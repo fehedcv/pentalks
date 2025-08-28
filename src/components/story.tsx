@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
+import ScrollFloat from "./scrollfloat";
 
 export interface ScrollStackCard {
   title: string;
@@ -20,9 +21,11 @@ interface ScrollStackProps {
 }
 
 const defaultBackgrounds = [
-  "https://images.pexels.com/photos/6985136/pexels-photo-6985136.jpeg",
-  "https://images.pexels.com/photos/6985128/pexels-photo-6985128.jpeg",
-  "https://images.pexels.com/photos/2847648/pexels-photo-2847648.jpeg",
+  "https://images.pexels.com/photos/33562120/pexels-photo-33562120.jpeg",
+  "https://images.pexels.com/photos/29506613/pexels-photo-29506613.jpeg",
+  "https://images.pexels.com/photos/29506611/pexels-photo-29506611.jpeg",
+  "https://images.pexels.com/photos/7233329/pexels-photo-7233329.jpeg"
+
 ];
 
 const ScrollStack: React.FC<ScrollStackProps> = ({
@@ -136,6 +139,17 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
             justify-center overflow-hidden ${backgroundColor}`}
         >
           <div className="container px-6 lg:px-8 mx-auto h-full flex flex-col justify-center">
+            <ScrollFloat
+                      scrollContainerRef={null}
+                      animationDuration={1}
+                      ease='back.inOut(2)'
+                      scrollStart='center bottom+=50%'
+                      scrollEnd='bottom bottom-=40%'
+                      stagger={0.03}
+                      textClassName="text-4xl md:text-6xl font-bold text-white text-center mb-8 "
+                    >
+                      Our Services
+            </ScrollFloat>
             <div
               ref={cardsContainerRef}
               className="relative w-full max-w-5xl mx-auto flex-shrink-0"

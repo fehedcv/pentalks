@@ -34,17 +34,11 @@ export default function Navigation() {
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-transparent text-white bg-background/95 backdrop-blur-md shadow-lg border-b border-border `}
       >
         <div className="max-w-8xl mx-auto px-6 ">
-          <div className="flex items-center justify-between h-19 w-full">
+          <div className="flex items-center justify-between h-21 w-full">
             {/* Logo */}
             <Link to="/" className="flex items-center space-x-3 group flex-shrink-0">
               <motion.div whileHover={{ rotate: 5, scale: 1.1 }} transition={{ duration: 0.2 }} className="relative">
-                <svg width="40" height="40" viewBox="0 0 60 60" className="drop-shadow-sm">
-                  <ellipse cx="30" cy="28" rx="18" ry="13" fill="#2e7d32" />
-                  <ellipse cx="30" cy="28" rx="15" ry="10" fill="#81c784" />
-                  <ellipse cx="30" cy="15" rx="6" ry="8" fill="#81c784" />
-                  <circle cx="27" cy="12" r="1.5" fill="#1b4332" />
-                  <circle cx="33" cy="12" r="1.5" fill="#1b4332" />
-                </svg>
+                <img src="image.png" alt="Logo" className="h-10 mt-4 w-auto mb-4" /> 
               </motion.div>
               <span className="text-xl font-bold text-foreground group-hover:text-primary transition-colors">
                 PenTalks

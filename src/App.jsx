@@ -2,22 +2,22 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navigation from "./components/navbar";
 import HomePage from "./components/hero";
 import ScrollStack from "./components/story";
+import ProductCardGrid from "./components/projects";
 
 
 const cards = [
     {
-      title: "Welcome to Cubeeto",
-      subtitle: "Student marketplace powered by AI",
-      badge: "New",
-      backgroundImage: "https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg"
-    },
-    {
-      title: "Buy & Sell",
-      subtitle: "Find items easily with AI-powered search",
+      title: "Architectural Design",
+      subtitle: "Architectural design services for residential and commercial projects",
       badge: "Feature",
     },
     {
-      title: "For Students",
+      title: "Interior Design",
+      subtitle: "Interior design solutions to create functional and aesthetic spaces",
+      badge: "Feature",
+    },
+    {
+      title: "Heritage",
       subtitle: "Low-cost, accessible, and youth-friendly",
       content: (
         <div>
@@ -32,7 +32,7 @@ const cards = [
 function App() {
   return (
     <BrowserRouter>
-      <div className="relative min-h-screen">
+      <div className="relative min-h-screen bg-[#896c4a]">
         <HomePage />
         <Navigation/>
         {/* Add your Routes here */}
@@ -43,12 +43,14 @@ function App() {
           <Route path="/about" element={<About />} />
           */}
         </Routes>
+{/*}
         <ScrollStack 
         cards={cards} 
-        backgroundColor="bg-gray-900" 
+        backgroundColor="bg-[#896c4a]" 
         cardHeight="70vh"
         sectionHeightMultiplier={3}
-      />
+      /> */}
+        <ProductCardGrid />
       </div>
     </BrowserRouter>
   )
