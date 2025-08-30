@@ -1,6 +1,7 @@
 import { Button } from "./ui/button";
-import BlurText from "./blurtext"
+import BlurText from "./blurtext";
 import Silk from "./background";
+import { motion } from "framer-motion";
 
 const handleAnimationComplete = () => {
   console.log('Animation completed!');
@@ -27,7 +28,14 @@ export default function HomePage() {
           <div className="flex flex-col items-center justify-center text-center">
             <div className="max-w-4xl mx-auto w-full">
               <div className="flex flex-col justify-center items-center mb-6">
-                <img src="image.png" alt="Logo" className="h-20 w-auto mb-4" /> 
+                <motion.img 
+                  src="image.png" 
+                  alt="Logo" 
+                  className="h-20 w-auto mb-4"
+                  initial={{ opacity: 0, scale: 0.5 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.8, ease: "easeOut" , delay:1.0}}
+                />
                 <BlurText
                   text="Pentalks"
                   delay={150}
@@ -37,18 +45,40 @@ export default function HomePage() {
                   className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white text-foreground leading-tight text-center"
                 />
               </div>
-              <p className="text-lg sm:text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl text-white mx-auto leading-relaxed text-center">
+              <motion.p 
+                className="text-lg sm:text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl text-white mx-auto leading-relaxed text-center"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 1.0, ease: "easeOut" }}
+              >
                 Build amazing experiences with modern tools and cutting-edge technology. Start your journey today and
                 transform your ideas into reality.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <Button size="lg" className="text-lg text-white px-8 py-3 w-full sm:w-auto">
-                  Get Started
-                </Button>
-                <Button variant="outline" size="lg" className="text-lg px-8 text-white py-3 w-full sm:w-auto bg-transparent">
-                  Learn More
-                </Button>
-              </div>
+              </motion.p>
+              <motion.div 
+                className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+                initial={{ opacity: 0, y: 40 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.8, ease: "easeOut" }}
+              >
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                >
+                  <Button size="lg" className="text-lg text-white px-8 py-3 w-full sm:w-auto">
+                    Get Started
+                  </Button>
+                </motion.div>
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 20}}
+                >
+                  <Button variant="outline" size="lg" className="text-lg px-8 text-white py-3 w-full sm:w-auto bg-transparent">
+                    Learn More
+                  </Button>
+                </motion.div>
+              </motion.div>
             </div>
           </div>
         </div>

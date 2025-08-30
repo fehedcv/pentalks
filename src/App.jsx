@@ -1,9 +1,10 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navigation from "./components/navbar";
 import HomePage from "./components/hero";
-import ScrollStack from "./components/story";
-import { div } from "framer-motion/client";
+import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import Mukham from "./components/pages/mukham";
+import Index from "./components/pages/mukham2";
 // import ProductCardGrid from "./components/projects"; // Commented out since we're replacing it
 // import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "./components/projectsv2"
 
@@ -48,11 +49,6 @@ const ProjectCardContent = ({ children, className = '', ...props }) => (
 
 // New Project Cards Component
 const ProjectCards = () => {
-  const handleProjectClick = (projectName) => {
-    // Handle navigation - you can use React Router here
-    console.log(`Navigating to ${projectName}`);
-    // Example: navigate(`/projects/${projectName.toLowerCase().replace(' ', '-')}`);
-  };
 
   const projects = [
     {
@@ -78,7 +74,12 @@ const ProjectCards = () => {
           <h2 className="text-5xl font-bold text-white mb-4">Our Projects</h2>
           <p className="text-xl text-white/80">Discover our featured work and services</p>
         </div>
-        
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          viewport={{ once: true, amount: 0.2 }} // animate once when 20% of it is visible
+        >
         <div className="grid lg:grid-cols-2 gap-8">
           {projects.map((project) => (
             <Link key={project.id} to={`/${project.name}`}>
@@ -129,57 +130,38 @@ const ProjectCards = () => {
           </Link>
           ))}
         </div>
+        </motion.div>
       </div>
     </div>
   );
 };
 
-const cards = [
-    {
-      title: "Architectural Design",
-      subtitle: "Architectural design services for residential and commercial projects",
-      badge: "Feature",
-    },
-    {
-      title: "Interior Design",
-      subtitle: "Interior design solutions to create functional and aesthetic spaces",
-      badge: "Feature",
-    },
-    {
-      title: "Heritage",
-      subtitle: "Low-cost, accessible, and youth-friendly",
-      content: (
-        <div>
-          <h3 className="text-2xl font-bold text-white mb-2">Custom Content</h3>
-          <p className="text-white/80">You can even pass JSX as content!</p>
-        </div>
-      )
-    },
-];
+const Home = () => (
+  <div className="relative min-h-screen bg-[#896c4a]">
+    <HomePage />
+    <Navigation />
+    <ProjectCards />
+  </div>
+);
 
 function App() {
   return (
     <BrowserRouter>
-      <div className="relative min-h-screen bg-[#896c4a]">
-        <HomePage />
-        <Navigation/>
         {/* Add your Routes here */}
         <Routes>
           {/* Your route components will go here */}
-
-          <Route path="/Mukham" element={<div>Mukham</div>} />
+          <Route path="/" element={<Home />} />
+          <Route path="/Mukham" element={
+          <div className="min-h-screen">
+            <Index />
+            <Navigation />            
+          </div>
+        } />
           
         </Routes>
 {/*
-        <ScrollStack 
-        cards={cards} 
-        backgroundColor="bg-[#896c4a]" 
-        cardHeight="70vh"
-        sectionHeightMultiplier={3}
-      /> */}
+         */}
         {/* Replaced ProductCardGrid with ProjectCards */}
-        <ProjectCards />
-      </div>
     </BrowserRouter>
   )
 }
