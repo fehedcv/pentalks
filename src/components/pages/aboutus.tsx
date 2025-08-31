@@ -31,28 +31,28 @@ const teamMembers = [
       id: "1",
       name: "Ahmed",
       role: "CEO & Founder",
-      image: "../assets/ahmed.jpeg",
+      image: "https://github.com/fehedcv/pentalks/blob/main/src/assets/ahmed.jpeg?raw=true",
       bio: "Visionary leader with 15+ years in tech innovation and startup growth."
     },
     {
       id: "2", 
       name: "Sakeeb Arsalan",
       role: "CTO",
-      image: "../assets/sakeeb.jpeg",
+      image: "https://github.com/fehedcv/pentalks/blob/main/src/assets/sakeeb.jpeg?raw=true",
       bio: "Full-stack architect passionate about scalable solutions and emerging technologies."
     },
     {
       id: "3",
       name: "Anshif",
       role: "Head of Design",
-      image: "../assets/anshif.jpeg",
+      image: "https://github.com/fehedcv/pentalks/blob/main/src/assets/anshif.jpeg?raw=true",
       bio: "Creative strategist focused on user-centered design and brand storytelling."
     },
     {
       id: "4",
       name: "Hashim",
       role: "Lead Developer",
-      image: "../assets/hashim.jpeg",
+      image: "https://github.com/fehedcv/pentalks/blob/main/src/assets/hashim.jpeg?raw=true",
       bio: "Code craftsman dedicated to clean architecture and performance optimization."
     },
     {
