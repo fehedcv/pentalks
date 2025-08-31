@@ -5,6 +5,7 @@ import type React from "react"
 import { Building, Home, Landmark, TreePine, Rocket } from "lucide-react"
 import { motion } from "framer-motion"
 import Silk from "../background"
+import { useEffect } from "react"
 
 const GradientButton = ({ children }: { children: React.ReactNode }) => (
   <motion.button
@@ -87,6 +88,9 @@ const designProcess = [
 ]
 
 const Index = () => {
+  useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
   return (
     <div className="bg-[#f5efe6]">
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -142,27 +146,6 @@ const Index = () => {
         </div>
       </section>
       {/* CTA Section */}
-      <section className="py-20 px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.6 }}
-          className="max-w-4xl mx-auto text-center"
-        >
-          <h2 className="text-4xl md:text-5xl font-bold text-[#1f2937] mb-6">Ready to Begin Your Journey?</h2>
-          <p className="text-xl text-[#6b7280] mb-12 max-w-2xl mx-auto">
-            Let's collaborate to create architectural excellence that stands the test of time. Your vision, our
-            expertise, extraordinary results.
-          </p>
-
-          <GradientButton>
-            <Rocket className="mr-3" size={24} />
-            Start Your Project
-          </GradientButton>
-        </motion.div>
-      </section>
-      {/* Design Process Section */}
       <section className="py-20 px-6 bg-[#f5efe6]">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-16">
@@ -186,6 +169,27 @@ const Index = () => {
           </div>
         </div>
       </section>
+      <section className="py-20 px-6">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.6 }}
+          className="max-w-4xl mx-auto text-center"
+        >
+          <h2 className="text-4xl md:text-5xl font-bold text-[#1f2937] mb-6">Ready to Begin Your Journey?</h2>
+          <p className="text-xl text-[#6b7280] mb-12 max-w-2xl mx-auto">
+            Let's collaborate to create architectural excellence that stands the test of time. Your vision, our
+            expertise, extraordinary results.
+          </p>
+
+          <GradientButton>
+            <Rocket className="mr-3" size={24} />
+            Start Your Project
+          </GradientButton>
+        </motion.div>
+      </section>
+      {/* Design Process Section */}
       {/* Process steps can be added here */}
     </div>
   )
