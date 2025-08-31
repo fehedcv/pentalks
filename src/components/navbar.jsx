@@ -3,13 +3,14 @@
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Link, useLocation } from "react-router-dom"
-import { Menu, X, Home, User, Mail } from "lucide-react"
+import { Menu, X, Home, User, Mail, ScanFace } from "lucide-react"
 import { Button } from "./ui/button"
 
 const navItems = [
   { href: "/", label: "Home", icon: Home },
   { href: "/about", label: "About", icon: User },
   { href: "/contact", label: "Contact", icon: Mail },
+  {href: "/Mukham", label: "Mukham", icon: ScanFace},
 ]
 
 export default function Navigation() {

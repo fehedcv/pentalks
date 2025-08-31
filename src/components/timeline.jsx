@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { cn } from "../lib/utils";
-import { Card, CardContent } from "./card";
+import { Card, CardContent } from "./ui/card";
 
 const WORKFLOW_EVENTS = [
   {
@@ -28,8 +28,8 @@ const WORKFLOW_EVENTS = [
 
 export const ScrollTimeline = ({
   events = WORKFLOW_EVENTS,
-  title = "My Creative Workflow",
-  subtitle = "Scroll to explore my process",
+  title = "Our Journey",
+  subtitle = "Scroll to explore our journey",
   animationOrder = "sequential",
   cardAlignment = "alternating",
   progressIndicator = true,
@@ -111,14 +111,14 @@ export const ScrollTimeline = ({
       ref={scrollRef}
       className={cn(
         "relative min-h-screen w-full overflow-hidden py-16",
-        darkMode ? "bg-black text-white" : "bg-white text-black",
+        darkMode ? "bg-[#896c4a] text-white" : "bg-white text-black",
         className
       )}
     >
       {/* Section Header */}
       <div className="text-center mb-12 px-4">
         <h3 className="text-green-400 uppercase tracking-wider text-sm font-bold">
-          My Process
+          story
         </h3>
         <h2 className="text-3xl md:text-5xl font-bold mt-2">{title}</h2>
         <p className="text-gray-400 text-lg mt-2">{subtitle}</p>

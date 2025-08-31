@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import Mukham from "./components/pages/mukham";
 import Index from "./components/pages/mukham2";
+import OurStoryPage from "./components/pages/aboutus";
 import ContactPage from "./components/pages/contact";
 // import ProductCardGrid from "./components/projects"; // Commented out since we're replacing it
 // import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "./components/projectsv2"
@@ -154,7 +155,7 @@ function App() {
           {/* Your route components will go here */}
           <Route path="/" element={<Home />} />
           <Route path="/Mukham" element={
-          <div className="min-h-screen bg-[#f5efe6]">
+          <div className="min-h-screen bg-[#896c4a]">
             <Index />           
           </div>
         } />
@@ -163,7 +164,11 @@ function App() {
             <ContactPage />   
           </div>        
           } />
-          
+          <Route path="about" element={
+          <div className="min-h-screen bg-[#896c4a]">
+            <OurStoryPage />   
+          </div>        
+          } />
         </Routes>
 {/*
          */}
