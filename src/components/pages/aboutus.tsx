@@ -248,13 +248,7 @@ export default function OurStoryPage() {
         </div>
       </section>
 
-      {/* Subtle footer strip */}
-      <div className="h-px w-full" style={{ backgroundColor: COLORS.border }} />
-      <footer className="mx-auto w-full max-w-5xl px-4 py-8 md:px-6">
-        <p className="text-center text-sm" style={{ color: COLORS.muted }}>
-          © {new Date().getFullYear()} Mukham Studio
-        </p>
-      </footer>
+  
     </main>
   )
 }

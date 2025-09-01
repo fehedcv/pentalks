@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import Mukham from "./components/pages/mukham";
 import Index from "./components/pages/mukham2";
 import OurStoryPage from "./components/pages/aboutus";
+import Footer from "./components/footer";
 import ContactPage from "./components/pages/contact";
 
 // import ProductCardGrid from "./components/projects"; // Commented out since we're replacing it
@@ -175,7 +176,7 @@ const Home = () => {
 
 function App() {
   return (
-    <div>
+    <div className="bg-[#FAF7F2]">
     
     
         {/* Add your Routes here */}
@@ -202,6 +203,7 @@ function App() {
          */}
         {/* Replaced ProductCardGrid with ProjectCards */}
       <Navigation />
+      <Footer />
     </div>
   )
 }
