@@ -2,45 +2,79 @@ import React from "react";
 import { motion } from "framer-motion";
 import BlurText from "./blurtext";
 
+
+const AnimatedText = ({ text, className }) => {
+  // Split text into words
+  const words = text.split(" ");
+  
+  return (
+    <motion.h1
+      className={className}
+      variants={textVariants}
+      initial="hidden"
+      animate="visible"
+      style={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}
+    >
+      {words.map((word, index) => (
+        <motion.span
+          key={index}
+          variants={wordVariants}
+          style={{ marginRight: "8px", display: "inline-block" }}
+        >
+          {word}
+        </motion.span>
+      ))}
+    </motion.h1>
+  );
+};
+
+const textVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.8,
+      staggerChildren: 0.05 // This creates the staggered effect for each word
+    }
+  }
+};
+
+// Variants for each word
+const wordVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0 }
+};
+
 export default function HomePage() {
   return (
     <div 
       className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden px-4"
       style={{ 
-        backgroundImage: "../assets/hero-bg.png",
+        backgroundImage: "url('https://raw.githubusercontent.com/fehedcv/pentalks/refs/heads/main/src/assets/hero-bg.png')",
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat"
       }}
     >
       {/* Overlay for better text readability */}
-      <div className="absolute inset-0 bg-black bg-opacity-30"></div>
+      <div className="absolute inset-0"></div>
       
-      {/* Logo */}
-      <motion.div
-        initial={{ opacity: 0, y: -30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        className="absolute top-6 left-6 flex items-center z-10"
-      >
-        <img src="/image.png" alt="Pentalks Logo" className="h-10 w-10 mr-2" />
-        <span className="text-xl font-semibold text-white">Pentalks</span>
-      </motion.div>
+
 
       {/* Main Content - Centered */}
       <div className="flex flex-col items-center justify-center text-center w-full max-w-3xl z-10">
         {/* Hero Text */}
-        <div className="mb-8">
-          <BlurText
+        <div className="mb-8 ">
+          <AnimatedText
             text="Launch Faster. Build Smarter."
-            className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 text-white"
+            className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 text-[#222222]"
           />
-          
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5, duration: 0.8 }}
-            className="text-lg md:text-xl max-w-2xl mx-auto text-white"
+            className="text-lg md:text-xl max-w-2xl mx-auto text-[#222222]"
           >
             Pentalks helps startups and teams design, build, and launch digital products in record time — with modern tools, sleek design, and powerful automation.
           </motion.p>
@@ -50,7 +84,7 @@ export default function HomePage() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.8, duration: 0.8 }}
+          transition={{ delay: 0.5, duration: 0.8 }}
           className="flex flex-col sm:flex-row justify-center gap-4 mt-4"
         >
           <a
