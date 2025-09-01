@@ -4,7 +4,7 @@ import type React from "react"
 import { useState } from "react"
 import { motion } from "framer-motion"
 import { Mail, Phone, MapPin, Clock, Send } from "lucide-react"
-
+import { useEffect } from "react"
 const COLORS = {
   bg: "#FAF7F2", // warm cream
   primary: "#C47A3D", // refined terracotta
@@ -40,6 +40,9 @@ export default function ContactPage() {
       setSubmitting(false)
     }
   }
+    useEffect(() => {
+      window.scrollTo(0, 0);
+    }, []);
 
   return (
     <main className="font-sans py-24" style={{ backgroundColor: COLORS.bg }}>

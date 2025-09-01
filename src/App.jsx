@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navigation from "./components/navbar";
+import { useEffect } from "react";
 import HomePage from "./components/hero";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
@@ -50,9 +51,9 @@ const ProjectCardContent = ({ children, className = '', ...props }) => (
   </div>
 );
 
-// New Project Cards Component
-const ProjectCards = () => {
 
+
+const ProjectCards = () => {
   const projects = [
     {
       id: 1,
@@ -71,66 +72,86 @@ const ProjectCards = () => {
   ];
   
   return (
-    <div className="py-16 px-4" style={{ backgroundColor: '#896c4a' }}>
+    <div className="py-16 px-4" style={{ backgroundColor: '#FAF7F2' }}> {/* Warm cream background */}
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
-          <h2 className="text-5xl font-bold text-white mb-4">Our Projects</h2>
-          <p className="text-xl text-white/80">Discover our featured work and services</p>
+          <h2 className="text-5xl font-bold mb-4" style={{ color: '#222222' }}>Our Projects</h2> {/* Deep neutral text */}
+          <p className="text-xl" style={{ color: '#666666' }}>Discover our featured work and services</p> {/* Soft grey muted text */}
         </div>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          viewport={{ once: true, amount: 0.2 }} // animate once when 20% of it is visible
+          viewport={{ once: true, amount: 0.2 }}
         >
         <div className="grid lg:grid-cols-2 gap-8">
           {projects.map((project) => (
-            <Link key={project.id} to={`/${project.name}`}>
-              <ProjectCard
-                hoverable
-                className="h-full min-h-[600px] flex flex-col"
+            <Link key={project.id} to={`/${project.name}`} className="group">
+              <div 
+                className="h-full min-h-[600px] flex flex-col rounded-lg overflow-hidden shadow-lg transition-all duration-300 hover:shadow-xl"
+                style={{ 
+                  backgroundColor: 'white',
+                  border: '1px solid #E0DED8' // Subtle beige grey border
+                }}
               >
-              <div className="relative overflow-hidden rounded-t-lg">
-                <img
-                  src={project.image}
-                  alt={project.alt}
-                  className="w-full h-64 object-cover transition-transform duration-300 hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-opacity-20 transition-opacity duration-300 hover:bg-opacity-10"></div>
-              </div>
-              
-              <div className="flex-1 flex flex-col">
-                <ProjectCardHeader>
-                  <ProjectCardTitle>{project.name}</ProjectCardTitle>
-                </ProjectCardHeader>
+                <div className="relative overflow-hidden">
+                  <img
+                    src={project.image}
+                    alt={project.alt}
+                    className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-110"
+                  />
+                  <div 
+                    className="absolute inset-0 transition-opacity duration-300 group-hover:opacity-20"
+                    style={{ backgroundColor: '#C47A3D', opacity: 0 }} // Refined terracotta overlay
+                  ></div>
+                </div>
                 
-                <ProjectCardContent className="flex-1 flex flex-col justify-between">
-                  <ProjectCardDescription className="mb-6 leading-relaxed">
-                    {project.description}
-                  </ProjectCardDescription>
+                <div className="flex-1 flex flex-col p-6">
+                  <div className="mb-4">
+                    <h3 
+                      className="text-2xl font-bold mb-2 group-hover:underline"
+                      style={{ color: '#222222' }} // Deep neutral text
+                    >
+                      {project.name}
+                    </h3>
+                  </div>
                   
-                  <div className="mt-auto">
-                    <div className="flex items-center justify-between">
-                      <span className="text-sm text-gray-500 font-medium">
-                        Click to view details
-                      </span>
-                      <div className="flex items-center text-blue-600">
-                        <span className="mr-2">Learn more</span>
-                        <svg 
-                          className="w-5 h-5 transform transition-transform duration-300 group-hover:translate-x-1" 
-                          fill="none" 
-                          stroke="currentColor" 
-                          viewBox="0 0 24 24"
+                  <div className="flex-1 flex flex-col justify-between">
+                    <p 
+                      className="mb-6 leading-relaxed"
+                      style={{ color: '#666666' }} // Soft grey muted text
+                    >
+                      {project.description}
+                    </p>
+                    
+                    <div className="mt-auto">
+                      <div className="flex items-center justify-between">
+                        <span 
+                          className="text-sm font-medium"
+                          style={{ color: '#666666' }} // Soft grey muted text
                         >
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                        </svg>
+                          Click to view details
+                        </span>
+                        <div 
+                          className="flex items-center transition-all duration-300 group-hover:translate-x-1"
+                          style={{ color: '#C47A3D' }} // Refined terracotta
+                        >
+                          <span className="mr-2">Learn more</span>
+                          <svg 
+                            className="w-5 h-5" 
+                            fill="none" 
+                            stroke="currentColor" 
+                            viewBox="0 0 24 24"
+                          >
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                          </svg>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </ProjectCardContent>
+                </div>
               </div>
-            </ProjectCard>
-          </Link>
+            </Link>
           ))}
         </div>
         </motion.div>
@@ -139,12 +160,18 @@ const ProjectCards = () => {
   );
 };
 
-const Home = () => (
-  <div className="relative min-h-screen bg-[#896c4a]">
-    <HomePage />
-    <ProjectCards />
-  </div>
-);
+
+const Home = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  return (
+    <div className="relative min-h-screen bg-[#896c4a]">
+      <HomePage />
+      <ProjectCards />
+    </div>
+  );
+};
 
 function App() {
   return (

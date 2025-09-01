@@ -32,7 +32,11 @@ export default function Navigation() {
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-transparent text-[#222222] bg-background/95 backdrop-blur-md shadow-lg border-b border-border `}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+          scrolled 
+            ? "bg-[#FAF7F2]/95 shadow-lg border-b border-[#E0DED8]" 
+            : "bg-[#FAF7F2] border-b border-[#E0DED8]/50"
+        }`}
       >
         <div className="max-w-8xl mx-auto px-6 ">
           <div className="flex items-center justify-between h-21 w-full">
@@ -41,7 +45,7 @@ export default function Navigation() {
               <motion.div whileHover={{ rotate: 5, scale: 1.1 }} transition={{ duration: 0.2 }} className="relative">
                 <img src="image.png" alt="Logo" className="h-10 mt-4 w-auto mb-4" /> 
               </motion.div>
-              <span className="text-xl font-bold text-foreground group-hover:text-primary transition-colors">
+              <span className="text-xl font-bold text-[#222222] group-hover:text-[#C47A3D] transition-colors">
                 PenTalks
               </span>
             </Link>
@@ -56,8 +60,8 @@ export default function Navigation() {
                       whileHover={{ y: -2 }}
                       className={`flex items-center space-x-2 px-4 py-2 rounded-full transition-all duration-300 ${
                         isActive
-                          ? "text-primary bg-primary/10"
-                          : "text-muted-foreground hover:text-primary hover:bg-primary/5"
+                          ? "text-[#C47A3D] bg-[#C47A3D]/10"
+                          : "text-[#666666] hover:text-[#C47A3D] hover:bg-[#C47A3D]/5"
                       }`}
                     >
                       <item.icon className="h-4 w-4" />
@@ -66,7 +70,7 @@ export default function Navigation() {
                     {isActive && (
                       <motion.div
                         layoutId="activeTab"
-                        className="absolute inset-0 bg-primary/10 rounded-full border border-primary/20"
+                        className="absolute inset-0 bg-[#C47A3D]/10 rounded-full border border-[#C47A3D]/20"
                         initial={false}
                         transition={{ type: "spring", stiffness: 500, damping: 30 }}
                       />
@@ -87,7 +91,7 @@ export default function Navigation() {
                     exit={{ rotate: 90, opacity: 0 }}
                     transition={{ duration: 0.2 }}
                   >
-                    <X className="h-5 w-5" />
+                    <X className="h-5 w-5 text-[#222222]" />
                   </motion.div>
                 ) : (
                   <motion.div
@@ -97,7 +101,7 @@ export default function Navigation() {
                     exit={{ rotate: -90, opacity: 0 }}
                     transition={{ duration: 0.2 }}
                   >
-                    <Menu className="h-5 w-5" />
+                    <Menu className="h-5 w-5 text-[#222222]" />
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -113,7 +117,7 @@ export default function Navigation() {
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.3 }}
-              className="md:hidden bg-background/95 backdrop-blur-md border-t border-border"
+              className="md:hidden bg-[#FAF7F2] border-t border-[#E0DED8]"
             >
               <div className="px-6 py-4 space-y-2">
                 {navItems.map((item, index) => {
@@ -130,8 +134,8 @@ export default function Navigation() {
                         onClick={() => setIsOpen(false)}
                         className={`flex items-center space-x-3 px-4 py-3 rounded-lg transition-all duration-300 ${
                           isActive
-                            ? "text-primary bg-primary/10 border border-primary/20"
-                            : "text-muted-foreground hover:text-primary hover:bg-primary/5"
+                            ? "text-[#C47A3D] bg-[#C47A3D]/10 border border-[#C47A3D]/20"
+                            : "text-[#666666] hover:text-[#C47A3D] hover:bg-[#C47A3D]/5"
                         }`}
                       >
                         <item.icon className="h-5 w-5" />

@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import BlurText from "./blurtext";
+import heroBg from "/hero-bg.png"; // Ensure you have a suitable background image
 
 
 const AnimatedText = ({ text, className }) => {
@@ -51,30 +52,29 @@ export default function HomePage() {
     <div 
       className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden px-4"
       style={{ 
-        backgroundImage: "url('https://raw.githubusercontent.com/fehedcv/pentalks/refs/heads/main/src/assets/hero-bg.png')",
+        backgroundImage:`url(${heroBg})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat"
       }}
     >
-      {/* Overlay for better text readability */}
-      <div className="absolute inset-0"></div>
+
       
 
 
       {/* Main Content - Centered */}
       <div className="flex flex-col items-center justify-center text-center w-full max-w-3xl z-10">
         {/* Hero Text */}
-        <div className="mb-8 ">
+        <div className="mb-6">
           <AnimatedText
-            text="Launch Faster. Build Smarter."
+            text="Design, Build, Launch Faster than ever"
             className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 text-[#222222]"
           />
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5, duration: 0.8 }}
-            className="text-lg md:text-xl max-w-2xl mx-auto text-[#222222]"
+            className="text-lg md:text-xl max-w-2xl mx-auto text-[#555555]"
           >
             Pentalks helps startups and teams design, build, and launch digital products in record time — with modern tools, sleek design, and powerful automation.
           </motion.p>

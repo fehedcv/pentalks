@@ -4,6 +4,7 @@ import { ScrollTimeline } from "../timeline"
 import { motion } from "framer-motion"
 import TeamDock, { sampleTeamMembers } from "../teamdock"
 import TeamCarousel from "../team"
+import { useEffect } from "react"
 import ScrollFloat from "../scrollfloat"
 
 const COLORS = {
@@ -186,6 +187,9 @@ function TeamCard({ member }: { member: TeamMember }) {
 }
 
 export default function OurStoryPage() {
+    useEffect(() => {
+      window.scrollTo(0, 0);
+    }, []);
   return (
     <main style={{ backgroundColor: COLORS.bg }} className="py-20">
       {/* Header */}
