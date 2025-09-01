@@ -4,6 +4,7 @@ import React, { useState, useCallback, useEffect } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { motion, AnimatePresence, TargetAndTransition} from 'framer-motion';
 import { cn } from '../lib/utils'; // Assuming this utility correctly merges class names
+import ScrollFloat from './scrollfloat';
 
 export interface TeamMember {
   id: string;
@@ -76,8 +77,8 @@ export const TeamCarousel: React.FC<TeamCarouselProps> = ({
   members,
   title = "OUR TEAM",
   titleSize = "2xl",
-  titleColor = "rgba(216,196,180, 1)",
-  background,
+  titleColor = "#C47A3D", // refined terracotta
+  background = "#FAF7F2", // warm cream
   cardWidth = 280,
   cardHeight = 380,
   cardRadius = 20,
@@ -96,7 +97,7 @@ export const TeamCarousel: React.FC<TeamCarouselProps> = ({
   cardClassName,
   titleClassName,
   infoPosition = "bottom",
-  infoTextColor = "rgb(216,196,180)",
+  infoTextColor = "#222222", // deep neutral
   infoBackground = "transparent",
   onMemberChange,
   onCardClick,
@@ -134,18 +135,9 @@ export const TeamCarousel: React.FC<TeamCarouselProps> = ({
     return 'hidden';
   };
 
-  // Explicitly type the return of getVariantStyles to match framer-motion's expectations
   const getVariantStyles = (position: string): TargetAndTransition => {
-    // FIX: Changed ease from number[] to an array of string presets or a valid CubicBezier type
-    // Using string presets for simplicity and type compatibility.
-    // If you need the exact cubic-bezier values, ensure they are compatible with framer-motion's Easing type.
-    // For custom cubic-bezier, you might need to use a type assertion like `as [number, number, number, number]`
-    // or import CubicBezier from 'framer-motion/types/value/types'.
     const transition = {
       duration: animationDuration / 1000,
-      // You can use a string preset like 'easeInOut' or a valid cubic-bezier array if framer-motion's types support it directly
-      // For the given numbers, 'easeInOut' is a close approximation or 'cubic-bezier(0.25, 0.46, 0.45, 0.94)' if framer-motion accepted it directly as string
-      // To strictly match [0.25, 0.46, 0.45, 0.94], framer-motion expects it as a CubicBezier tuple:
       ease: [0.25, 0.46, 0.45, 0.94] as [number, number, number, number],
     };
 
@@ -305,28 +297,22 @@ export const TeamCarousel: React.FC<TeamCarouselProps> = ({
       id="team-carousel-container"
       className={cn(`min-h-screen flex flex-col items-center justify-center overflow-hidden relative 
         transparent`, className)}
-      style={{ background: background }}
+      style={{ 
+        background: background,
+        backgroundColor: "#FAF7F2" // warm cream fallback
+      }}
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
     >
       {/* Title */}
       {title && (
-        <h1
-          className={cn(
-            "font-black uppercase tracking-tight absolute top-12 left-1/2 transform -translate-x-1/2 pointer-events-none whitespace-nowrap",
-            titleSizeClasses[titleSize],
-            titleClassName
-          )}
-          style={{
-            color: 'transparent',
-            background: `linear-gradient(to bottom, ${titleColor}75 40%, transparent 76%)`,
-            WebkitBackgroundClip: 'text',
-            backgroundClip: 'text',
-          }}
+        <h2
+          className={cn(`font-bold mb-10`, titleSizeClasses[titleSize], titleClassName)}
+          style={{ color: titleColor }}
         >
           {title}
-        </h1>
+        </h2>
       )}
 
       {/* Carousel Container */}
@@ -342,15 +328,31 @@ export const TeamCarousel: React.FC<TeamCarouselProps> = ({
           <>
             <motion.button
               onClick={() => paginate(-1)}
-              className="absolute left-5 top-1/2 transform -translate-y-1/2 bg-black/60 hover:bg-black/80 text-white w-10 h-10 rounded-full flex items-center justify-center z-20 transition-all duration-300 hover:scale-110"
+              className="absolute left-5 top-1/2 transform -translate-y-1/2 text-white w-10 h-10 rounded-full flex items-center justify-center z-20 transition-all duration-300 hover:scale-110"
+              style={{
+                backgroundColor: "rgba(196, 122, 61, 0.7)", // terracotta with opacity
+                backdropFilter: "blur(8px)",
+              }}
               whileTap={{ scale: 0.9 }}
+              whileHover={{
+                backgroundColor: "rgba(196, 122, 61, 0.9)",
+                boxShadow: "0 4px 12px rgba(196, 122, 61, 0.3)",
+              }}
             >
               <ChevronLeft className="w-6 h-6" />
             </motion.button>
             <motion.button
               onClick={() => paginate(1)}
-              className="absolute right-5 top-1/2 transform -translate-y-1/2 bg-black/60 hover:bg-black/80 text-white w-10 h-10 rounded-full flex items-center justify-center z-20 transition-all duration-300 hover:scale-110"
+              className="absolute right-5 top-1/2 transform -translate-y-1/2 text-white w-10 h-10 rounded-full flex items-center justify-center z-20 transition-all duration-300 hover:scale-110"
+              style={{
+                backgroundColor: "rgba(196, 122, 61, 0.7)", // terracotta with opacity
+                backdropFilter: "blur(8px)",
+              }}
               whileTap={{ scale: 0.9 }}
+              whileHover={{
+                backgroundColor: "rgba(196, 122, 61, 0.9)",
+                boxShadow: "0 4px 12px rgba(196, 122, 61, 0.3)",
+              }}
             >
               <ChevronRight className="w-6 h-6" />
             </motion.button>
@@ -373,7 +375,7 @@ export const TeamCarousel: React.FC<TeamCarouselProps> = ({
                 <motion.div
                   key={member.id}
                   className={cn(
-                    "absolute bg-white overflow-hidden shadow-2xl cursor-pointer",
+                    "absolute overflow-hidden cursor-pointer",
                     cardClassName
                   )}
                   style={{
@@ -384,6 +386,11 @@ export const TeamCarousel: React.FC<TeamCarouselProps> = ({
                     left: '50%',
                     marginLeft: -cardWidth / 2,
                     marginTop: -cardHeight / 2,
+                    backgroundColor: "#FAF7F2", // warm cream
+                    border: `2px solid ${isCurrent ? "#C47A3D" : "#E0DED8"}`, // terracotta for active, beige grey for inactive
+                    boxShadow: isCurrent 
+                      ? "0 10px 30px rgba(196, 122, 61, 0.2), 0 6px 20px rgba(34, 34, 34, 0.1)"
+                      : "0 4px 15px rgba(34, 34, 34, 0.1)",
                   }}
                   initial={getVariantStyles('hidden')}
                   animate={getVariantStyles(position)}
@@ -409,8 +416,8 @@ export const TeamCarousel: React.FC<TeamCarouselProps> = ({
                     <div
                       className="absolute bottom-0 left-0 right-0 p-4 text-center"
                       style={{
-                        background: infoBackground || "linear-gradient(transparent, rgba(0,0,0,0.8))",
-                        color: infoTextColor,
+                        background: infoBackground || "linear-gradient(transparent, rgba(34, 34, 34, 0.8))",
+                        color: "#FAF7F2", // warm cream for overlay text
                       }}
                     >
                       <h3 className="text-lg font-bold">{member.name}</h3>
@@ -436,22 +443,25 @@ export const TeamCarousel: React.FC<TeamCarouselProps> = ({
         >
           <h2
             className="text-4xl font-bold mb-3 relative inline-block"
-            style={{ color: infoTextColor }}
+            style={{ color: "#222222" }} // deep neutral
           >
             {members[currentIndex].name}
             <span
               className="absolute top-full left-0 w-full h-0.5 mt-2"
-              style={{ background: infoTextColor }}
+              style={{ backgroundColor: "#C47A3D" }} // terracotta underline
             />
           </h2>
           <p
             className="text-xl font-medium opacity-80 uppercase tracking-wider"
-            style={{ color: infoTextColor }}
+            style={{ color: "#C47A3D" }} // terracotta for role
           >
             {members[currentIndex].role}
           </p>
           {members[currentIndex].bio && (
-            <p className="text-base mt-4 max-w-lg mx-auto opacity-70">
+            <p 
+              className="text-base mt-4 max-w-lg mx-auto opacity-70"
+              style={{ color: "#666666" }} // soft grey for bio
+            >
               {members[currentIndex].bio}
             </p>
           )}
@@ -460,7 +470,7 @@ export const TeamCarousel: React.FC<TeamCarouselProps> = ({
 
       {/* Dots Indicator */}
       {showDots && (
-        <div className="flex justify-center gap-3 mt-15 ">
+        <div className="flex justify-center gap-3 mt-15">
           {members.map((_, index) => (
             <motion.button
               key={index}
@@ -479,9 +489,12 @@ export const TeamCarousel: React.FC<TeamCarouselProps> = ({
                   : "hover:scale-110"
               )}
               style={{
-                background: index === currentIndex
-                  ? infoTextColor
-                  : `${infoTextColor}40`,
+                backgroundColor: index === currentIndex
+                  ? "#C47A3D" // terracotta for active dot
+                  : "#E0DED8", // beige grey for inactive dots
+                boxShadow: index === currentIndex
+                  ? "0 2px 8px rgba(196, 122, 61, 0.4)"
+                  : "none",
               }}
               whileTap={{ scale: 0.9 }}
             />

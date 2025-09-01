@@ -6,6 +6,7 @@ import { Building, Home, Landmark, TreePine, Rocket } from "lucide-react"
 import { motion } from "framer-motion"
 import Silk from "../background"
 import { useEffect } from "react"
+import BlurText from "../blurtext"
 
 const GradientButton = ({ children }: { children: React.ReactNode }) => (
   <motion.button
@@ -18,6 +19,10 @@ const GradientButton = ({ children }: { children: React.ReactNode }) => (
     {children}
   </motion.button>
 )
+
+const handleAnimationComplete = () => {
+  console.log('Animation completed!');
+};
 
 const ServiceCard = ({
   title,
@@ -107,16 +112,28 @@ const Index = () => {
                     />
         </div>
         <div className="absolute inset-0 bg-gradient-to-b from-coffee-dark/80 via-coffee-medium/60 to-coffee-dark/90" />
+        <div className="flex flex-col justify-center items-center mb-6">
 
-        <div className="relative z-10 text-center max-w-4xl mx-auto px-6">
-          <h1 className="text-6xl md:text-8xl font-bold mb-8 text-white tracking-tight">
-            Mukham
-          </h1>
-          <p className="text-xl md:text-2xl text-white max-w-2xl mx-auto leading-relaxed">
-            Where architectural vision meets timeless design. We create spaces
+          
+        </div>
+        <div className="relative z-10 text-center max-w-4xl mx-auto px-6 ">
+                          <BlurText
+                            text="Mukham"
+                            delay={150}
+                            animateBy="words"
+                            direction="top"
+                            onAnimationComplete={handleAnimationComplete}
+                            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white text-foreground justify-center flex mb-6"
+                          />
+              <motion.p 
+                className="text-lg sm:text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl text-white mx-auto leading-relaxed text-center"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 1.0, ease: "easeOut" }}
+              >Where architectural vision meets timeless design. We create spaces
             that inspire, preserve heritage, and shape the future of sustainable
-            living.
-          </p>
+            living.</motion.p>                          
+
         </div>
       </section>
       {/* Your page content here */}

@@ -79,7 +79,7 @@ const ScrollFloat = ({
       className={`-my-15 pt-35 overflow-hidden w-full${containerClassName}`}
     >
       <span
-        className={`inline-block text-[clamp(1.6rem,4vw,3rem)] leading-[1.5] w-full ${textClassName}`}
+        className={`inline-block text-8xl text-white leading-[1.5] w-full ${textClassName}`}
       >
         {splitText}
       </span>

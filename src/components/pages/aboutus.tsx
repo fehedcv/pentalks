@@ -2,15 +2,16 @@
 
 import { ScrollTimeline } from "../timeline"
 import { motion } from "framer-motion"
-import TeamDock, {sampleTeamMembers} from "../teamdock"
+import TeamDock, { sampleTeamMembers } from "../teamdock"
 import TeamCarousel from "../team"
+import ScrollFloat from "../scrollfloat"
 
 const COLORS = {
-  primary: "white", // brand accent
-  text: "white", // near-black
-  bg: "#896c4a", // background
-  muted: "white", // gray for secondary text
-  border: "white", // light gray
+  primary: "#C47A3D", // warm terracotta (brand accent)
+  text: "#222222", // deep neutral for main text
+  bg: "#FAF7F2", // warm cream background
+  muted: "#666666", // soft grey for secondary text
+  border: "#E0DED8", // subtle beige-grey for borders
 }
 
 type TimelineEntry = {
@@ -33,36 +34,37 @@ const teamMembers: TeamMember[] = [
     name: "Ahmed",
     role: "CEO & Founder",
     image: "https://github.com/fehedcv/pentalks/blob/main/src/assets/ahmed.jpeg?raw=true",
-    bio: "Visionary leader with 15+ years in tech innovation and startup growth."
+    bio: "Visionary leader with 15+ years in tech innovation and startup growth.",
   },
   {
     id: "2",
     name: "Sakeeb Arsalan",
     role: "CTO",
     image: "https://github.com/fehedcv/pentalks/blob/main/src/assets/sakeeb.jpeg?raw=true",
-    bio: "Full-stack architect passionate about scalable solutions and emerging technologies."
+    bio: "Full-stack architect passionate about scalable solutions and emerging technologies.",
   },
   {
     id: "3",
     name: "Anshif",
     role: "Head of Design",
     image: "https://github.com/fehedcv/pentalks/blob/main/src/assets/anshif.jpeg?raw=true",
-    bio: "Creative strategist focused on user-centered design and brand storytelling."
+    bio: "Creative strategist focused on user-centered design and brand storytelling.",
   },
   {
     id: "4",
     name: "Hashim",
     role: "Lead Developer",
     image: "https://github.com/fehedcv/pentalks/blob/main/src/assets/hashim.jpeg?raw=true",
-    bio: "Code craftsman dedicated to clean architecture and performance optimization."
+    bio: "Code craftsman dedicated to clean architecture and performance optimization.",
   },
   {
     id: "5",
     name: "Lisa Thompson",
     role: "Marketing Director",
-    image: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=400&h=600&fit=crop&crop=face",
-    bio: "Growth hacker with expertise in digital marketing and customer acquisition."
-  }
+    image:
+      "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=400&h=600&fit=crop&crop=face",
+    bio: "Growth hacker with expertise in digital marketing and customer acquisition.",
+  },
 ]
 
 const container = {
@@ -75,7 +77,11 @@ const container = {
 
 const itemUp = {
   hidden: { opacity: 0, y: 16 },
-  show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 240, damping: 22 } },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { type: "spring", stiffness: 240, damping: 22 },
+  },
 }
 
 const itemFade = {
@@ -83,19 +89,36 @@ const itemFade = {
   show: { opacity: 1, transition: { duration: 0.4 } },
 }
 
-function SectionTitle({ eyebrow, title, intro }: { eyebrow?: string; title: string; intro?: string }) {
+function SectionTitle({
+  eyebrow,
+  title,
+  intro,
+}: {
+  eyebrow?: string
+  title: string
+  intro?: string
+}) {
   return (
     <div className="max-w-2xl">
       {eyebrow ? (
-        <p className="text-sm font-medium tracking-wide uppercase" style={{ color: COLORS.primary }}>
+        <p
+          className="text-sm font-medium tracking-wide uppercase"
+          style={{ color: COLORS.primary }}
+        >
           {eyebrow}
         </p>
       ) : null}
-      <h2 className="mt-2 text-pretty text-3xl font-semibold md:text-4xl" style={{ color: COLORS.text }}>
+      <h2
+        className="mt-2 text-pretty text-3xl font-semibold md:text-4xl"
+        style={{ color: COLORS.text }}
+      >
         {title}
       </h2>
       {intro ? (
-        <p className="mt-3 text-base leading-relaxed" style={{ color: COLORS.muted }}>
+        <p
+          className="mt-3 text-base leading-relaxed"
+          style={{ color: COLORS.muted }}
+        >
           {intro}
         </p>
       ) : null}
@@ -105,10 +128,17 @@ function SectionTitle({ eyebrow, title, intro }: { eyebrow?: string; title: stri
 
 function TimelineItem({ entry, index }: { entry: TimelineEntry; index: number }) {
   return (
-    <motion.li variants={itemUp} className="relative pl-6" style={{ borderLeft: `2px solid ${COLORS.border}` }}>
+    <motion.li
+      variants={itemUp}
+      className="relative pl-6"
+      style={{ borderLeft: `2px solid ${COLORS.border}` }}
+    >
       <span
         className="absolute -left-2 top-1.5 h-3 w-3 rounded-full"
-        style={{ backgroundColor: COLORS.primary, boxShadow: `0 0 0 4px ${COLORS.bg}` }}
+        style={{
+          backgroundColor: COLORS.primary,
+          boxShadow: `0 0 0 4px ${COLORS.bg}`,
+        }}
         aria-hidden
       />
       <div className="flex flex-col gap-1">
@@ -157,7 +187,7 @@ function TeamCard({ member }: { member: TeamMember }) {
 
 export default function OurStoryPage() {
   return (
-    <main style={{ backgroundColor: COLORS.bg }} className="py-20 ">
+    <main style={{ backgroundColor: COLORS.bg }} className="py-20">
       {/* Header */}
       <section className="mx-auto w-full max-w-5xl px-4 py-12 md:px-6 md:py-16">
         <motion.div
@@ -168,16 +198,26 @@ export default function OurStoryPage() {
           className="flex flex-col gap-6"
         >
           <motion.div variants={itemUp}>
-            <p className="text-sm font-medium uppercase tracking-wide" style={{ color: COLORS.primary }}>
+            <p
+              className="text-sm font-medium uppercase tracking-wide"
+              style={{ color: COLORS.primary }}
+            >
               Our Story
             </p>
-            <h1 className="mt-2 text-pretty text-4xl font-semibold md:text-5xl" style={{ color: COLORS.text }}>
+            <h1
+              className="mt-2 text-pretty text-4xl font-semibold md:text-5xl"
+              style={{ color: COLORS.text }}
+            >
               Crafting architecture with warmth and intention
             </h1>
-            <p className="mt-3 max-w-2xl text-base leading-relaxed" style={{ color: COLORS.muted }}>
-              Since 2021, Mukham has pursued work that balances material honesty, daylight, and human scale. This page
-              captures the milestones that shaped us, the team who carries the practice, and the growing community that
-              supports our journey.
+            <p
+              className="mt-3 max-w-2xl text-base leading-relaxed"
+              style={{ color: COLORS.muted }}
+            >
+              Since 2021, Mukham has pursued work that balances material honesty,
+              daylight, and human scale. This page captures the milestones that
+              shaped us, the team who carries the practice, and the growing
+              community that supports our journey.
             </p>
           </motion.div>
         </motion.div>
@@ -191,8 +231,8 @@ export default function OurStoryPage() {
       </section>
 
       {/* Core Team */}
-      <section className="mx-auto w-full max-w-5xl px-4 py-12 md:px-6 md:py-16">
-        <div className="flex flex-col gap-8">
+     <section className="w-full px-4 py-12 md:px-6 md:py-16"> {/* Removed max-width constraint */}
+        <div className="flex flex-col">
           <TeamCarousel members={teamMembers} title="Meet Our Team" />
         </div>
       </section>

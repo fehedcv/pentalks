@@ -7,6 +7,7 @@ import Mukham from "./components/pages/mukham";
 import Index from "./components/pages/mukham2";
 import OurStoryPage from "./components/pages/aboutus";
 import ContactPage from "./components/pages/contact";
+
 // import ProductCardGrid from "./components/projects"; // Commented out since we're replacing it
 // import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "./components/projectsv2"
 
@@ -68,7 +69,7 @@ const ProjectCards = () => {
       alt: "Elegant interior design"
     }
   ];
-
+  
   return (
     <div className="py-16 px-4" style={{ backgroundColor: '#896c4a' }}>
       <div className="max-w-7xl mx-auto">

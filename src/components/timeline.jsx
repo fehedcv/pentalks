@@ -33,7 +33,7 @@ export const ScrollTimeline = ({
   animationOrder = "sequential",
   cardAlignment = "alternating",
   progressIndicator = true,
-  darkMode = true,
+  darkMode = false, // Changed default to false for light theme
   parallaxIntensity = 0.1,
   progressLineWidth = 3,
   progressLineCap = "round",
@@ -111,17 +111,31 @@ export const ScrollTimeline = ({
       ref={scrollRef}
       className={cn(
         "relative min-h-screen w-full overflow-hidden py-16",
-        darkMode ? "bg-[#896c4a] text-white" : "bg-white text-black",
+        "bg-[#FAF7F2]", // warm cream background
         className
       )}
+      style={{ backgroundColor: "#FAF7F2" }}
     >
       {/* Section Header */}
       <div className="text-center mb-12 px-4">
-        <h3 className="text-green-400 uppercase tracking-wider text-sm font-bold">
+        <h3 
+          className="uppercase tracking-wider text-sm font-bold"
+          style={{ color: "#C47A3D" }} // refined terracotta
+        >
           story
         </h3>
-        <h2 className="text-3xl md:text-5xl font-bold mt-2">{title}</h2>
-        <p className="text-gray-400 text-lg mt-2">{subtitle}</p>
+        <h2 
+          className="text-3xl md:text-5xl font-bold mt-2"
+          style={{ color: "#222222" }} // deep neutral
+        >
+          {title}
+        </h2>
+        <p 
+          className="text-lg mt-2"
+          style={{ color: "#666666" }} // soft grey
+        >
+          {subtitle}
+        </p>
       </div>
 
       {/* Timeline Wrapper */}
@@ -129,17 +143,26 @@ export const ScrollTimeline = ({
         {/* Vertical Progress Line */}
         {progressIndicator && (
           <>
+            {/* Background line */}
+            <div 
+              className="absolute top-0 left-1/2 -translate-x-1/2 z-5 h-full"
+              style={{
+                width: progressLineWidth,
+                backgroundColor: "#E0DED8", // subtle beige grey
+                borderRadius: progressLineCap === "round" ? "9999px" : "0px",
+              }}
+            />
+            {/* Progress line */}
             <motion.div
               className="absolute top-0 left-1/2 -translate-x-1/2 z-10"
               style={{
                 height: progressHeight,
                 width: progressLineWidth,
-                borderRadius:
-                  progressLineCap === "round" ? "9999px" : "0px",
-                background: "linear-gradient(to bottom, #22d3ee, #6366f1, #a855f7)",
+                backgroundColor: "#C47A3D", // refined terracotta
+                borderRadius: progressLineCap === "round" ? "9999px" : "0px",
                 boxShadow: `
-                  0 0 15px rgba(99,102,241,0.5),
-                  0 0 25px rgba(168,85,247,0.3)
+                  0 0 8px rgba(196, 122, 61, 0.3),
+                  0 0 15px rgba(196, 122, 61, 0.1)
                 `,
               }}
             />
@@ -155,61 +178,78 @@ export const ScrollTimeline = ({
               [parallaxIntensity * 100, -parallaxIntensity * 100]
             );
             return (
-            <motion.div
-  key={index}
-  className={cn(
-    "relative flex flex-col items-center mb-16", // ✅ mobile = centered
-    cardAlignment === "alternating"
-      ? index % 2 === 0
-        ? "lg:flex-row lg:justify-start lg:items-center"
-        : "lg:flex-row-reverse lg:justify-start lg:items-center"
-      : cardAlignment === "left"
-      ? "lg:flex-row lg:justify-start lg:items-center"
-      : "lg:flex-row-reverse lg:justify-start lg:items-center"
-  )}
-//   variants={getCardVariants(index)}
-//   initial="initial"
-//   whileInView="whileInView"
-//   viewport={{ once: false, margin: "-100px" }}
-//   style={parallaxIntensity > 0 ? { y: yOffset } : undefined}
->
-  {/* Connector Dot */}
-  <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 z-30 lg:top-1/2">
-    <motion.div
-      className={cn(
-        "w-6 h-6 rounded-full border-4 bg-black flex items-center justify-center",
-        index <= activeIndex ? "border-indigo-500" : "border-gray-600"
-      )}
-      animate={
-        index <= activeIndex
-          ? {
-              scale: [1, 1.3, 1],
-              boxShadow: [
-                "0 0 0px rgba(99,102,241,0)",
-                "0 0 12px rgba(99,102,241,0.6)",
-                "0 0 0px rgba(99,102,241,0)",
-              ],
-            }
-          : {}
-      }
-      transition={{
-        duration: 0.8,
-        repeat: Infinity,
-        repeatDelay: 4,
-        ease: "easeInOut",
-      }}
-    />
-  </div>
+              <motion.div
+                key={index}
+                className={cn(
+                  "relative flex flex-col items-center mb-16", // mobile = centered
+                  cardAlignment === "alternating"
+                    ? index % 2 === 0
+                      ? "lg:flex-row lg:justify-start lg:items-center"
+                      : "lg:flex-row-reverse lg:justify-start lg:items-center"
+                    : cardAlignment === "left"
+                    ? "lg:flex-row lg:justify-start lg:items-center"
+                    : "lg:flex-row-reverse lg:justify-start lg:items-center"
+                )}
+                variants={getCardVariants(index)}
+                initial="initial"
+                whileInView="whileInView"
+                viewport={{ once: false, margin: "-100px" }}
+                style={parallaxIntensity > 0 ? { y: yOffset } : undefined}
+              >
+                {/* Connector Dot */}
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 z-30 lg:top-1/2">
+                  <motion.div
+                    className="w-6 h-6 rounded-full border-4 flex items-center justify-center"
+                    style={{
+                      backgroundColor: "#FAF7F2", // warm cream
+                      borderColor: index <= activeIndex ? "#C47A3D" : "#E0DED8", // terracotta or beige grey
+                    }}
+                    animate={
+                      index <= activeIndex
+                        ? {
+                            scale: [1, 1.3, 1],
+                            boxShadow: [
+                              "0 0 0px rgba(196, 122, 61, 0)",
+                              "0 0 12px rgba(196, 122, 61, 0.6)",
+                              "0 0 0px rgba(196, 122, 61, 0)",
+                            ],
+                          }
+                        : {}
+                    }
+                    transition={{
+                      duration: 0.8,
+                      repeat: Infinity,
+                      repeatDelay: 4,
+                      ease: "easeInOut",
+                    }}
+                  />
+                </div>
 
-  {/* Card */}
-  <Card className="bg-gray-900 border border-gray-700 shadow-lg w-full max-w-md lg:w-[calc(50%-40px)] mt-12 lg:mt-0">
-    <CardContent className="p-6 text-center lg:text-left">
-      <h3 className="text-xl font-bold mb-2 text-white">{event.step}</h3>
-      <p className="text-gray-400 leading-relaxed">{event.description}</p>
-    </CardContent>
-  </Card>
-</motion.div>
-
+                {/* Card */}
+                <Card 
+                  className="shadow-lg w-full max-w-md lg:w-[calc(50%-40px)] mt-12 lg:mt-0"
+                  style={{
+                    backgroundColor: "#FAF7F2", // warm cream
+                    borderColor: "#E0DED8", // subtle beige grey
+                    boxShadow: "0 4px 6px -1px rgba(34, 34, 34, 0.1), 0 2px 4px -1px rgba(34, 34, 34, 0.06)",
+                  }}
+                >
+                  <CardContent className="p-6 text-center lg:text-left">
+                    <h3 
+                      className="text-xl font-bold mb-2"
+                      style={{ color: "#C47A3D" }} // refined terracotta
+                    >
+                      {event.step}
+                    </h3>
+                    <p 
+                      className="leading-relaxed"
+                      style={{ color: "#666666" }} // soft grey
+                    >
+                      {event.description}
+                    </p>
+                  </CardContent>
+                </Card>
+              </motion.div>
             );
           })}
         </div>
