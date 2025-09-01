@@ -2,12 +2,13 @@
 
 import { ScrollTimeline } from "../timeline"
 import { motion } from "framer-motion"
+import TeamDock, {sampleTeamMembers} from "../teamdock"
 import TeamCarousel from "../team"
 
 const COLORS = {
   primary: "white", // brand accent
   text: "white", // near-black
-  bg: "#896c4a", // white
+  bg: "#896c4a", // background
   muted: "white", // gray for secondary text
   border: "white", // light gray
 }
@@ -18,53 +19,51 @@ type TimelineEntry = {
   body: string
 }
 
-
-
 type TeamMember = {
+  id: string
   name: string
   role: string
-  imgAlt: string
+  image: string
+  bio: string
 }
 
-const teamMembers = [
-    {
-      id: "1",
-      name: "Ahmed",
-      role: "CEO & Founder",
-      image: "https://github.com/fehedcv/pentalks/blob/main/src/assets/ahmed.jpeg?raw=true",
-      bio: "Visionary leader with 15+ years in tech innovation and startup growth."
-    },
-    {
-      id: "2", 
-      name: "Sakeeb Arsalan",
-      role: "CTO",
-      image: "https://github.com/fehedcv/pentalks/blob/main/src/assets/sakeeb.jpeg?raw=true",
-      bio: "Full-stack architect passionate about scalable solutions and emerging technologies."
-    },
-    {
-      id: "3",
-      name: "Anshif",
-      role: "Head of Design",
-      image: "https://github.com/fehedcv/pentalks/blob/main/src/assets/anshif.jpeg?raw=true",
-      bio: "Creative strategist focused on user-centered design and brand storytelling."
-    },
-    {
-      id: "4",
-      name: "Hashim",
-      role: "Lead Developer",
-      image: "https://github.com/fehedcv/pentalks/blob/main/src/assets/hashim.jpeg?raw=true",
-      bio: "Code craftsman dedicated to clean architecture and performance optimization."
-    },
-    {
-      id: "5",
-      name: "Lisa Thompson",
-      role: "Marketing Director", 
-      image: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=400&h=600&fit=crop&crop=face",
-      bio: "Growth hacker with expertise in digital marketing and customer acquisition."
-    }
-  ];
-// Simulate a large number of members
-const MEMBERS: string[] = Array.from({ length: 36 }).map((_, i) => `Member ${i + 1}`)
+const teamMembers: TeamMember[] = [
+  {
+    id: "1",
+    name: "Ahmed",
+    role: "CEO & Founder",
+    image: "https://github.com/fehedcv/pentalks/blob/main/src/assets/ahmed.jpeg?raw=true",
+    bio: "Visionary leader with 15+ years in tech innovation and startup growth."
+  },
+  {
+    id: "2",
+    name: "Sakeeb Arsalan",
+    role: "CTO",
+    image: "https://github.com/fehedcv/pentalks/blob/main/src/assets/sakeeb.jpeg?raw=true",
+    bio: "Full-stack architect passionate about scalable solutions and emerging technologies."
+  },
+  {
+    id: "3",
+    name: "Anshif",
+    role: "Head of Design",
+    image: "https://github.com/fehedcv/pentalks/blob/main/src/assets/anshif.jpeg?raw=true",
+    bio: "Creative strategist focused on user-centered design and brand storytelling."
+  },
+  {
+    id: "4",
+    name: "Hashim",
+    role: "Lead Developer",
+    image: "https://github.com/fehedcv/pentalks/blob/main/src/assets/hashim.jpeg?raw=true",
+    bio: "Code craftsman dedicated to clean architecture and performance optimization."
+  },
+  {
+    id: "5",
+    name: "Lisa Thompson",
+    role: "Marketing Director",
+    image: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=400&h=600&fit=crop&crop=face",
+    bio: "Growth hacker with expertise in digital marketing and customer acquisition."
+  }
+]
 
 const container = {
   hidden: { opacity: 0 },
@@ -106,7 +105,6 @@ function SectionTitle({ eyebrow, title, intro }: { eyebrow?: string; title: stri
 
 function TimelineItem({ entry, index }: { entry: TimelineEntry; index: number }) {
   return (
-    
     <motion.li variants={itemUp} className="relative pl-6" style={{ borderLeft: `2px solid ${COLORS.border}` }}>
       <span
         className="absolute -left-2 top-1.5 h-3 w-3 rounded-full"
@@ -139,9 +137,9 @@ function TeamCard({ member }: { member: TeamMember }) {
     >
       <div className="flex items-center gap-4">
         <img
-          src={`/abstract-geometric-shapes.png?height=72&width=72&query=${encodeURIComponent("team member portrait")}`}
-          alt={member.imgAlt}
-          className="h-18 w-18 rounded-lg object-cover"
+          src={member.image}
+          alt={member.name}
+          className="h-16 w-16 rounded-lg object-cover"
           style={{ border: `1px solid ${COLORS.border}` }}
         />
         <div>
@@ -153,19 +151,6 @@ function TeamCard({ member }: { member: TeamMember }) {
           </p>
         </div>
       </div>
-    </motion.div>
-  )
-}
-
-function MemberBadge({ name }: { name: string }) {
-  return (
-    <motion.div
-      variants={itemFade}
-      whileHover={{ y: -2 }}
-      className="rounded-lg px-3 py-2 text-sm"
-      style={{ backgroundColor: COLORS.bg, color: COLORS.text, border: `1px solid ${COLORS.border}` }}
-    >
-      {name}
     </motion.div>
   )
 }
@@ -208,32 +193,14 @@ export default function OurStoryPage() {
       {/* Core Team */}
       <section className="mx-auto w-full max-w-5xl px-4 py-12 md:px-6 md:py-16">
         <div className="flex flex-col gap-8">
-          <TeamCarousel 
-            members={teamMembers}
-            title="Meet Our Team"
-        />
+          <TeamCarousel members={teamMembers} title="Meet Our Team" />
         </div>
       </section>
 
       {/* Members (Large list) */}
       <section className="mx-auto w-full max-w-5xl px-4 pb-16 md:px-6 md:pb-24">
         <div className="flex flex-col gap-6">
-          <SectionTitle
-            eyebrow="Community"
-            title="Members"
-            intro="A growing circle of collaborators, interns, makers, and partners."
-          />
-          <motion.div
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.2 }}
-            variants={container}
-            className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4"
-          >
-            {MEMBERS.map((name) => (
-              <MemberBadge key={name} name={name} />
-            ))}
-          </motion.div>
+          <TeamDock members={sampleTeamMembers} />
         </div>
       </section>
 
