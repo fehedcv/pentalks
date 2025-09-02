@@ -88,7 +88,7 @@ export default function HomePage() {
           className="flex flex-col sm:flex-row justify-center gap-4 mt-4"
         >
           <a
-            href="#get-started"
+            href="/contact"
             className="px-8 py-3 font-medium rounded-lg shadow-md transition text-center"
             style={{ 
               backgroundColor: '#C47A3D', // Refined terracotta
@@ -100,7 +100,7 @@ export default function HomePage() {
             Get Started
           </a>
           <a
-            href="#learn-more"
+            href="/about"
             className="px-8 py-3 font-medium rounded-lg transition text-center bg-white bg-opacity-90"
             style={{ 
               color: '#222222' // Deep neutral text

@@ -156,7 +156,7 @@ export default function ContactPage() {
                   type="submit"
                   disabled={submitting}
                   className="inline-flex w-full items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-semibold text-white shadow-md transition-colors disabled:cursor-not-allowed disabled:opacity-70 md:w-auto"
-                  style={{ backgroundColor: COLORS.primary }}
+                  style={{ backgroundColor: COLORS.primary, cursor: "pointer"}}
                 >
                   <Send size={18} />
                   {submitting ? "Sending..." : "Send Message"}

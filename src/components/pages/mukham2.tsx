@@ -15,6 +15,8 @@ const GradientButton = ({ children }: { children: React.ReactNode }) => (
     transition={{ type: "spring", stiffness: 300, damping: 20 }}
     className="inline-flex items-center justify-center rounded-full px-12 py-6 text-lg font-semibold shadow-md hover:shadow-lg transition-colors duration-300
                bg-[#C47A3D] hover:bg-[#A8652F] text-white"
+    onClick={() => window.location.href = "/contact"}
+    style={{ cursor: "pointer" }}
   >
     {children}
   </motion.button>
