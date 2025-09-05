@@ -75,13 +75,14 @@ const Footer = () => {
                   </Link>
                 </motion.div>
               </li>
+              {/*}
               <li>
                 <motion.div whileHover={{ x: 5 }} transition={{ type: "spring", stiffness: 300 }}>
                   <Link to="/projects" className="text-[#666666] hover:text-[#C47A3D] transition-colors">
                     Projects
                   </Link>
                 </motion.div>
-              </li>
+              </li> */}
               <li>
                 <motion.div whileHover={{ x: 5 }} transition={{ type: "spring", stiffness: 300 }}>
                   <Link to="/contact" className="text-[#666666] hover:text-[#C47A3D] transition-colors">

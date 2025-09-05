@@ -1,6 +1,5 @@
 import React from "react";
 import { motion } from "framer-motion";
-import BlurText from "./blurtext";
 import heroBg from "/hero-bg.png"; // Ensure you have a suitable background image
 
 
