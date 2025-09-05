@@ -228,12 +228,12 @@ export default function OurStoryPage() {
       </section>
 
       {/* Core Team */}
-     <section className="w-full px-4 py-12 md:px-6 md:py-16"> {/* Removed max-width constraint */}
-        <div className="flex flex-col">
+     <section className="w-full px-4 py-16 md:px-6 md:py-20"> {/* Removed max-width constraint */}
+        <div className="flex flex-col ">
           <TeamCarousel members={teamMembers} title="Meet Our Team" />
         </div>
       </section>
-      
+
       {/* Timeline */}
       <section className="mx-auto w-full max-w-5xl px-4 pb-12 md:px-6 md:pb-16">
         <div className="flex flex-col gap-8">

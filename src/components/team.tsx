@@ -79,8 +79,8 @@ export const TeamCarousel: React.FC<TeamCarouselProps> = ({
   titleSize = "2xl",
   titleColor = "#C47A3D", // refined terracotta
   background = "#FAF7F2", // warm cream
-  cardWidth = 280,
-  cardHeight = 380,
+  cardWidth = 300,
+  cardHeight = 340,
   cardRadius = 20,
   showArrows = true,
   showDots = true,
@@ -308,7 +308,7 @@ export const TeamCarousel: React.FC<TeamCarouselProps> = ({
       {/* Title */}
       {title && (
         <h2
-          className={cn(`font-bold mb-10`, titleSizeClasses[titleSize], titleClassName)}
+          className={cn(`font-bold `, titleSizeClasses[titleSize], titleClassName)}
           style={{ color: titleColor }}
         >
           {title}
@@ -470,7 +470,7 @@ export const TeamCarousel: React.FC<TeamCarouselProps> = ({
 
       {/* Dots Indicator */}
       {showDots && (
-        <div className="flex justify-center gap-3 mt-15">
+        <div className="flex justify-center py-8 gap-3 ">
           {members.map((_, index) => (
             <motion.button
               key={index}
