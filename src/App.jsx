@@ -18,7 +18,7 @@ const App = () => {
         <SmoothScrollManager />
         <Navbar />
         
-        <main className="min-h-screen flex flex-col">
+        <main className="min-h-screen flex flex-col bg-[#FAF7F2]">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<AboutPage />} />

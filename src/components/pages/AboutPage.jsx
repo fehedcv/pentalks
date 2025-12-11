@@ -1,6 +1,7 @@
 import React from 'react';
 import { Target, Users, Layers, Award, Globe, Heart, Briefcase, Calendar } from 'lucide-react';
 import SectionHeader from '../SectionHeader';
+import MapJourney from '../MapJourney';
 
 const AboutPage = () => {
   const team = [
@@ -26,7 +27,7 @@ const AboutPage = () => {
   ];
 
   return (
-    <div className="pt-32 pb-24 px-8 md:px-16 animate-fade-in">
+    <div className="pt-32 pb-24 px-8 md:px-16 animate-fade-in bg-[#FAF7F2]">
       <SectionHeader title="The Origin Story" subtitle="How a conversation about space and story became something bigger." />
       
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 mb-24">
@@ -71,27 +72,7 @@ const AboutPage = () => {
       </section>
 
       <SectionHeader title="Our Journey" subtitle="Key milestones in the Pentalks story." />
-      <div className="relative mb-24">
-        <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-px bg-[#C47A3D]/30" />
-        <div className="space-y-12">
-          {milestones.map((item, i) => (
-            <div key={i} className={`flex flex-col md:flex-row items-start gap-8 ${i % 2 === 0 ? 'md:flex-row-reverse' : ''}`}>
-              <div className={`flex-1 ${i % 2 === 0 ? 'md:text-right' : ''}`}>
-                <span className="text-[#C47A3D] font-syne font-bold text-lg">{item.year}</span>
-                <h4 className="font-syne text-2xl font-bold mt-1 mb-2">{item.title}</h4>
-                <p className="text-[#333333]">{item.desc}</p>
-              </div>
-              <div className="relative">
-                <div className="w-8 h-8 bg-[#C47A3D] rounded-full flex items-center justify-center">
-                  <Calendar className="w-4 h-4 text-white" />
-                </div>
-              </div>
-              <div className="flex-1 hidden md:block" />
-            </div>
-          ))}
-        </div>
-      </div>
-
+      <MapJourney milestones={milestones} />
       <SectionHeader title="Meet the Team" subtitle="The creative minds behind Pentalks." />
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-24">
         {team.map((member, i) => (
