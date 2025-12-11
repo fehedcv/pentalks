@@ -4,10 +4,11 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Cursor from './components/cursor';
 import SmoothScrollManager from './components/SmoothScrollManager';
-// Page Views
 import Home from './components/pages/Home';
 import AboutPage from './components/pages/AboutPage';
 import CompaniesPage from './components/pages/CompaniesPage';
+import MukhamPage from './components/pages/MukhamPage';
+import VerPage from './components/pages/VerPage';
 
 const App = () => {
   return (
@@ -22,6 +23,8 @@ const App = () => {
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/companies" element={<CompaniesPage />} />
+            <Route path="/mukham" element={<MukhamPage />} />
+            <Route path="/ver" element={<VerPage />} />
           </Routes>
         </main>
 

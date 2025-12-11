@@ -1,6 +1,6 @@
 import React from 'react';
 import { ArrowUpRight, Mic } from 'lucide-react';
-import { Link } from 'react-router-dom'; // Import Link
+import { Link } from 'react-router-dom';
 import SectionHeader from './SectionHeader';
 import MukhamImage from '/mukhamcover.png'; 
 
@@ -10,8 +10,7 @@ const BrandHighlights = () => {
       <SectionHeader title="Our Ecosystem" subtitle="Distinct entities. One vision." />
       
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-        {/* Mukham - Wrapped in Link */}
-        <Link to="/companies" className="block bg-[#E5E5E5] h-[400px] lg:h-[500px] rounded-sm relative overflow-hidden group hover-target cursor-pointer">
+        <Link to="/mukham" className="block bg-[#E5E5E5] h-[400px] lg:h-[500px] rounded-sm relative overflow-hidden group hover-target cursor-pointer">
            <div className="absolute inset-0 bg-stone-300 flex items-center justify-center text-stone-500 font-syne text-xl">
                 <img src={MukhamImage} alt="Mukham Cover" className="object-cover w-full h-full" />
            </div>
@@ -25,8 +24,7 @@ const BrandHighlights = () => {
            </div>
         </Link>
 
-        {/* Ver - Wrapped in Link */}
-        <Link to="/companies" className="block bg-[#0a0a0a] h-[400px] lg:h-[500px] rounded-sm relative overflow-hidden group hover-target cursor-pointer">
+        <Link to="/ver" className="block bg-[#0a0a0a] h-[400px] lg:h-[500px] rounded-sm relative overflow-hidden group hover-target cursor-pointer">
            <div className="absolute inset-0 flex items-center justify-center opacity-30">
               <div className="flex gap-1 items-end h-32">
                 {[...Array(20)].map((_, i) => (

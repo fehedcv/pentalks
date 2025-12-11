@@ -1,14 +1,23 @@
-import React from 'react';
-import { Menu } from 'lucide-react';
+import React, { useState } from 'react';
+import { Menu, X } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import logo from '/logogreen.png';
 
 const Navbar = () => {
   const location = useLocation();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const isActive = (path) => {
     return location.pathname === path ? 'text-[#C47A3D]' : 'hover:text-[#C47A3D]';
   };
+
+  const navLinks = [
+    { path: '/', label: 'Home' },
+    { path: '/about', label: 'About' },
+    { path: '/companies', label: 'Companies' },
+    { path: '/mukham', label: 'Mukham' },
+    { path: '/ver', label: 'Ver' },
+  ];
 
   return (
     <nav className="flex justify-between items-center py-6 px-8 md:px-16 fixed w-full top-0 z-50 backdrop-blur-md bg-[#FAF7F2]/80">
@@ -22,19 +31,34 @@ const Navbar = () => {
       </Link>
 
       <div className="hidden md:flex gap-8 text-sm font-medium text-[#0a0a0a]">
-        <Link to="/" className={`transition-colors hover-target ${isActive('/')}`}>
-          Home
-        </Link>
-        <Link to="/about" className={`transition-colors hover-target ${isActive('/about')}`}>
-          About
-        </Link>
-        <Link to="/companies" className={`transition-colors hover-target ${isActive('/companies')}`}>
-          Companies
-        </Link>
-        
-
+        {navLinks.map((link) => (
+          <Link key={link.path} to={link.path} className={`transition-colors hover-target ${isActive(link.path)}`}>
+            {link.label}
+          </Link>
+        ))}
       </div>
-      <button className="md:hidden text-2xl text-[#0a0a0a]"><Menu /></button>
+
+      <button 
+        className="md:hidden text-2xl text-[#0a0a0a] z-50"
+        onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+      >
+        {mobileMenuOpen ? <X /> : <Menu />}
+      </button>
+
+      {mobileMenuOpen && (
+        <div className="fixed inset-0 bg-[#FAF7F2] z-40 flex flex-col items-center justify-center gap-8 md:hidden">
+          {navLinks.map((link) => (
+            <Link 
+              key={link.path} 
+              to={link.path} 
+              className={`text-2xl font-syne font-bold transition-colors ${isActive(link.path)}`}
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              {link.label}
+            </Link>
+          ))}
+        </div>
+      )}
     </nav>
   );
 };
