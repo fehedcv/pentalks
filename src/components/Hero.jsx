@@ -201,8 +201,7 @@ const PentalksSlowPortal = () => {
      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 text-center pointer-events-none">
   
   <h1 className="
-    text-[12vw] sm:text-6xl md:text-7xl lg:text-8xl xl:text-[9vw]
-    font-black
+text-[13vw]  sm:text-6xl md:text-7xl lg:text-8xl xl:text-[8vw]    font-black
     leading-[0.95] sm:leading-[0.9] lg:leading-[0.85]
     tracking-tight
     uppercase
