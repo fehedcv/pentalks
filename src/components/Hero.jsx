@@ -165,7 +165,20 @@ const PortalContent = () => {
         />
 
         <svg className="w-[350px] md:w-[500px] h-auto overflow-visible" viewBox="0 0 500 150">
-          <text x="50%" y="40%" textAnchor="middle" className="drawing-heading text-5xl md:text-6xl font-black uppercase" fill="none" stroke={COLORS.forest} strokeWidth="1.2">PENTALKS</text>
+<text
+  x="50%"
+  y="40%"
+  textAnchor="middle"
+  className="drawing-heading text-5xl md:text-6xl font-black uppercase"
+  fill="none"
+  stroke={COLORS.forest}
+  strokeWidth="1"
+  strokeLinejoin="round"
+  strokeLinecap="round"
+  paintOrder="stroke"
+>
+  PENTALKS
+</text>
           <text x="50%" y="70%" textAnchor="middle" className="drawing-desc text-lg md:text-xl font-bold tracking-[0.45em]" fill="none" stroke={COLORS.forest} strokeWidth="0.5">Journey of Turtles</text>
         </svg>
       </div>
