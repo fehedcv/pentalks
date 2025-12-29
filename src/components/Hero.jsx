@@ -1,48 +1,59 @@
-import React, { useLayoutEffect, useRef } from 'react';
+import React, { useLayoutEffect, useRef, useEffect, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { motion, useScroll, useTransform } from 'framer-motion';
+
 gsap.registerPlugin(ScrollTrigger);
 
 const PentalksSlowPortal = () => {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return <div className="h-screen bg-[#F9F7F2]" />;
+
+  return <PortalContent />;
+};
+
+const PortalContent = () => {
   const containerRef = useRef(null);
   const logoWrapperRef = useRef(null);
   const realImageRef = useRef(null);
   const titleRef = useRef(null);
-  const bgImageRef = useRef(null);
   const portalRef = useRef(null);
 
-  // Turtle-inspired Light Palette
   const COLORS = {
-    sand: "#F5F2ED",     // Warm sand white
-    moss: "#8B9D83",     // Mossy green
-    forest: "#0f4c39",   // Deep forest green
-    espresso: "#2B1E12"  // Dark shell brown
+    sand: "#F9F7F2",    // Light Theme Base
+    moss: "#8B9D83",    // Muted Sage
+    forest: "#0f4c39",  // Dark Theme Base
+    espresso: "#1C150D", // Deep Accent
   };
-
-  const BG_IMAGE = "https://images.unsplash.com/photo-1549366021-9f761d450615?q=80&w=2000";
 
   useLayoutEffect(() => {
     let ctx = gsap.context(() => {
+      const scrollDistance = window.innerWidth < 768 ? "+=3000" : "+=6000";
       
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
-          // ടോട്ടൽ സ്ക്രോൾ ഡിസ്റ്റൻസ് കൂട്ടി, ഇത് അനിമേഷൻ സ്ലോ ആക്കും
           start: "top top",
-          end: "+=6000", 
-          scrub: 1.8,    // സ്മൂത്ത്‌നെസ്സ് കൂട്ടാൻ സ്ക്രബ് വാല്യൂ കൂട്ടി
+          end: scrollDistance, 
+          scrub: 1.2,    
           pin: true,
           anticipatePin: 1,
         }
       });
 
-      // 1. HERO ELEMENTS FADE (Gentle Departure)
-      tl.to(bgImageRef.current, { scale: 1.1, opacity: 0.03, ease: "power1.inOut" }, 0)
-        .to(".bg-text-flow", { xPercent: -12, opacity: 0, ease: "none" }, 0)
-        .to(titleRef.current, { opacity: 0, y: -60, filter: "blur(15px)", ease: "power2.inOut" }, 0);
+      // YOUR ORIGINAL ANIMATIONS
+      tl.to(titleRef.current, { 
+        opacity: 0, 
+        y: -150, 
+        filter: "blur(20px)", 
+        ease: "power2.inOut" 
+      }, 0);
 
-      // 2. LOGO MOVES TO CENTER (Steady & Controlled)
       tl.to(logoWrapperRef.current, {
         top: "50%",
         right: "50%",
@@ -53,33 +64,28 @@ const PentalksSlowPortal = () => {
         ease: "expo.inOut",
       }, 0.1);
 
-      // 3. CINEMATIC ICON REVEAL (Very Slow Fade)
       tl.fromTo(realImageRef.current,
-        { opacity: 0, scale: 0.7, filter: "brightness(2) blur(20px)" },
-        { opacity: 1, scale: 1, filter: "brightness(1) blur(0px)", duration: 4, ease: "power2.out" }, 
+        { opacity: 0, scale: 0.7, filter: "brightness(1) blur(20px)" },
+        { opacity: 1, scale: 1, filter: "blur(0px)", duration: 4, ease: "power2.out" }, 
       0.8);
 
-      // 4. THE SLOW DRAWING (Stroke Animation)
-      // Heading: PENTALKS - Drawing speed കുറച്ചു
       tl.fromTo(".drawing-heading", 
         { strokeDashoffset: 1000, strokeDasharray: 1000 },
         { strokeDashoffset: 0, duration: 4.5, ease: "power2.inOut" }, 
       1.2);
 
-      // Description: Journey of Turtles - കൂടുതൽ പതുക്കെ വരുന്നു
       tl.fromTo(".drawing-desc", 
         { strokeDashoffset: 800, strokeDasharray: 800 },
         { strokeDashoffset: 0, duration: 4, ease: "power2.inOut" }, 
       2.0);
 
-      // 5. ELEGANT COLOR FILL
+      // Fills with Dark Forest as the background is now Light Sand
       tl.to([".drawing-heading", ".drawing-desc"], {
-        fill: COLORS.forest, //
+        fill: COLORS.forest, 
         duration: 2.5,
         ease: "power1.in"
       }, 4.0);
 
-      // 6. PORTAL ZOOM (Final Cinematic Leap)
       tl.to(logoWrapperRef.current, {
         scale: 160, 
         duration: 4,
@@ -91,152 +97,107 @@ const PentalksSlowPortal = () => {
     }, containerRef);
     return () => ctx.revert();
   }, []);
-// const containerRef = useRef(null);
-  
-  // Scroll Logic for the fade-away effect
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"]
   });
 
-  const opacity = useTransform(scrollYProgress, [0, 0.4], [1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 0.4], [1, 0.95]);
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
+  const contentScale = useTransform(scrollYProgress, [0, 0.2], [1, 0.95]);
 
-  // Grid Configuration
-  const rows = 15;
-  const cols = 25;
   return (
-    <div ref={containerRef} className="relative w-full h-screen bg-[#F5F2ED] text-[#2B1E12] overflow-hidden font-sans">
+    // LIGHT BACKGROUND for the Logo/Portal Section
+    <div ref={containerRef} className="relative w-full h-screen bg-[#F9F7F2] overflow-hidden font-sans">
       
-      {/* --- LIGHT TURTLE THEME BACKGROUND --- */}
-      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-        <div 
-          ref={bgImageRef}
-          className="w-full h-full bg-cover bg-center opacity-30 saturate-[0.6]"
-          style={{ backgroundImage: `url(${BG_IMAGE})` }}
-        />
-        <div className="absolute inset-0 bg-[#F5F2ED]/85 backdrop-blur-[1px]" />
-      </div>
+      {/* 1. DARK HERO SECTION (Your Parent Company Content) */}
+      <motion.section 
+        style={{ opacity: contentOpacity, scale: contentScale }}
+        className="absolute inset-0 z-20 bg-[#0f4c39] flex flex-col"
+      >
+        {/* Navbar Space */}
+        <div className="h-24 md:h-32 w-full flex-shrink-0" />
 
-      {/* --- CINEMATIC LOGO LOCKUP --- */}
+        <div className="flex-grow w-full max-w-[1400px] mx-auto px-6 md:px-12 flex flex-col justify-center">
+          <div ref={titleRef} className="grid grid-cols-12 gap-y-12 items-center">
+            
+            {/* Parent Identity */}
+            <div className="col-span-12 lg:col-span-7 space-y-6">
+              <span className="font-bold uppercase tracking-[0.4em] text-[#8B9D83] text-[10px] md:text-xs">
+                The Pentalks Archetype
+              </span>
+              
+              <h1 className="font-syne text-[12vw] md:text-[7vw] font-black uppercase leading-[0.85] tracking-tighter text-[#F9F7F2]">
+                Dual <br /> 
+                <span className="outline-text block">Entities.</span>
+              </h1>
+
+              <p className="max-w-xl text-[#F9F7F2]/60 text-lg md:text-xl font-medium leading-relaxed italic">
+                Pentalks serves as the parent ecosystem, providing a resilient shell for technical and creative evolution.
+              </p>
+            </div>
+
+            {/* Sub-Company Layout */}
+            <div className="col-span-12 lg:col-span-5 grid grid-cols-1 md:grid-cols-2 gap-4 lg:pl-12">
+              <div className="bg-[#F9F7F2]/5 backdrop-blur-md p-8 rounded-tr-[60px] rounded-bl-[60px] border border-white/10">
+                <span className="text-[#8B9D83] font-black text-[10px] uppercase tracking-[0.2em] block mb-4">01 Architecture</span>
+                <h3 className="text-[#F9F7F2] font-bold text-xl leading-tight">Designing <br /> Spaces</h3>
+              </div>
+              <div className="bg-[#F9F7F2]/5 backdrop-blur-md p-8 rounded-tl-[60px] rounded-br-[60px] border border-white/10 md:mt-12">
+                <span className="text-[#8B9D83] font-black text-[10px] uppercase tracking-[0.2em] block mb-4">02 Podcast</span>
+                <h3 className="text-[#F9F7F2] font-bold text-xl leading-tight">Voices of <br /> Impact</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </motion.section>
+
+      {/* 2. LOGO SECTION (Fixed Animation Layer with Light BG) */}
       <div 
         ref={logoWrapperRef} 
-        className="fixed top-1/2 right-8 md:right-20 z-50 flex flex-col items-center justify-center -translate-y-1/2 pointer-events-none p-8 origin-center"
+        className="fixed top-1/2 right-8 md:right-20 z-10 flex flex-col items-center justify-center -translate-y-1/2 pointer-events-none p-8 origin-center"
       >
         <img 
           ref={realImageRef}
           src="logogreen.png" 
-          alt="Pentalks Icon" 
-          className="w-32 h-32 md:w-40 md:h-40 object-contain drop-shadow-2xl mb-8"
+          alt="Pentalks" 
+          className="w-32 h-32 md:w-40 md:h-40 object-contain mb-8" 
         />
 
         <svg className="w-[350px] md:w-[500px] h-auto overflow-visible" viewBox="0 0 500 150">
-          <text
-            x="50%" y="40%"
-            textAnchor="middle"
-            dominantBaseline="middle"
-            className="drawing-heading text-5xl md:text-6xl font-black uppercase tracking-tight"
-            fill="none"
-            stroke={COLORS.forest}
-            strokeWidth="1.2"
-          >
-            PENTALKS
-          </text>
-          
-          <text
-            x="50%" y="70%"
-            textAnchor="middle"
-            dominantBaseline="middle"
-            className="drawing-desc text-lg md:text-xl font-bold tracking-[0.45em] opacity-80"
-            fill="none"
-            stroke={COLORS.forest}
-            strokeWidth="0.5"
-          >
-            Journey of Turtles
-          </text>
+<text
+  x="50%"
+  y="40%"
+  textAnchor="middle"
+  className="drawing-heading text-5xl md:text-6xl font-black uppercase"
+  fill="none"
+  stroke={COLORS.forest}
+  strokeWidth="1"
+  strokeLinejoin="round"
+  strokeLinecap="round"
+  paintOrder="stroke"
+>
+  PENTALKS
+</text>
+          <text x="50%" y="70%" textAnchor="middle" className="drawing-desc text-lg md:text-xl font-bold tracking-[0.45em]" fill="none" stroke={COLORS.forest} strokeWidth="0.5">Journey of Turtles</text>
         </svg>
       </div>
 
-<div ref={containerRef} className="relative h-[160vh] bg-[#F9F7F2]">
-      <motion.section 
-        style={{ opacity, scale }}
-        className="sticky top-0 h-screen w-full flex flex-col justify-center items-center overflow-hidden px-6"
-      >
-        
-        {/* --- INTERLOCKING WIREFRAME GRID --- */}
-        <div className="absolute inset-0 z-0 flex flex-col justify-center items-center pointer-events-auto opacity-20 w-[120vw] h-[120vh]">
-          {Array.from({ length: rows }).map((_, rowIndex) => (
-            <div 
-              key={rowIndex} 
-              className={`flex gap-0 ${rowIndex % 2 === 0 ? 'ml-[86px]' : ''}`}
-              style={{ marginTop: '-25px' }} // Joins them vertically
-            >
-              {Array.from({ length: cols }).map((_, colIndex) => (
-                <div
-                  key={colIndex}
-                  className="group relative w-[86px] h-[100px] flex items-center justify-center cursor-none"
-                >
-                  {/* The Outline (Always visible) */}
-                  <div 
-                    className="absolute inset-0 bg-[#0f4c39] opacity-30 group-hover:opacity-0 transition-opacity duration-500"
-                    style={{
-                      clipPath: "polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%, 50% 0%, 50% 5%, 5% 27%, 5% 73%, 50% 95%, 95% 73%, 95% 27%, 50% 5%)"
-                    }}
-                  />
-                  
-                  {/* The Fill (Appears on hover) */}
-                  <div 
-                    className="absolute inset-0 bg-[#0f4c39] opacity-0 group-hover:opacity-100 transition-all duration-700 ease-out scale-75 group-hover:scale-100"
-                    style={{
-                      clipPath: "polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)"
-                    }}
-                  />
-                </div>
-              ))}
-            </div>
-          ))}
-        </div>
+      {/* Pinning Spacer */}
+      <div className="h-[200vh] pointer-events-none" />
 
-        {/* --- TEXT CONTENT --- */}
-     <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 text-center pointer-events-none">
-  
-  <h1 className="
-text-[13vw]  sm:text-6xl md:text-7xl lg:text-8xl xl:text-[8vw]    font-black
-    leading-[0.95] sm:leading-[0.9] lg:leading-[0.85]
-    tracking-tight
-    uppercase
-    text-[#1C150D]
-  ">
-    Steady <br />
-    Foundation<span className="text-[#0f4c39]">.</span>
-  </h1>
-
-  <p className="
-    mt-5 sm:mt-6 md:mt-8
-    text-sm sm:text-base md:text-lg
-    text-[#1C150D]/70
-    font-medium
-    leading-relaxed
-    max-w-xs sm:max-w-md md:max-w-xl
-    mx-auto
-    italic
-  ">
-    Pentalks acts as the central intelligence, providing a resilient shell for
-    technical and organic evolution.
-  </p>
-
-</div>
-
-
-      </motion.section>
-
-      {/* Spacer so the page actually scrolls */}
-      <div className="h-screen pointer-events-none" />
-    </div>
-
-      {/* FINAL PORTAL OVERLAY */}
+      {/* Final Portal Transition Overlay (Dark Green to match content) */}
       <div ref={portalRef} className="absolute inset-0 z-[60] bg-[#0f4c39] opacity-0 pointer-events-none" />
 
+      <style jsx>{`
+        .outline-text { 
+          color: transparent; 
+          -webkit-text-stroke: 1px #F9F7F2; 
+        }
+        @media (min-width: 768px) { 
+          .outline-text { -webkit-text-stroke: 2px #F9F7F2; } 
+        }
+      `}</style>
     </div>
   );
 };

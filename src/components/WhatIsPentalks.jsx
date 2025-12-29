@@ -100,7 +100,7 @@ const WhatIsPentalks = () => {
           >
             <div className="h-[1px] w-20 bg-[#8B9D83]/40" />
             <span className="text-[12px] font-black tracking-[0.7em] text-[#8B9D83] uppercase">
-              Brand Ecosystem // 2025
+              Brand Ecosystem
             </span>
           </motion.div>
           
@@ -110,7 +110,7 @@ const WhatIsPentalks = () => {
               whileInView={{ y: 0, skewY: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
-              className="text-7xl md:text-9xl lg:text-[11.5vw] font-black text-[#FAF7F2] uppercase leading-[0.8] tracking-tighter"
+              className="text-6xl md:text-8xl lg:text-[10vw] font-black text-[#FAF7F2] uppercase leading-[0.8] tracking-tighter"
             >
               What is <br /> 
               <span className="text-transparent stroke-text">Pentalks?</span>
