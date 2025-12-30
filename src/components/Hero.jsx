@@ -155,7 +155,7 @@ const PortalContent = () => {
             {/* THEME CARDS */}
             <div className="lg:col-span-5 flex flex-col sm:flex-row lg:flex-col gap-8">
               <div className="bg-[#F9F7F2] p-7 rounded-3xl shadow-xl">
-                <h3 className="text-[#0f4c39] font-semibold text-2xl leading-snug">
+                <h3 className="text-[#0f4c39] text-white font-semibold text-2xl leading-snug">
                   Designing<br />Spaces
                 </h3>
               </div>

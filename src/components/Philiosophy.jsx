@@ -23,16 +23,7 @@ const Philosophy = () => {
         style={{ clipPath: 'polygon(0 0, 100% 0, 100% 20%, 50% 100%, 0 20%)' }} 
       />
 
-      {/* --- 2. KINETIC BACKGROUND --- */}
-      {/* Large scale typography motif from your "WHAT THEY SAY" screenshots */}
-      <motion.div 
-        style={{ x: xMove, opacity: opacityText }}
-        className="absolute inset-0 flex items-center whitespace-nowrap pointer-events-none z-0 select-none"
-      >
-        <h2 className="text-[25vw] font-black text-[#0f4c39] uppercase tracking-tighter">
-          PENTALKS PHILOSOPHY PENTALKS PHILOSOPHY
-        </h2>
-      </motion.div>
+ 
 
       <div className="relative z-10 max-w-[1700px] mx-auto px-6 md:px-16 lg:px-24">
         

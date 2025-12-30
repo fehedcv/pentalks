@@ -10,6 +10,7 @@ import AboutPage from './components/pages/AboutPage';
 import CompaniesPage from './components/pages/CompaniesPage';
 import MukhamPage from './components/pages/MukhamPage';
 import VerPage from './components/pages/VerPage';
+import WhatIsPentalks from './components/WhatIsPentalks';
 
 const App = () => {
   return (
@@ -19,7 +20,7 @@ const App = () => {
         {/* Step 1: Initialize Smooth Scrolling */}
         <SmoothScrollManager /> 
         
-        <Navbar />
+        {/* <Navbar /> */}
         
         <main className="min-h-screen flex flex-col bg-[#FAF7F2]">
           <Routes>
@@ -31,7 +32,8 @@ const App = () => {
           </Routes>
         </main>
 
-        <Footer />
+        {/* <Footer /> */}
+        {/* <WhatIsPentalks /> */}
       </div>
     </HashRouter>
   );
