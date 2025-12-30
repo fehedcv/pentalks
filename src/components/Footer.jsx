@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Instagram, Linkedin, Mail, ArrowUp, ChevronRight, Facebook, Twitter } from 'lucide-react';
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   const container = useRef(null);
@@ -68,7 +69,7 @@ const Footer = () => {
             <p className="text-[#0f4c39]/80 text-lg md:text-xl max-w-md lg:text-right font-medium">
               We transform outdated digital spaces into premium architectural masterpieces that define your identity.
             </p>
-            
+            <Link to="/contact">
             <motion.button 
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -76,6 +77,7 @@ const Footer = () => {
             >
               Start a project <ChevronRight className="group-hover:translate-x-1 transition-transform" />
             </motion.button>
+            </Link>
           </div>
         </div>
 
