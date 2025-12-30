@@ -26,13 +26,13 @@ const CTASection = () => {
           
             
             {/* TYPOGRAPHY INCREASED: Matches large-scale headers from screenshots */}
-            <h2 className="font-syne text-6xl md:text-9xl font-black text-[#FAF7F2] leading-[0.85] tracking-tighter uppercase mb-12">
+            <h2 className=" text-6xl md:text-9xl font-black text-[#FAF7F2] leading-[0.85] tracking-tighter uppercase mb-12">
               READY TO <br /> 
               <span className="text-transparent stroke-white">CREATE</span> <br />
               IMPACT?
             </h2>
 
-            <p className="font-syne text-xl md:text-2xl text-white/60 max-w-lg leading-relaxed italic border-l-2 border-[#1C150D]/30 pl-8">
+            <p className=" text-xl md:text-2xl text-white/60 max-w-lg leading-relaxed italic border-l-2 border-[#1C150D]/30 pl-8">
               "Whether it's a brand, a building, or a story—we're here to help you make your mark."
             </p>
           </motion.div>

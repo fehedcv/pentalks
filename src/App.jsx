@@ -10,6 +10,7 @@ import AboutPage from './components/pages/AboutPage';
 import CompaniesPage from './components/pages/CompaniesPage';
 import MukhamPage from './components/pages/MukhamPage';
 import VerPage from './components/pages/VerPage';
+import WhatIsPentalks from './components/WhatIsPentalks';
 
 const App = () => {
   return (
@@ -32,6 +33,7 @@ const App = () => {
         </main>
 
         <Footer />
+        {/* <WhatIsPentalks /> */}
       </div>
     </HashRouter>
   );

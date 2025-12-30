@@ -57,7 +57,7 @@ const Footer = () => {
         {/* --- 3. MAIN CONTENT --- */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-24 items-end">
           <motion.div style={{ y: yText }}>
-            <h2 className="font-syne text-5xl md:text-[8vw] font-black text-[#0f4c39] leading-[0.85] uppercase tracking-tighter">
+            <h2 className=" text-5xl md:text-[8vw] font-black text-[#0f4c39] leading-[0.85] uppercase tracking-tighter">
               Build <br /> 
               Your <br /> 
               Legacy.
