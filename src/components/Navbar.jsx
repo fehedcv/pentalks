@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, ArrowUpRight } from 'lucide-react'; // Added ArrowUpRight for flair
 import { Link, useLocation } from 'react-router-dom';
-import logoAsset from '/og_logo.png'; // Your logo asset
+import logoAsset from '/og_logo.png'; 
 
 const Navbar = () => {
   const location = useLocation();
@@ -11,7 +11,6 @@ const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
 
-  // Hide on scroll down, Show on scroll up - Design Logic Preserved
   useMotionValueEvent(scrollY, "change", (latest) => {
     const previous = scrollY.getPrevious();
     if (latest <= 80) {
@@ -42,22 +41,17 @@ const Navbar = () => {
             transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
             className="fixed w-full top-0 z-[100] border-b border-white/10 bg-[#0f4c39]/80 backdrop-blur-xl transition-colors duration-500"
           >
-            {/* FULL WIDTH CONTAINER */}
             <div className="w-full flex justify-between items-center px-6 md:px-12 py-4 relative overflow-hidden group">
               
-              {/* --- CUSTOM LOGO SECTION --- */}
+              {/* --- LOGO SECTION --- */}
               <Link to="/" className="flex items-center gap-4 z-10">
                 <div className="relative">
-                  {/* The Scute shape wrapper for the logo */}
-                  
                     <img 
                       src={logoAsset} 
                       alt="Pentalks Logo" 
                       className="w-24 md:w-28 object-contain"
                     />
-                  
                 </div>
-                
               </Link>
 
               {/* --- DESKTOP NAV --- */}
@@ -75,7 +69,6 @@ const Navbar = () => {
                       {link.label}
                     </span>
                     
-                    {/* The Scute Active Indicator */}
                     {location.pathname === link.path && (
                       <motion.div 
                         layoutId="nav-scute"
@@ -86,11 +79,13 @@ const Navbar = () => {
                   </Link>
                 ))}
                 
-                {/* Asymmetric Action Button */}
-                <button className="ml-8 px-8 py-2.5 bg-[#FAF7F2] text-[#0f4c39] text-[10px] font-black uppercase tracking-[0.2em] 
+                {/* SET ROUTING FOR DESKTOP CONNECT BUTTON */}
+                <Link to="/contact">
+                  <button className="ml-8 px-8 py-2.5 bg-[#FAF7F2] text-[#0f4c39] text-[10px] font-black uppercase tracking-[0.2em] 
                                    rounded-tr-xl rounded-bl-xl transition-all duration-300 hover:rounded-none shadow-xl">
-                  Connect
-                </button>
+                    Connect
+                  </button>
+                </Link>
               </div>
 
               {/* --- MOBILE TOGGLE --- */}
@@ -117,7 +112,7 @@ const Navbar = () => {
           >
             {/* Header */}
             <div className="p-8 flex justify-between items-center border-b border-white/5">
-                <span className="text-[10px] font-bold text-[#8B9D83] uppercase tracking-[0.5em]">Portal // Navigation</span>
+                <span className="text-[10px] font-bold text-[#8B9D83] uppercase tracking-[0.5em]">Pentalks-Navigation</span>
                 <button 
                  onClick={() => setMobileMenuOpen(false)}
                  className="w-12 h-12 flex items-center justify-center rounded-tr-2xl rounded-bl-2xl bg-[#FAF7F2] text-[#0f4c39]"
@@ -145,20 +140,33 @@ const Navbar = () => {
                   </Link>
                 </motion.div>
               ))}
+
+              {/* CONNECT BUTTON IN MOBILE DRAWER */}
+              <motion.div
+                initial={{ x: 20, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ delay: 0.1 * (navLinks.length) }}
+                className="mt-8 pt-8 border-t border-white/5"
+              >
+                <Link to="/contact" onClick={() => setMobileMenuOpen(false)}>
+                  <button className="w-full py-6 bg-[#0f4c39] text-[#FAF7F2] text-xl font-black uppercase tracking-widest 
+                                   rounded-tr-3xl rounded-bl-3xl flex items-center justify-center gap-3 active:scale-95 transition-transform">
+                    Connect <ArrowUpRight size={24} />
+                  </button>
+                </Link>
+              </motion.div>
             </div>
 
             {/* Footer */}
             <div className="p-10 border-t border-white/5 flex justify-between items-end">
                 <div>
-                   <p className="text-[#8B9D83] text-[9px] font-bold uppercase tracking-widest mb-2">// Network</p>
+                   {/* <p className="text-[#8B9D83] text-[9px] font-bold uppercase tracking-widest mb-2">// Network</p> */}
                    <div className="flex gap-6 text-white/40 text-[10px] font-bold uppercase">
                      <a href="#" className="hover:text-[#FAF7F2]">IG</a>
                      <a href="#" className="hover:text-[#FAF7F2]">LI</a>
                    </div>
                 </div>
-                <span className="text-[8px] text-white/20 uppercase tracking-[0.3em] text-right">
-                  System v2.0
-                </span>
+              
             </div>
           </motion.div>
         )}

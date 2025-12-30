@@ -1,166 +1,183 @@
 import React from 'react';
-import { Play, Headphones, Users, Clock, Mic, Radio, Heart, ArrowUpRight } from 'lucide-react';
-import SectionHeader from '../SectionHeader';
+import { Headphones, Clock, Mic, Radio, ArrowUpRight, Volume2, Podcast, Timer, Activity } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom'; // Import Link for routing
 
 const VerPage = () => {
-  const shows = [
+  const COLORS = {
+    sand: "#F9F7F2",
+    moss: "#8B9D83",
+    forest: "#0f4c39",
+    espresso: "#1C150D",
+  };
+
+  const upcomingShows = [
     { 
       title: "The Design Mind", 
       host: "Arjun Mehta", 
-      desc: "Conversations with world-renowned architects and designers about creativity and innovation.",
-      episodes: 48,
-      category: "Design"
+      desc: "Conversations with world-renowned architects about the 'Face' of creativity.",
+      category: "Design",
+      image: "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?q=80&w=800&auto=format&fit=crop"
     },
     { 
       title: "Build Stories", 
       host: "Priya Sharma", 
-      desc: "Behind-the-scenes narratives of iconic buildings and the people who made them.",
-      episodes: 32,
-      category: "Architecture"
-    },
-    { 
-      title: "Creative Fuel", 
-      host: "Rahul Kapoor", 
-      desc: "Weekly inspiration for creators, makers, and dreamers navigating the creative industry.",
-      episodes: 67,
-      category: "Creativity"
-    },
-    { 
-      title: "Urban Pulse", 
-      host: "Maya Desai", 
-      desc: "Exploring how cities shape culture and how culture shapes cities.",
-      episodes: 24,
-      category: "Culture"
-    },
-  ];
-
-  const stats = [
-    { number: "500K+", label: "Monthly Listeners" },
-    { number: "200+", label: "Episodes Published" },
-    { number: "4.9", label: "Average Rating" },
-    { number: "50+", label: "Countries Reached" },
-  ];
-
-  const latestEpisodes = [
-    { show: "The Design Mind", title: "Minimalism in Modern Architecture", duration: "45 min", date: "Dec 8, 2024" },
-    { show: "Build Stories", title: "The Story Behind Marina Bay Sands", duration: "38 min", date: "Dec 5, 2024" },
-    { show: "Creative Fuel", title: "Finding Your Creative Voice", duration: "52 min", date: "Dec 3, 2024" },
+      desc: "Behind-the-scenes narratives of iconic buildings and their structural souls.",
+      category: "Architecture",
+      image: "https://images.unsplash.com/photo-1478737270239-2f02b77fc618?q=80&w=800&auto=format&fit=crop"
+    }
   ];
 
   return (
-    <div className="pt-32 pb-24 animate-fade-in">
-      <div className="relative h-[60vh] bg-[#1a1a1a] overflow-hidden mb-24">
-        <div className="absolute inset-0 flex items-center justify-center opacity-20">
-          <div className="flex gap-1 items-end h-64">
-            {[...Array(40)].map((_, i) => (
-              <div key={i} className="w-3 bg-[#C47A3D] animate-pulse rounded-t" style={{ height: `${Math.random() * 100}%`, animationDelay: `${i * 0.05}s` }} />
+    <div className="bg-[#1C150D] min-h-screen selection:bg-[#8B9D83] selection:text-[#1C150D] overflow-x-hidden">
+      
+      {/* --- HERO SECTION: THE IMMERSIVE ROOT --- */}
+      <section className="relative h-screen w-full flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <img 
+            src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=2000&auto=format&fit=crop" 
+            className="w-full h-full object-cover opacity-40 grayscale"
+            alt="Studio Background"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#1C150D] via-transparent to-[#1C150D]" />
+          <div className="absolute inset-0 bg-black/40" />
+          
+          <div className="absolute top-0 left-1/2 w-[1px] h-full bg-white/10" />
+          <div className="absolute top-0 left-1/4 w-[1px] h-full bg-white/5" />
+          <div className="absolute top-0 right-1/4 w-[1px] h-full bg-white/5" />
+        </div>
+
+        <div className="relative z-10 text-center px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.2, ease: "circOut" }}
+          >
+            <div className="flex items-center justify-center gap-3 mb-8">
+               <span className="h-[1px] w-8 bg-[#8B9D83]" />
+               <span className="text-[#8B9D83] text-[10px] font-black uppercase tracking-[0.6em]">Coming in 2026</span>
+               <span className="h-[1px] w-8 bg-[#8B9D83]" />
+            </div>
+
+            <h1 className="text-[25vw] md:text-[18vw] font-black uppercase leading-[0.7] tracking-tighter text-[#F9F7F2] opacity-80">
+              VER.
+            </h1>
+
+            <div className="max-w-xl mx-auto mt-12 space-y-8">
+              <p className="text-[#F9F7F2]/60 text-lg md:text-xl leading-relaxed italic font-medium">
+                The auditory root system of Pentalks. <br />
+                <span className="text-[#8B9D83]">Deep narratives are currently forming.</span>
+              </p>
+              
+              <div className="flex items-center justify-center gap-4 text-[#8B9D83]/40 font-black text-[10px] uppercase tracking-widest pt-4">
+                <Activity size={14} className="animate-pulse" /> Live Signal: Pre-Production
+              </div>
+            </div>
+          </motion.div>
+        </div>
+
+     
+      </section>
+
+      {/* --- PREVIEW SECTION --- */}
+      <section className="px-6 md:px-12 py-32 md:py-48 max-w-[1400px] mx-auto bg-[#F9F7F2] rounded-t-[60px] md:rounded-t-[150px] relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
+          
+          <div className="lg:col-span-4 lg:sticky lg:top-32">
+            <h2 className="text-5xl md:text-7xl font-black text-[#1C150D] uppercase tracking-tighter leading-none mb-8">
+              The <br /> <span className="text-[#0f4c39]">Preview.</span>
+            </h2>
+            <p className="text-[#1C150D]/60 text-base leading-relaxed border-l-2 border-[#8B9D83] pl-6 italic">
+              Explore the structural foundations of the conversations we are currently recording. Each show is a module of our future ecosystem.
+            </p>
+          </div>
+
+          <div className="lg:col-span-8 space-y-24">
+            {upcomingShows.map((show, i) => (
+              <motion.div 
+                key={i}
+                initial={{ opacity: 0, x: 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                className="group flex flex-col md:flex-row gap-10 items-center"
+              >
+                <div className="w-full md:w-1/2 aspect-[4/5] overflow-hidden rounded-tl-[80px] rounded-br-[80px] shadow-2xl relative">
+                  <img src={show.image} className="w-full h-full object-cover grayscale transition-all duration-1000 group-hover:grayscale-0 group-hover:scale-110" alt={show.title} />
+                  <div className="absolute inset-0 bg-[#0f4c39]/10 mix-blend-multiply group-hover:opacity-0 transition-opacity" />
+                </div>
+                <div className="w-full md:w-1/2">
+                  <span className="text-[#8B9D83] font-black text-[10px] uppercase tracking-[0.4em] block mb-4">{show.category}</span>
+                  <h3 className="text-4xl font-black text-[#1C150D] uppercase tracking-tighter mb-4">{show.title}</h3>
+                  <p className="text-[#1C150D]/70 text-sm leading-relaxed mb-8">{show.desc}</p>
+                  <div className="flex items-center gap-4 text-[#0f4c39] font-black text-[10px] uppercase tracking-widest border border-[#0f4c39]/20 w-fit px-6 py-3 rounded-full">
+                    <Timer size={14} /> Production Phase
+                  </div>
+                </div>
+              </motion.div>
             ))}
           </div>
         </div>
-        <div className="absolute inset-0 bg-gradient-to-r from-[#1a1a1a] via-transparent to-[#1a1a1a]" />
-        <div className="absolute inset-0 flex items-center px-8 md:px-16">
-          <div className="text-[#FAF7F2] max-w-3xl">
-            <h1 className="font-syne text-6xl md:text-8xl font-bold mb-6">VER</h1>
-            <p className="text-xl md:text-2xl font-light tracking-wide mb-4">Podcast Network</p>
-            <p className="text-lg text-gray-300 max-w-xl leading-relaxed">
-              Stories that resonate. Conversations that inspire. A podcast network dedicated to the creative minds shaping our world.
-            </p>
-            <div className="flex gap-4 mt-8">
-              <button className="bg-[#C47A3D] text-[#FAF7F2] px-8 py-4 rounded-full font-medium flex items-center gap-2 hover:bg-[#A8652F] transition-colors duration-300 hover-target cursor-pointer">
-                <Play size={18} fill="currentColor" /> Start Listening
-              </button>
-              <button className="border border-[#FAF7F2] text-[#FAF7F2] px-8 py-4 rounded-full font-medium hover:bg-[#FAF7F2] hover:text-[#1a1a1a] transition-colors duration-300 hover-target cursor-pointer">
-                Subscribe
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+      </section>
 
-      <div className="px-8 md:px-16">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-24 border-y border-[#0a0a0a]/10 py-12">
-          {stats.map((stat, i) => (
-            <div key={i} className="text-center">
-              <div className="font-syne text-4xl md:text-5xl font-bold text-[#C47A3D] mb-2">{stat.number}</div>
-              <div className="text-[#333333] text-sm uppercase tracking-wider">{stat.label}</div>
-            </div>
-          ))}
+      {/* --- PHILOSOPHY SECTION --- */}
+      <section className="bg-[#0f4c39] py-32 md:py-48 px-6 md:px-12 text-[#F9F7F2] relative overflow-hidden">
+        <div className="absolute -top-20 -right-20 text-[25vw] font-black text-white/[0.03] leading-none uppercase pointer-events-none select-none">
+          DEPTH
         </div>
 
-        <SectionHeader title="Our Shows" subtitle="Curated podcasts for the curious and creative." />
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-24">
-          {shows.map((show, i) => (
-            <div key={i} className="bg-[#0a0a0a] text-[#FAF7F2] p-8 rounded-sm group hover-target cursor-pointer">
-              <div className="flex items-start justify-between mb-6">
-                <span className="text-xs uppercase tracking-widest text-[#C47A3D] px-3 py-1 border border-[#C47A3D] rounded-full">{show.category}</span>
-                <div className="w-12 h-12 bg-[#C47A3D] rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <Play size={18} fill="white" />
-                </div>
-              </div>
-              <h3 className="font-syne text-2xl font-bold mb-2">{show.title}</h3>
-              <p className="text-gray-400 text-sm mb-4">Hosted by {show.host}</p>
-              <p className="text-gray-300 leading-relaxed mb-6">{show.desc}</p>
-              <div className="flex items-center gap-4 text-sm text-gray-500">
-                <span className="flex items-center gap-1"><Mic size={14} /> {show.episodes} Episodes</span>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <section className="py-24 bg-[#0a0a0a] text-[#FAF7F2] -mx-8 md:-mx-16 px-8 md:px-16 mb-24">
-          <div className="max-w-4xl mx-auto text-center">
-            <Radio className="w-12 h-12 text-[#C47A3D] mx-auto mb-6" />
-            <h2 className="font-syne text-3xl md:text-5xl font-bold leading-tight mb-8">
-              Why Ver?
+        <div className="max-w-4xl mx-auto relative z-10">
+          <div className="flex flex-col items-center text-center">
+            <Radio className="text-[#8B9D83] w-12 h-12 mb-10" />
+            <h2 className="text-5xl md:text-8xl font-black uppercase tracking-tighter mb-12">
+              Why <span className="text-[#8B9D83]">Ver?</span>
             </h2>
-            <p className="text-xl text-gray-300 leading-relaxed mb-6">
-              In a world of noise, we create signal. Ver is more than a podcast network—it's a platform for meaningful dialogue. We believe in the power of voice to educate, inspire, and connect.
-            </p>
-            <div className="w-24 h-1 bg-[#C47A3D] mx-auto mt-8" />
-          </div>
-        </section>
-
-        <SectionHeader title="Latest Episodes" subtitle="Fresh content, every week." />
-        <div className="space-y-4 mb-24">
-          {latestEpisodes.map((ep, i) => (
-            <div key={i} className="flex flex-col md:flex-row md:items-center justify-between p-6 border border-[#0a0a0a]/10 hover:border-[#C47A3D] transition-colors duration-300 group hover-target cursor-pointer">
-              <div className="flex items-center gap-6">
-                <div className="w-14 h-14 bg-[#C47A3D] rounded-full flex items-center justify-center text-white group-hover:scale-110 transition-transform">
-                  <Play size={20} fill="currentColor" />
-                </div>
-                <div>
-                  <span className="text-xs text-[#C47A3D] uppercase tracking-wider">{ep.show}</span>
-                  <h4 className="font-syne text-lg font-bold">{ep.title}</h4>
-                </div>
-              </div>
-              <div className="flex items-center gap-6 mt-4 md:mt-0 text-sm text-[#333333]">
-                <span className="flex items-center gap-1"><Clock size={14} /> {ep.duration}</span>
-                <span>{ep.date}</span>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <section className="bg-gradient-to-br from-[#C47A3D] to-[#A8652F] text-[#FAF7F2] p-12 md:p-16 rounded-sm">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-8">
-            <div>
-              <Headphones className="w-12 h-12 mb-4" />
-              <h3 className="font-syne text-3xl md:text-4xl font-bold mb-4">Never Miss an Episode</h3>
-              <p className="text-white/80 max-w-md">
-                Subscribe to Ver and get the latest episodes delivered straight to your favorite podcast app.
+            <div className="space-y-10">
+              <p className="text-xl md:text-3xl font-bold italic leading-tight">
+                "In a world of noise, we create signal. Ver is the resonating shell of Pentalks, where abstract ideas find their voice."
+              </p>
+              <p className="text-[#F9F7F2]/50 text-lg md:text-xl leading-relaxed max-w-2xl mx-auto font-medium">
+                Like the roots that hold a structure together, our conversations explore the foundations of creativity, city-building, and human culture.
               </p>
             </div>
-            <div className="flex gap-4">
-              <button className="bg-white text-[#C47A3D] px-8 py-4 rounded-full font-medium hover:bg-[#0a0a0a] hover:text-white transition-colors duration-300 hover-target cursor-pointer">
-                Apple Podcasts
-              </button>
-              <button className="border border-white px-8 py-4 rounded-full font-medium hover:bg-white hover:text-[#C47A3D] transition-colors duration-300 hover-target cursor-pointer">
-                Spotify
-              </button>
-            </div>
           </div>
-        </section>
-      </div>
+        </div>
+      </section>
+
+      {/* --- CTA: FINAL PORTAL (REFINED SCUTE LAYOUT) --- */}
+      <section className="py-24 md:py-32 px-6 bg-[#F9F7F2]">
+        <div className="max-w-[1300px] mx-auto bg-[#1C150D] p-12 md:p-24 rounded-tl-[80px] md:rounded-tl-[120px] rounded-br-[80px] md:rounded-br-[120px] relative overflow-hidden shadow-2xl flex flex-col items-center text-center">
+            {/* Scute Decorative Elements */}
+            <div className="absolute top-0 right-0 p-8 opacity-10 pointer-events-none">
+              <Podcast size={180} className="text-[#8B9D83]" />
+            </div>
+            
+            <div className="relative z-10">
+              <div className="bg-[#0f4c39] p-5 rounded-full mb-10 shadow-inner w-fit mx-auto">
+                <Headphones className="text-[#8B9D83] w-10 h-10" />
+              </div>
+              <h3 className="text-4xl md:text-7xl font-black text-white uppercase tracking-tighter mb-8 max-w-2xl leading-[0.9]">
+                Stay Rooted <br /> <span className="text-[#8B9D83]">To The Pulse.</span>
+              </h3>
+              <p className="text-white/40 max-w-md mb-12 text-lg leading-relaxed font-medium mx-auto">
+                We are currently in active development. Reach out to collaborate or learn more about our upcoming broadcast cycle.
+              </p>
+              
+              <Link to="/contact">
+                <button className="group bg-[#0f4c39] text-[#F9F7F2] px-12 py-6 rounded-full font-black uppercase tracking-widest text-[11px] flex items-center gap-4 hover:bg-[#8B9D83] hover:text-[#1C150D] transition-all duration-500 shadow-xl">
+                  Contact Team <ArrowUpRight size={18} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                </button>
+              </Link>
+            </div>
+            
+            {/* Visual sound bars decoration */}
+            <div className="absolute -bottom-1 left-0 right-0 flex justify-center gap-1.5 opacity-5 h-24 items-end pointer-events-none">
+              {[...Array(30)].map((_, i) => (
+                <div key={i} className="w-3 bg-white rounded-t-sm" style={{ height: `${20 + Math.random() * 80}%` }} />
+              ))}
+            </div>
+        </div>
+      </section>
+
     </div>
   );
 };

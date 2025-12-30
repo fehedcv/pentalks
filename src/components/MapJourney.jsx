@@ -1,27 +1,27 @@
-import React, { useEffect, useRef } from 'react';
-import { Turtle } from 'lucide-react';
+import React, { useEffect, useRef, useState } from 'react';
+import { Turtle, ChevronRight } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 // --- CONFIGURATION ---
-const PATH_D = "M 50 400 C 150 400, 200 150, 350 150 C 500 150, 550 450, 700 450 C 850 450, 900 150, 1050 150 C 1200 150, 1250 350, 1350 350";
+const PATH_D = "M 100 300 C 300 300, 400 100, 600 100 C 800 100, 900 500, 1100 500 C 1300 500, 1400 300, 1600 300";
 
 const CHECKPOINTS = [
-  { id: 1, x: 350, y: 150, title: 'DESIGN THAT GROWS', desc: 'Identity that evolves.', align: 'top' },
-  { id: 2, x: 700, y: 450, title: 'PENTALKS', desc: 'A new beginning.', align: 'bottom' },
-  { id: 3, x: 1050, y: 150, title: 'EXPANSION', desc: 'Finding new currents.', align: 'top' },
-  { id: 4, x: 1350, y: 350, title: 'LATECOMERS', desc: 'Found their place.', align: 'right' },
+  { id: 1, x: 600, y: 100, progress: 0.35, title: 'Design Evolution', desc: 'Identity that adapts to its environment.', label: 'Node 01' },
+  { id: 2, x: 1100, y: 500, progress: 0.65, title: 'Pentalks Core', desc: 'The shell where narrative meets structure.', label: 'Node 02' },
+  { id: 3, x: 1600, y: 300, progress: 0.95, title: 'Future Expansion', desc: 'Deep sea currents of creative strategy.', label: 'Node 03' },
 ];
 
 export default function TurtleJourney() {
   const containerRef = useRef(null);
   const pathRef = useRef(null);
   const turtleGroupRef = useRef(null);
+  const [activeCheckpoint, setActiveCheckpoint] = useState(null);
 
-  // Physics state
+  // Animation Refs
   const progressRef = useRef(0);
   const targetRef = useRef(0);
   const reqIdRef = useRef(null);
 
-  // 1. Initialize path drawing
   useEffect(() => {
     if (pathRef.current) {
       const length = pathRef.current.getTotalLength();
@@ -30,12 +30,10 @@ export default function TurtleJourney() {
     }
   }, []);
 
-  // 2. Physics & Animation Loop
   useEffect(() => {
     const updatePhysics = () => {
-      // --- SMOOTHING LOGIC ---
       const diff = targetRef.current - progressRef.current;
-      const speed = 0.04; 
+      const speed = 0.05; 
 
       if (Math.abs(diff) > 0.0001) {
         progressRef.current += diff * speed;
@@ -45,13 +43,11 @@ export default function TurtleJourney() {
 
       const p = Math.max(0, Math.min(1, progressRef.current));
 
-      // --- PATH LOGIC ---
       if (pathRef.current && turtleGroupRef.current) {
         const path = pathRef.current;
         const len = path.getTotalLength();
-        
         const point = path.getPointAtLength(p * len);
-        const lookAheadDist = Math.min(len, p * len + 4);
+        const lookAheadDist = Math.min(len, p * len + 5);
         const nextPoint = path.getPointAtLength(lookAheadDist);
         
         const dy = nextPoint.y - point.y;
@@ -64,34 +60,10 @@ export default function TurtleJourney() {
         );
         
         path.style.strokeDashoffset = len * (1 - p);
-      }
 
-      // --- CHECKPOINT ANIMATIONS ---
-      CHECKPOINTS.forEach((_, index) => {
-        const el = document.getElementById(`checkpoint-${index}`);
-        if (!el) return;
-
-        const triggerPoint = (index + 1) * 0.22;
-        let opacity = 0;
-        let translateY = 20;
-
-        if (p > triggerPoint - 0.08) {
-          const fadeProgress = Math.min(1, (p - (triggerPoint - 0.08)) / 0.08);
-          opacity = fadeProgress;
-          translateY = 20 - fadeProgress * 20;
-        }
-
-        el.style.opacity = opacity;
-        el.style.transform = `translateY(${translateY}px)`;
-      });
-
-      // --- END TEXT ANIMATION ---
-      const endText = document.getElementById('end-text');
-      if (endText) {
-        const start = 0.9;
-        let op = 0;
-        if (p > start) op = (p - start) * 10;
-        endText.style.opacity = Math.min(1, op);
+        // Active Checkpoint Logic
+        const currentActive = CHECKPOINTS.find(cp => p > cp.progress - 0.05 && p < cp.progress + 0.05);
+        setActiveCheckpoint(currentActive ? currentActive.id : null);
       }
 
       reqIdRef.current = requestAnimationFrame(updatePhysics);
@@ -101,130 +73,160 @@ export default function TurtleJourney() {
     return () => cancelAnimationFrame(reqIdRef.current);
   }, []);
 
-  // 3. Scroll Listener
   useEffect(() => {
     const handleScroll = () => {
       if (!containerRef.current) return;
       const { top, height } = containerRef.current.getBoundingClientRect();
       const win = window.innerHeight;
-      const scrollDist = -top;
-      const total = height - win;
-      let progress = scrollDist / total;
+      const progress = (-top) / (height - win);
       targetRef.current = Math.max(0, Math.min(1, progress));
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
-    // --- ROOT CONTAINER: FULL WIDTH BREAKOUT ---
-    <div 
-      ref={containerRef} 
-      className="relative w-screen left-1/2 -translate-x-1/2 h-[400vh] bg-black"
-    >
+    <div ref={containerRef} className="relative w-full h-[500vh] bg-[#F9F7F2] overflow-visible">
       
       {/* --- STICKY VIEWPORT --- */}
       <div className="sticky top-0 w-full h-screen overflow-hidden flex items-center justify-center">
-
-        {/* --- BACKGROUND IMAGE (Static) --- */}
-        <div className="absolute inset-0 w-full h-full overflow-hidden">
-  <img 
-    src="/map.png" 
-    className="w-full h-full object-cover scale-125 transition-transform duration-[5000ms] ease-out"
-  />
-
-          {/* Overlay */}
-          <div className="absolute inset-0 bg-black/40" />
+        
+        {/* --- ARCHITECTURAL BACKGROUND --- */}
+        <div className="absolute inset-0 z-0">
+          <div className="absolute inset-0 opacity-[0.03] pointer-events-none" 
+               style={{ backgroundImage: `radial-gradient(#0f4c39 1px, transparent 1px)`, backgroundSize: '40px 40px' }} />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#F9F7F2] via-transparent to-[#F9F7F2]" />
+          
+          {/* Vertical Decoration */}
+          <div className="absolute left-12 top-1/2 -translate-y-1/2 hidden md:block">
+            <p className="font-syne text-[10px] font-black uppercase tracking-[0.8em] text-[#0f4c39]/20 [writing-mode:vertical-lr] rotate-180">
+              The Path of Resilience — Node.Structure
+            </p>
+          </div>
         </div>
 
-        {/* Texture */}
-        <div
-          className="absolute inset-0 pointer-events-none opacity-20 mix-blend-overlay"
-          style={{ backgroundImage: `url("https://www.transparenttextures.com/patterns/felt.png")` }}
-        />
+        {/* --- INTERACTIVE SVG SCENE --- */}
+        <div className="w-full h-full max-w-[1600px] relative z-10 p-12">
+          
+          {/* Section Title */}
+          <div className="absolute top-12 left-12 z-20">
+            <h2 className="font-syne text-5xl md:text-7xl font-black text-[#0f4c39] uppercase tracking-tighter leading-none">
+              The <br /> <span className="text-[#8B9D83]">Journey.</span>
+            </h2>
+          </div>
 
-        {/* --- MAIN SVG SCENE --- */}
-        <div className="w-full h-full max-w-[1400px] aspect-video relative flex items-center justify-center z-10">
-          <svg viewBox="0 0 1400 600" className="w-full h-full overflow-visible">
-
-            {/* Dashed Background Path */}
+          <svg viewBox="0 0 1800 600" className="w-full h-full overflow-visible translate-y-12">
+            {/* Background Trace */}
             <path
               d={PATH_D}
               fill="none"
-              stroke="#e9f0d8"
-              strokeWidth="3"
-              strokeDasharray="10 10"
-              strokeLinecap="round"
-              className="opacity-30"
+              stroke="#0f4c39"
+              strokeWidth="1"
+              strokeDasharray="10 15"
+              className="opacity-10"
             />
 
-            {/* Solid Animated Path */}
+            {/* Solid Progress Path */}
             <path
               ref={pathRef}
               d={PATH_D}
               fill="none"
-              stroke="#e9f0d8"
-              strokeWidth="4"
+              stroke="#0f4c39"
+              strokeWidth="3"
               strokeLinecap="round"
-              style={{ filter: 'drop-shadow(0 0 8px rgba(233,240,216, 0.4))' }}
             />
 
-            {/* Checkpoints */}
-            {CHECKPOINTS.map((point, i) => (
-              <g key={i}>
-                <circle cx={point.x} cy={point.y} r="8" fill="#e9f0d8" />
-                <foreignObject
-                  x={point.x - 150}
-                  y={point.align === 'top' ? point.y - 150 : point.y + 30}
-                  width="300"
-                  height="140"
-                >
-                  <div
-                    id={`checkpoint-${i}`}
-                    className="flex flex-col items-center text-center h-full justify-center will-change-transform"
-                    style={{ opacity: 0 }}
-                  >
-                    <h4 className="font-sans font-bold text-[#e9f0d8] text-xl uppercase tracking-wider whitespace-nowrap drop-shadow-lg">
-                      {point.title}
-                    </h4>
-                    <p className="font-mono text-white/80 font-bold text-[11px] uppercase tracking-widest mt-1 max-w-[200px] drop-shadow-md">
-                      {point.desc}
-                    </p>
-                  </div>
-                </foreignObject>
+            {/* Checkpoint Indicators */}
+            {CHECKPOINTS.map((point) => (
+              <g key={point.id}>
+                <circle 
+                  cx={point.x} cy={point.y} r="6" 
+                  fill={activeCheckpoint === point.id ? "#8B9D83" : "#0f4c39"}
+                  className="transition-colors duration-500" 
+                />
+                <circle 
+                   cx={point.x} cy={point.y} r="12" 
+                   fill="none" stroke="#8B9D83" strokeWidth="1" 
+                   className={`transition-all duration-700 ${activeCheckpoint === point.id ? 'opacity-100 scale-125' : 'opacity-0 scale-50'}`}
+                />
               </g>
             ))}
 
-            {/* TURTLE CAR (Original Lucide Icon) */}
-            <g ref={turtleGroupRef} style={{ pointerEvents: 'none' }}>
-              <foreignObject x="-30" y="-30" width="60" height="60">
-                <div 
-                  className="w-full h-full flex items-center justify-center"
-                  style={{ transform: 'scaleX(1)' }} 
-                >
-                  <div className="relative flex items-center justify-center">
-                    <Turtle className="relative w-14 h-14 text-[#2f3d24] fill-[#cddbb6] drop-shadow-2xl" />
+            {/* THE TURTLE --- */}
+            <g ref={turtleGroupRef}>
+              <foreignObject x="-40" y="-40" width="80" height="80">
+                <div className="w-full h-full flex items-center justify-center">
+                  <div className="relative p-3 bg-[#0f4c39] rounded-full shadow-2xl border-4 border-[#F9F7F2]">
+                    <Turtle size={24} className="text-[#F9F7F2]" />
                   </div>
                 </div>
               </foreignObject>
             </g>
-
           </svg>
 
-          {/* End Text */}
-          <div id="end-text" className="absolute right-10 bottom-10 text-right opacity-0 pointer-events-none">
-            <h3 className="text-4xl md:text-5xl font-sans font-bold text-[#e9f0d8] drop-shadow-md leading-none">
-              TO BE<br />CONTINUED...
-            </h3>
-            <p className="text-white/80 font-mono text-xs font-bold tracking-[0.3em] mt-3 drop-shadow-sm">
-              JOURNEY OF TURTLES
-            </p>
+          {/* --- OVERLAY CONTENT: SCUTE CARDS --- */}
+          <div className="absolute bottom-12 right-12 w-full max-w-md pointer-events-none">
+            <AnimatePresence mode="wait">
+              {activeCheckpoint ? (
+                <motion.div
+                  key={activeCheckpoint}
+                  initial={{ opacity: 0, x: 50, filter: 'blur(10px)' }}
+                  animate={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
+                  exit={{ opacity: 0, x: -50, filter: 'blur(10px)' }}
+                  className="bg-white p-10 rounded-tl-[80px] rounded-br-[80px] shadow-2xl border border-[#0f4c39]/5"
+                >
+                  <span className="text-[#8B9D83] font-black text-[10px] uppercase tracking-[0.4em] block mb-4">
+                    {CHECKPOINTS.find(c => c.id === activeCheckpoint).label}
+                  </span>
+                  <h3 className="font-syne text-3xl font-black text-[#0f4c39] uppercase tracking-tighter mb-4">
+                    {CHECKPOINTS.find(c => c.id === activeCheckpoint).title}
+                  </h3>
+                  <p className="text-[#1C150D]/60 text-lg leading-relaxed italic border-l-2 border-[#8B9D83] pl-6 mb-6">
+                    {CHECKPOINTS.find(c => c.id === activeCheckpoint).desc}
+                  </p>
+                  <div className="flex items-center gap-2 text-[#0f4c39] font-bold text-xs uppercase tracking-widest">
+                    Continue Scrolling <ChevronRight size={14} className="animate-pulse" />
+                  </div>
+                </motion.div>
+              ) : (
+                <motion.div 
+                  initial={{ opacity: 0 }} 
+                  animate={{ opacity: 1 }} 
+                  className="text-right"
+                >
+                  <p className="font-syne text-xs font-black text-[#0f4c39]/20 uppercase tracking-[0.5em]">
+                    Scroll to advance the timeline
+                  </p>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
 
         </div>
       </div>
+
+      {/* --- ENDING SECTION --- */}
+      <div className="h-screen flex items-center justify-center">
+        <div className="text-center">
+          <h2 className="font-syne text-[10vw] font-black text-[#0f4c39] uppercase tracking-tighter leading-none mb-8 outline-text">
+            To be <br /> continued
+          </h2>
+          <p className="text-[#8B9D83] font-black uppercase tracking-[0.8em] text-xs">
+            Journey of Turtles
+          </p>
+        </div>
+      </div>
+
+      <style jsx>{`
+        .outline-text {
+          color: transparent;
+          -webkit-text-stroke: 2px #0f4c39;
+        }
+        @media (min-width: 768px) {
+          .outline-text { -webkit-text-stroke: 3px #0f4c39; }
+        }
+      `}</style>
     </div>
   );
 }
