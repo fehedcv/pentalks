@@ -112,7 +112,7 @@ const PortalContent = () => {
   const contentOpacity = useTransform(scrollYProgress, [0, 0.05], [1, 0]);
 
   return (
-    <div ref={containerRef} className="relative w-full h-screen bg-[#F9F7F2] overflow-visible font-syne">
+    <div ref={containerRef} className="relative w-full h-screen bg-[#F9F7F2] overflow-x-hidden font-syne">
 
       {/* HERO SECTION */}
       <motion.section
@@ -155,7 +155,7 @@ const PortalContent = () => {
             {/* THEME CARDS */}
             <div className="lg:col-span-5 flex flex-col sm:flex-row lg:flex-col gap-8">
               <div className="bg-[#F9F7F2] p-7 rounded-3xl shadow-xl">
-                <h3 className="text-[#0f4c39] text-white font-semibold text-2xl leading-snug">
+                <h3 className="text-[#0f4c39] font-semibold text-2xl leading-snug">
                   Designing<br />Spaces
                 </h3>
               </div>
@@ -173,7 +173,7 @@ const PortalContent = () => {
       {/* LOGO & SVG (UNCHANGED) */}
       <div
         ref={logoWrapperRef}
-        className="fixed top-1/2 right-6 md:right-20 z-30 -translate-y-1/2 pointer-events-none flex flex-col items-center"
+        className="fixed top-1/2  right-6 md:right-20 z-30 -translate-y-1/2 pointer-events-none flex flex-col items-center"
       >
         <img
           ref={realImageRef}
@@ -197,16 +197,19 @@ const PortalContent = () => {
       </div>
 
       {/* FINAL PORTAL */}
-      <div ref={portalRef} className="fixed inset-0 bg-[#0f4c39] opacity-0 invisible z-[60] flex items-center justify-center text-center">
-        <h2 className="text-[#F9F7F2] text-5xl font-black uppercase tracking-widest">
+      <div ref={portalRef} className=" fixed inset-0 bg-[#0f4c39] opacity-0 invisible z-[60] flex items-center justify-center text-center">
+        <h2 className="text-[#F9F7F2] text-5xl  md:text-8xl font-black uppercase tracking-widest">
           Let's Begin
         </h2>
       </div>
 
       <style jsx>{`
-        @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&display=swap');
-        .font-syne { font-family: 'Syne', sans-serif; }
-        .drawing-heading, .drawing-desc { transition: fill 0.5s ease;  }
+        // @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&display=swap');
+        // .font-syne { font-family: 'Syne', sans-serif; }
+        .drawing-heading, .drawing-desc 
+        { 
+        transition: fill 0.5s ease;  
+        }
       `}</style>
     </div>
   );

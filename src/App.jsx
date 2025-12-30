@@ -20,7 +20,7 @@ const App = () => {
         {/* Step 1: Initialize Smooth Scrolling */}
         <SmoothScrollManager /> 
         
-        {/* <Navbar /> */}
+        <Navbar />
         
         <main className="min-h-screen flex flex-col bg-[#FAF7F2]">
           <Routes>
@@ -32,7 +32,7 @@ const App = () => {
           </Routes>
         </main>
 
-        {/* <Footer /> */}
+        <Footer />
         {/* <WhatIsPentalks /> */}
       </div>
     </HashRouter>

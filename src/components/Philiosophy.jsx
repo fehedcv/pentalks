@@ -1,8 +1,9 @@
-import React, { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import React, { useRef } from 'react'; // Added useRef
+import { motion, useScroll, useTransform } from 'framer-motion'; // Added Framer Motion imports
 
 const Philosophy = () => {
   const containerRef = useRef(null);
+  
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start end", "end start"]
@@ -18,12 +19,19 @@ const Philosophy = () => {
       className="relative bg-[#F9F7F2] py-40 md:py-64 overflow-hidden"
     >
       {/* --- 1. TURTLE SHELL TRANSITION (TOP) --- */}
-      {/* Connects the dark green section above to this cream section */}
       <div className="absolute top-0 left-0 w-full h-[15vh] bg-[#0f4c39] z-10" 
         style={{ clipPath: 'polygon(0 0, 100% 0, 100% 20%, 50% 100%, 0 20%)' }} 
       />
 
- 
+      {/* --- 2. KINETIC BACKGROUND --- */}
+      <motion.div 
+        style={{ x: xMove, opacity: opacityText }}
+        className="absolute inset-0 flex items-center whitespace-nowrap pointer-events-none z-0 select-none"
+      >
+        <h2 className="text-[25vw] font-black text-[#0f4c39] uppercase tracking-tighter">
+          PENTALKS PHILOSOPHY PENTALKS PHILOSOPHY
+        </h2>
+      </motion.div>
 
       <div className="relative z-10 max-w-[1700px] mx-auto px-6 md:px-16 lg:px-24">
         
@@ -35,7 +43,7 @@ const Philosophy = () => {
           viewport={{ once: true }}
           className="relative bg-white p-12 md:p-32 rounded-tr-[140px] rounded-bl-[140px] shadow-[0_60px_120px_rgba(15,76,57,0.04)] border border-[#0f4c39]/5"
         >
-          {/* Section Indicator from image_5fe7e0.png */}
+          {/* Section Indicator */}
           <div className="flex items-center gap-4 mb-16">
             <div className="h-[1px] w-12 bg-[#0f4c39]/40" />
             <span className="text-[10px] md:text-xs font-bold tracking-[0.5em] text-[#1C150D] uppercase">
@@ -46,7 +54,7 @@ const Philosophy = () => {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             {/* Main Content Area */}
             <div className="lg:col-span-8">
-              <h2 className="font-syne text-4xl md:text-7xl font-black text-[#0f4c39] leading-[0.95] tracking-tighter italic">
+              <h2 className=" text-4xl md:text-7xl font-black text-[#0f4c39] leading-[0.95] tracking-tighter italic">
                 “We believe that great brands are <br className="hidden md:block" /> 
                 not just seen, <span className="text-transparent stroke-outline">they are felt.</span> <br />
                 They are the sum of architecture, <br className="hidden md:block" />
@@ -54,7 +62,7 @@ const Philosophy = () => {
               </h2>
             </div>
 
-            {/* Floating Detail Element matching image_5ff722.png */}
+            {/* Floating Detail Element */}
             <div className="lg:col-span-4 flex justify-end">
               <div className="relative pt-12 border-t border-[#1C150D]/30 max-w-[280px]">
                 <p className="font-syne text-sm md:text-base text-[#0f4c39]/60 italic leading-relaxed">
