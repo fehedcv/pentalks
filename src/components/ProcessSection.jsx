@@ -44,9 +44,7 @@ const ProcessSection = () => {
          <svg className="absolute bottom-0 w-full h-full" preserveAspectRatio="none" viewBox="0 0 1440 320">
             <path fill="#0f4c39" d="M0,0L1440,0L1440,224C1320,280,1200,320,960,320C720,320,480,250,240,240C120,235,0,260,0,320Z"></path>
          </svg>
-         <motion.div style={{ y: yScute }} className="absolute top-[40%] left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-30 mix-blend-overlay">
-             <img src="/logogreen.png" alt="Logo" className="w-[150px] md:w-[250px] grayscale brightness-200" />
-         </motion.div>
+        
       </div>
 
       <motion.div 

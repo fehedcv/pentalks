@@ -25,33 +25,32 @@ const PortalContent = () => {
   const portalRef = useRef(null);
 
   const COLORS = {
-    sand: "#F9F7F2",    // Light Theme Base
-    moss: "#8B9D83",    // Muted Sage
-    forest: "#0f4c39",  // Dark Theme Base
-    espresso: "#1C150D", // Deep Accent
+    sand: "#F9F7F2",
+    sage: "#8B9D83",
+    forest: "#0f4c39",
+    espresso: "#1C150D",
   };
 
   useLayoutEffect(() => {
-    let ctx = gsap.context(() => {
+    const ctx = gsap.context(() => {
       const scrollDistance = window.innerWidth < 768 ? "+=3000" : "+=6000";
-      
+
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
           start: "top top",
-          end: scrollDistance, 
-          scrub: 1.2,    
+          end: scrollDistance,
+          scrub: 1.5,
           pin: true,
           anticipatePin: 1,
-        }
+        },
       });
 
-      // YOUR ORIGINAL ANIMATIONS
-      tl.to(titleRef.current, { 
-        opacity: 0, 
-        y: -150, 
-        filter: "blur(20px)", 
-        ease: "power2.inOut" 
+      tl.to(titleRef.current, {
+        opacity: 0,
+        y: -80,
+        filter: "blur(15px)",
+        ease: "power2.inOut",
       }, 0);
 
       tl.to(logoWrapperRef.current, {
@@ -60,143 +59,154 @@ const PortalContent = () => {
         xPercent: 50,
         yPercent: -50,
         rotation: 360,
-        scale: 1.25,
+        scale: window.innerWidth < 768 ? 0.8 : 1.1,
         ease: "expo.inOut",
-      }, 0.1);
+      }, 0.2);
 
-      tl.fromTo(realImageRef.current,
-        { opacity: 0, scale: 0.7, filter: "brightness(1) blur(20px)" },
-        { opacity: 1, scale: 1, filter: "blur(0px)", duration: 4, ease: "power2.out" }, 
-      0.8);
+      tl.fromTo(
+        realImageRef.current,
+        { opacity: 0, scale: 0.6, filter: "blur(15px)" },
+        { opacity: 1, scale: 1, filter: "blur(0px)", duration: 2 },
+        1
+      );
 
-      tl.fromTo(".drawing-heading", 
+      tl.fromTo(".drawing-heading",
         { strokeDashoffset: 1000, strokeDasharray: 1000 },
-        { strokeDashoffset: 0, duration: 4.5, ease: "power2.inOut" }, 
-      1.2);
+        { strokeDashoffset: 0, duration: 3 },
+        1.5
+      );
 
-      tl.fromTo(".drawing-desc", 
+      tl.fromTo(".drawing-desc",
         { strokeDashoffset: 800, strokeDasharray: 800 },
-        { strokeDashoffset: 0, duration: 4, ease: "power2.inOut" }, 
-      2.0);
+        { strokeDashoffset: 0, duration: 3 },
+        2
+      );
 
-      // Fills with Dark Forest as the background is now Light Sand
       tl.to([".drawing-heading", ".drawing-desc"], {
-        fill: COLORS.forest, 
-        duration: 2.5,
-        ease: "power1.in"
-      }, 4.0);
+        fill: COLORS.forest,
+        duration: 2,
+      }, 4);
 
       tl.to(logoWrapperRef.current, {
-        scale: 160, 
-        duration: 4,
-        ease: "expo.in"
-      }, 5.5);
+        scale: window.innerWidth < 768 ? 100 : 180,
+        duration: 5,
+        ease: "expo.in",
+      }, 6);
 
-      tl.to(portalRef.current, { opacity: 1, duration: 2 }, 7.5);
+      tl.to(portalRef.current, { 
+        opacity: 1, 
+        visibility: "visible", 
+        duration: 1 
+      }, 9);
 
     }, containerRef);
+
     return () => ctx.revert();
   }, []);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start start", "end start"]
+    offset: ["start start", "end start"],
   });
 
-  const contentOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
-  const contentScale = useTransform(scrollYProgress, [0, 0.2], [1, 0.95]);
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.05], [1, 0]);
 
   return (
-    // LIGHT BACKGROUND for the Logo/Portal Section
-    <div ref={containerRef} className="relative w-full h-screen bg-[#F9F7F2] overflow-hidden font-sans">
-      
-      {/* 1. DARK HERO SECTION (Your Parent Company Content) */}
-      <motion.section 
-        style={{ opacity: contentOpacity, scale: contentScale }}
-        className="absolute inset-0 z-20 bg-[#0f4c39] flex flex-col"
-      >
-        {/* Navbar Space */}
-        <div className="h-24 md:h-32 w-full flex-shrink-0" />
+    <div ref={containerRef} className="relative w-full h-screen bg-[#F9F7F2] overflow-visible font-syne">
 
-        <div className="flex-grow w-full max-w-[1400px] mx-auto px-6 md:px-12 flex flex-col justify-center">
-          <div ref={titleRef} className="grid grid-cols-12 gap-y-12 items-center">
-            
-            {/* Parent Identity */}
-            <div className="col-span-12 lg:col-span-7 space-y-6">
-              <span className="font-bold uppercase tracking-[0.4em] text-[#8B9D83] text-[10px] md:text-xs">
-                The Pentalks Archetype
-              </span>
-              
-              <h1 className="font-syne text-[12vw] md:text-[7vw] font-black uppercase leading-[0.85] tracking-tighter text-[#F9F7F2]">
-                Dual <br /> 
-                <span className="outline-text block">Entities.</span>
+      {/* HERO SECTION */}
+      <motion.section
+        style={{ opacity: contentOpacity }}
+        className="absolute inset-0 z-20 flex items-center"
+      >
+        {/* Background Shape */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div
+            className="absolute top-0 left-0 w-full h-[75vh] bg-[#0f4c39]"
+            style={{
+ clipPath: window.innerWidth >= 768 
+      ? 'polygon(0 0,100% 0,100% 75%,50% 100%,0 75%)' // desktop
+      :  'polygon(0 0,100% 0,100% 85%,50% 100%,0 85%)'      //mobile
+            }}
+          />
+        </div>
+
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12">
+          <div
+            ref={titleRef}
+            className="grid grid-cols-1 lg:grid-cols-12 gap-14 items-center"
+          >
+            {/* TEXT */}
+            <div className="lg:col-span-7 space-y-6 text-center lg:text-left lg:-translate-y-2">
+              <h1 className="text-[#F9F7F2] font-semibold tracking-tight leading-tight
+                text-[clamp(5rem,7vw,5.5rem)]
+                lg:text-[clamp(7rem,6vw,7.5rem)]
+              ">
+                Dual <br />
+                <span className="font-bold">Entities</span>
               </h1>
 
-              <p className="max-w-xl text-[#F9F7F2]/60 text-lg md:text-xl font-medium leading-relaxed italic">
-                Pentalks serves as the parent ecosystem, providing a resilient shell for technical and creative evolution.
+              <p className="max-w-lg mx-auto lg:mx-0 text-[#1C150D] text-base md:text-lg leading-relaxed border-l-4 border-[#8B9D83] pl-5">
+                Pentalks is the parent ecosystem that supports both technical and
+                creative journeys with balance and clarity.
               </p>
             </div>
 
-            {/* Sub-Company Layout */}
-            <div className="col-span-12 lg:col-span-5 grid grid-cols-1 md:grid-cols-2 gap-4 lg:pl-12">
-              <div className="bg-[#F9F7F2]/5 backdrop-blur-md p-8 rounded-tr-[60px] rounded-bl-[60px] border border-white/10">
-                <span className="text-[#8B9D83] font-black text-[10px] uppercase tracking-[0.2em] block mb-4">01 Architecture</span>
-                <h3 className="text-[#F9F7F2] font-bold text-xl leading-tight">Designing <br /> Spaces</h3>
+            {/* THEME CARDS */}
+            <div className="lg:col-span-5 flex flex-col sm:flex-row lg:flex-col gap-8">
+              <div className="bg-[#F9F7F2] p-7 rounded-3xl shadow-xl">
+                <h3 className="text-[#0f4c39] font-semibold text-2xl leading-snug">
+                  Designing<br />Spaces
+                </h3>
               </div>
-              <div className="bg-[#F9F7F2]/5 backdrop-blur-md p-8 rounded-tl-[60px] rounded-br-[60px] border border-white/10 md:mt-12">
-                <span className="text-[#8B9D83] font-black text-[10px] uppercase tracking-[0.2em] block mb-4">02 Podcast</span>
-                <h3 className="text-[#F9F7F2] font-bold text-xl leading-tight">Voices of <br /> Impact</h3>
+
+              <div className="bg-[#1C150D] p-7 rounded-3xl shadow-xl">
+                <h3 className="text-[#F9F7F2] font-semibold text-2xl leading-snug">
+                  Voices of<br />Impact
+                </h3>
               </div>
             </div>
           </div>
         </div>
       </motion.section>
 
-      {/* 2. LOGO SECTION (Fixed Animation Layer with Light BG) */}
-      <div 
-        ref={logoWrapperRef} 
-        className="fixed top-1/2 right-8 md:right-20 z-10 flex flex-col items-center justify-center -translate-y-1/2 pointer-events-none p-8 origin-center"
+      {/* LOGO & SVG (UNCHANGED) */}
+      <div
+        ref={logoWrapperRef}
+        className="fixed top-1/2 right-6 md:right-20 z-30 -translate-y-1/2 pointer-events-none flex flex-col items-center"
       >
-        <img 
+        <img
           ref={realImageRef}
-          src="logogreen.png" 
-          alt="Pentalks" 
-          className="w-32 h-32 md:w-40 md:h-40 object-contain mb-8" 
+          src="logogreen.png"
+          alt="Pentalks"
+          className="w-20 h-20 md:w-44 md:h-44 object-contain mb-6"
         />
 
-        <svg className="w-[350px] md:w-[500px] h-auto overflow-visible" viewBox="0 0 500 150">
-<text
-  x="50%"
-  y="40%"
-  textAnchor="middle"
-  className="drawing-heading text-5xl md:text-6xl font-black uppercase"
-  fill="none"
-  stroke={COLORS.forest}
-  strokeWidth="1"
-  strokeLinejoin="round"
-  strokeLinecap="round"
-  paintOrder="stroke"
->
-  PENTALKS
-</text>
-          <text x="50%" y="70%" textAnchor="middle" className="drawing-desc text-lg md:text-xl font-bold tracking-[0.45em]" fill="none" stroke={COLORS.forest} strokeWidth="0.5">Journey of Turtles</text>
+        <svg className="w-[280px] md:w-[550px] overflow-visible" viewBox="0 0 500 120">
+          <text x="50%" y="40%" textAnchor="middle" dominantBaseline="middle"
+            className="drawing-heading text-6xl font-black uppercase tracking-tighter"
+            fill="none" stroke={COLORS.forest} strokeWidth="1.5">
+            PENTALKS
+          </text>
+          <text x="50%" y="85%" textAnchor="middle" dominantBaseline="middle"
+            className="drawing-desc text-xl font-bold tracking-[0.6em] uppercase "
+            fill="none" stroke={COLORS.forest} strokeWidth="0.8">
+            Journey of Turtles
+          </text>
         </svg>
       </div>
 
-      {/* Pinning Spacer */}
-      <div className="h-[200vh] pointer-events-none" />
-
-      {/* Final Portal Transition Overlay (Dark Green to match content) */}
-      <div ref={portalRef} className="absolute inset-0 z-[60] bg-[#0f4c39] opacity-0 pointer-events-none" />
+      {/* FINAL PORTAL */}
+      <div ref={portalRef} className="fixed inset-0 bg-[#0f4c39] opacity-0 invisible z-[60] flex items-center justify-center text-center">
+        <h2 className="text-[#F9F7F2] text-5xl font-black uppercase tracking-widest">
+          Let's Begin
+        </h2>
+      </div>
 
       <style jsx>{`
-        .outline-text { 
-          color: transparent; 
-          -webkit-text-stroke: 1px #F9F7F2; 
-        }
-        @media (min-width: 768px) { 
-          .outline-text { -webkit-text-stroke: 2px #F9F7F2; } 
-        }
+        @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&display=swap');
+        .font-syne { font-family: 'Syne', sans-serif; }
+        .drawing-heading, .drawing-desc { transition: fill 0.5s ease;  }
       `}</style>
     </div>
   );
