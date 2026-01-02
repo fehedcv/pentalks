@@ -13,28 +13,28 @@ const AboutPage = () => {
 
   const team = [
     { 
-      name: "Aditya Menon", 
+      name: "Ahmed", 
       role: "Founder & Creative Director", 
       desc: "Visionary leader with 15+ years in brand strategy and design.",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=800&auto=format&fit=crop" 
+      image: "/src/assets/ahmed.jpeg" 
     },
     { 
-      name: "Priya Nair", 
+      name: "Anshif", 
       role: "Head of Architecture", 
       desc: "Award-winning architect specializing in sustainable design.",
-      image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=800&auto=format&fit=crop" 
+      image: "/src/assets/anshif.jpeg" 
     },
     { 
-      name: "Rahul Kapoor", 
+      name: "Hashim", 
       role: "Audio Director", 
       desc: "Former radio producer turned podcast innovator.",
-      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=800&auto=format&fit=crop" 
+      image: "/src/assets/hashim.jpeg" 
     },
     { 
-      name: "Maya Desai", 
+      name: "Sakeeb", 
       role: "Strategy Lead", 
       desc: "Brand strategist with experience at Fortune 500 companies.",
-      image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=800&auto=format&fit=crop" 
+      image: "/src/assets/sakeeb.jpeg" 
     },
   ];
 
@@ -46,12 +46,27 @@ const AboutPage = () => {
   ];
 
   const milestones = [
-    { year: "2018", title: "The Beginning", desc: "Pentalks founded with a vision to blend architecture and storytelling." },
-    { year: "2019", title: "Mukham Launch", desc: "Our architectural studio opened its doors, completing 10 projects in year one." },
-    { year: "2021", title: "Ver Podcast Network", desc: "Launched our podcast network, reaching 100K listeners in 6 months." },
-    { year: "2023", title: "Global Expansion", desc: "Expanded operations to serve clients across 15+ countries." },
-    { year: "2024", title: "Award Recognition", desc: "Received multiple design and innovation awards for our work." },
-  ];
+  { 
+    year: "2021", 
+    title: "MPTC (Our Beginning)", 
+    desc: "The foundation of our journey, establishing a creative base focused on multimedia and technical excellence." 
+  },
+  { 
+    year: "2024", 
+    title: "Pentalks", 
+    desc: "The growth phase where we bridged the gap between architecture and storytelling through engaging digital content." 
+  },
+  { 
+    year: "2025", 
+    title: "Mugham", 
+    desc: "A dedicated Architecture Design Studio crafting premium spaces with a focus on modern aesthetic and functional design." 
+  },
+  { 
+    year: "2026", 
+    title: "Veru (Upcoming Project)", 
+    desc: "The next evolution in auditory narratives—a creative podcast network and studio built for deep-rooted conversations." 
+  }
+];
 
   return (
     <div className="bg-[#F9F7F2] min-h-screen font-sans selection:bg-[#0f4c39] selection:text-white">
@@ -158,7 +173,7 @@ const AboutPage = () => {
                 {/* Removed grayscale classes - Image is always normal color */}
                 <div className="aspect-[3/4] bg-[#F9F7F2] rounded-tl-[80px] rounded-br-[80px] mb-6 overflow-hidden relative transition-all duration-700">
                     <img src={member.image} alt={member.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-                    <div className="absolute inset-0 bg-[#0f4c39] translate-y-full group-hover:translate-y-0 transition-transform duration-700 ease-expo opacity-10" />
+                    <div className="absolute inset-0 bg-[#0f4c39]  translate-y-0 transition-transform duration-700 ease-expo opacity-10" />
                 </div>
                 <h4 className="font-syne text-xl font-bold text-[#0f4c39] mb-1 uppercase tracking-tighter">{member.name}</h4>
                 <p className="text-[#8B9D83] text-[10px] font-black uppercase tracking-[0.2em] mb-4">{member.role}</p>

@@ -60,7 +60,7 @@ const VerPage = () => {
             </div>
 
             <h1 className="text-[25vw] md:text-[18vw] font-black uppercase leading-[0.7] tracking-tighter text-[#F9F7F2] opacity-80">
-              VER.
+              VERU.
             </h1>
 
             <div className="max-w-xl mx-auto mt-12 space-y-8">
