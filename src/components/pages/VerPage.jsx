@@ -17,14 +17,14 @@ const VerPage = () => {
       host: "Arjun Mehta", 
       desc: "Conversations with world-renowned architects about the 'Face' of creativity.",
       category: "Design",
-      image: "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?q=80&w=800&auto=format&fit=crop"
+      image: "/verStock02.png"
     },
     { 
       title: "Build Stories", 
       host: "Priya Sharma", 
       desc: "Behind-the-scenes narratives of iconic buildings and their structural souls.",
       category: "Architecture",
-      image: "https://images.unsplash.com/photo-1478737270239-2f02b77fc618?q=80&w=800&auto=format&fit=crop"
+      image: "/VeruImg.png"
     }
   ];
 
@@ -33,19 +33,31 @@ const VerPage = () => {
       
       {/* --- HERO SECTION: THE IMMERSIVE ROOT --- */}
       <section className="relative h-screen w-full flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <img 
-            src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=2000&auto=format&fit=crop" 
-            className="w-full h-full object-cover opacity-40 grayscale"
-            alt="Studio Background"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#1C150D] via-transparent to-[#1C150D]" />
-          <div className="absolute inset-0 bg-black/40" />
-          
-          <div className="absolute top-0 left-1/2 w-[1px] h-full bg-white/10" />
-          <div className="absolute top-0 left-1/4 w-[1px] h-full bg-white/5" />
-          <div className="absolute top-0 right-1/4 w-[1px] h-full bg-white/5" />
-        </div>
+       <div className="absolute inset-0 z-0">
+  {/* Mobile (portrait image) */}
+  <img 
+    src="/ver-hero-mobile.png"
+    className="block md:hidden w-full h-full object-cover opacity-40 grayscale"
+    alt="Studio Background Mobile"
+  />
+
+  {/* Desktop (landscape image) */}
+  <img 
+    src="/veru-hero-desktop.png"
+    className="hidden md:block w-full h-full object-cover opacity-40 grayscale"
+    alt="Studio Background Desktop"
+  />
+
+  {/* overlays – common for both */}
+  <div className="absolute inset-0 bg-gradient-to-b from-[#1C150D] via-transparent to-[#1C150D]" />
+  <div className="absolute inset-0 bg-black/40" />
+
+  {/* grid lines */}
+  <div className="absolute top-0 left-1/2 w-[1px] h-full bg-white/10" />
+  <div className="absolute top-0 left-1/4 w-[1px] h-full bg-white/5" />
+  <div className="absolute top-0 right-1/4 w-[1px] h-full bg-white/5" />
+</div>
+
 
         <div className="relative z-10 text-center px-6">
           <motion.div
@@ -60,7 +72,7 @@ const VerPage = () => {
             </div>
 
             <h1 className="text-[25vw] md:text-[18vw] font-black uppercase leading-[0.7] tracking-tighter text-[#F9F7F2] opacity-80">
-              VER.
+              VERU.
             </h1>
 
             <div className="max-w-xl mx-auto mt-12 space-y-8">
@@ -102,7 +114,7 @@ const VerPage = () => {
                 className="group flex flex-col md:flex-row gap-10 items-center"
               >
                 <div className="w-full md:w-1/2 aspect-[4/5] overflow-hidden rounded-tl-[80px] rounded-br-[80px] shadow-2xl relative">
-                  <img src={show.image} className="w-full h-full object-cover grayscale transition-all duration-1000 group-hover:grayscale-0 group-hover:scale-110" alt={show.title} />
+                  <img src={show.image} className="w-full h-full object-cover grayscale-1 transition-all duration-1000  " alt={show.title} />
                   <div className="absolute inset-0 bg-[#0f4c39]/10 mix-blend-multiply group-hover:opacity-0 transition-opacity" />
                 </div>
                 <div className="w-full md:w-1/2">
@@ -121,9 +133,7 @@ const VerPage = () => {
 
       {/* --- PHILOSOPHY SECTION --- */}
       <section className="bg-[#0f4c39] py-32 md:py-48 px-6 md:px-12 text-[#F9F7F2] relative overflow-hidden">
-        <div className="absolute -top-20 -right-20 text-[25vw] font-black text-white/[0.03] leading-none uppercase pointer-events-none select-none">
-          DEPTH
-        </div>
+   
 
         <div className="max-w-4xl mx-auto relative z-10">
           <div className="flex flex-col items-center text-center">

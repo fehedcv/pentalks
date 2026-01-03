@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import { motion, useScroll, useTransform, useInView } from 'framer-motion';
 import { ArrowUpRight, Mic, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import MukhamImage from '/mukhamcover.png'; 
+import MukhamImage from '/MukhamMain.png'; 
 import logo from '/logogreen.png'; 
 
 const BrandHighlights = () => {
@@ -11,7 +11,7 @@ const BrandHighlights = () => {
     target: containerRef,
     offset: ["start end", "end start"]
   });
-
+  const VeruImage = "/VeruImg.png"
   // Background Parallax Elements
   const yGhostText = useTransform(scrollYProgress, [0, 1], [-200, 200]);
   const logoScale = useTransform(scrollYProgress, [0, 1], [0.8, 1.2]);
@@ -29,31 +29,14 @@ const BrandHighlights = () => {
         <img src={logo} alt="Bg" className="w-full max-w-[1200px] invert grayscale" />
       </motion.div>
 
-      <motion.h2 
-        style={{ y: yGhostText }}
-        className="absolute top-1/4 right-[-10%] text-[25vw] font-black text-white/[0.02] uppercase leading-none select-none pointer-events-none"
-      >
-        Ecosystem
-      </motion.h2>
-
       <div className="relative z-10 max-w-[1700px] mx-auto">
         
         {/* --- SECTION HEADER: Editorial Style --- */}
         <div className="mb-24 md:mb-40">
-          <motion.div 
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            className="flex items-center gap-4 mb-8"
-          >
-            {/* <div className="h-[1px] w-12 bg-[#8B9D83]" /> */}
-            {/* <span className="text-[10px] md:text-xs font-bold tracking-[0.5em] text-[#8B9D83] uppercase italic">Node 0.2 // Global Identity</span> */}
-          </motion.div>
-          
           <motion.h2 
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            transition={{ duration: 0.8 }}
             className="text-6xl md:text-8xl lg:text-[10vw] font-black text-[#F9F7F2] uppercase leading-[0.8] tracking-tighter"
           >
             Distinct <br />
@@ -62,31 +45,37 @@ const BrandHighlights = () => {
         </div>
 
         {/* --- LAYER 2: THE MODERN PORTALS --- */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-0 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-8 items-start overflow-visible">
           
           {/* MUKHAM: Left Staggered Portal */}
-          <div className="lg:col-span-7 lg:pr-12">
-            <ModernNodePortal 
-              to="/mukham"
-              id="M-01"
-              title="MUKHAM"
-              tagline="Architectural Studio"
-              description="Crafting resilient shells for technical and organic evolution."
-              image={MukhamImage}
-              isLarge={true}
-            />
+          <div className="lg:col-span-7 relative z-20">
+            {/* Using aspect-[4/5] ensures the card shape stays consistent. 
+                Adjust to aspect-square if your images are 1:1 
+            */}
+            <div className="w-full aspect-[4/5] md:aspect-[16/10] lg:aspect-[4/5] xl:aspect-square">
+              <ModernNodePortal 
+                to="/mukham"
+                title="MUKHAM"
+                tagline="Architectural Studio"
+                description="Crafting resilient shells for technical and organic evolution."
+                image={MukhamImage}
+                isLarge={true}
+              />
+            </div>
           </div>
 
           {/* VER: Right Staggered Portal (Offset Down) */}
-          <div className="lg:col-span-5 lg:pt-64">
-            <ModernNodePortal 
-              to="/ver"
-              id="V-02"
-              title="VER"
-              tagline="Podcast & Narratives"
-              description="Producing rhythmic narratives that resonate through technical precision."
-              isPodcast={true}
-            />
+          <div className="lg:col-span-5 lg:mt-80 relative z-10">
+            <div className="w-full aspect-[4/5] md:aspect-[16/10] lg:aspect-[4/5]">
+              <ModernNodePortal 
+                to="/ver"
+                title="VERU"
+                tagline="Podcast & Narratives"
+                description="Producing rhythmic narratives that resonate through technical precision."
+                image={VeruImage}
+                isPodcast={true}
+              />
+            </div>
           </div>
 
         </div>
@@ -116,23 +105,28 @@ const ModernNodePortal = ({ to, id, title, tagline, description, image, isPodcas
     >
       <Link to={to} className="block relative">
         {/* The Scute Shape Container */}
-        <div className={`relative overflow-hidden transition-all duration-700 bg-white/[0.03] border border-white/5 group-hover:border-white/20
+        <div className={`relative overflow-hidden transition-all duration-700 bg-[#1C150D] border border-white/5 group-hover:border-[#8B9D83]/30
           ${isLarge ? 'h-[500px] md:h-[750px] rounded-tl-[150px] rounded-br-[150px]' : 'h-[450px] md:h-[600px] rounded-tr-[120px] rounded-bl-[120px]'}
         `}>
           
-          {/* Background Visuals */}
+          {/* Background Visuals - FIXED IMAGE FIT */}
           {image ? (
             <div className="absolute inset-0 z-0">
               <img 
                 src={image} 
                 alt={title} 
-                className="w-full h-full object-cover opacity-50 grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000 ease-out" 
+                /* Changed object-cover to include object-center 
+                   Increased base opacity to 70% for better visibility
+                */
+                className="w-full h-full object-cover object-center opacity-70 grayscale-0   transition-all duration-1000 ease-out" 
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0f4c39] via-[#0f4c39]/20 to-transparent" />
+              {/* Refined Gradient: Now uses a 'scrim' effect. 
+                  It's darker at the bottom (for text) and transparent at the top (for the image).
+              */}
+              <div className="absolute inset-0 bg-gradient-to-t from-[#1C150D] via-[#1C150D]/20 to-transparent opacity-80 group-hover:opacity-40 transition-opacity duration-700" />
             </div>
           ) : (
             <div className="absolute inset-0 z-0 flex items-center justify-center bg-[#0a0a0a]/40">
-              {/* Dynamic Waveform for VER */}
               <div className="flex gap-1.5 items-end h-32 opacity-30 group-hover:opacity-60 transition-opacity">
                 {[...Array(20)].map((_, i) => (
                   <motion.div 
@@ -159,20 +153,20 @@ const ModernNodePortal = ({ to, id, title, tagline, description, image, isPodcas
             </div>
 
             <div className="max-w-md">
-              <h3 className="text-5xl md:text-8xl font-black text-[#F9F7F2] tracking-tighter uppercase mb-4 leading-none">
+              <h3 className="text-5xl md:text-8xl font-black text-[#F9F7F2] tracking-tighter uppercase mb-4 leading-none" style={{ fontFamily: "'Montserrat', sans-serif" }}>
                 {title}
               </h3>
               <p className="text-[10px] md:text-xs font-bold tracking-[0.4em] text-[#8B9D83] uppercase mb-6 italic opacity-80">
                 {tagline}
               </p>
-              <p className="text-sm md:text-lg text-white/40 group-hover:text-white/70 transition-colors duration-500 leading-relaxed font-medium">
+              <p className="text-sm md:text-lg text-white/60 group-hover:text-white transition-colors duration-500 leading-relaxed font-medium">
                 {description}
               </p>
             </div>
           </div>
 
-          {/* Hover Scute (Hexagon) Watermark */}
-          <div className="absolute -bottom-20 -right-20 opacity-[0.05] group-hover:opacity-[0.15] group-hover:scale-110 transition-all duration-700 pointer-events-none">
+          {/* Background Scute Watermark */}
+          <div className="absolute -bottom-20 -right-20 opacity-[0.05] group-hover:opacity-[0.1] group-hover:scale-110 transition-all duration-700 pointer-events-none">
             <svg width="400" height="400" viewBox="0 0 100 100" fill="white">
               <path d="M50 0 L100 25 L100 75 L50 100 L0 75 L0 25 Z" />
             </svg>

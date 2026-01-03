@@ -65,15 +65,12 @@ const ProcessSection = () => {
           {/* LEFT HEADER: Pinned "Voices of Impact" Typography Style */}
           <div className="md:w-1/2 md:sticky md:top-32 h-fit">
               <div className="flex items-center gap-4 mb-8">
-                <div className="w-10 h-[2px] bg-[#0f4c39]"></div>
-                <span className="text-[#0f4c39] text-[10px] md:text-xs font-black tracking-[0.4em] uppercase">
-                  Workflow System
-                </span>
+               
               </div>
 
               <h2 className="text-[14vw] md:text-[8.5vw] font-black text-[#1C150D] uppercase tracking-tighter leading-[0.85] mb-8">
-                SYSTEM <br /> 
-                <span className="text-transparent outline-text">CORE</span>
+                WORK <br /> 
+                <span className="text-transparent outline-text">FLOW</span>
               </h2>
               
               <p className="text-[#1C150D]/50 text-base md:text-lg font-medium max-w-xs leading-relaxed tracking-tight">
