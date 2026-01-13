@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, useInView } from 'framer-motion';
 import { MessageSquareQuote } from 'lucide-react';
-import logo from '/logogreen.png'; 
+const logo = "https://res.cloudinary.com/dmtzmgbkj/image/upload/f_webp/v1768325287/logogreen_w4rnuq.png";
 
 const Testimonials = () => {
   const containerRef = useRef(null);

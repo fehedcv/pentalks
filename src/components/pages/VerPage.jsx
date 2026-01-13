@@ -17,14 +17,14 @@ const VerPage = () => {
       host: "Arjun Mehta", 
       desc: "Conversations with world-renowned architects about the 'Face' of creativity.",
       category: "Design",
-      image: "/verStock02.png"
+      image: "https://res.cloudinary.com/dmtzmgbkj/image/upload/f_webp/v1768326810/ver-hero-mobile_lgdtsd.png"
     },
     { 
       title: "Build Stories", 
       host: "Priya Sharma", 
       desc: "Behind-the-scenes narratives of iconic buildings and their structural souls.",
       category: "Architecture",
-      image: "/VeruImg.png"
+      image: "https://res.cloudinary.com/dmtzmgbkj/image/upload/f_webp/v1768326818/VeruImg_zpqqpp.png"
     }
   ];
 
@@ -36,14 +36,14 @@ const VerPage = () => {
        <div className="absolute inset-0 z-0">
   {/* Mobile (portrait image) */}
   <img 
-    src="/ver-hero-mobile.png"
+    src="https://res.cloudinary.com/dmtzmgbkj/image/upload/f_webp/v1768326810/verStock02_acnyya.png"
     className="block md:hidden w-full h-full object-cover opacity-40 grayscale"
     alt="Studio Background Mobile"
   />
 
   {/* Desktop (landscape image) */}
   <img 
-    src="/veru-hero-desktop.png"
+    src="https://res.cloudinary.com/dmtzmgbkj/image/upload/f_webp/v1768326811/veru-hero-desktop_ztjoqd.png"
     className="hidden md:block w-full h-full object-cover opacity-40 grayscale"
     alt="Studio Background Desktop"
   />

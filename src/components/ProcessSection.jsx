@@ -31,31 +31,7 @@ const ProcessSection = () => {
     <div ref={containerRef} className="relative bg-[#F9F7F2]">
       
       {/* 1. GREEN HERO SECTION - Pointed 'V' Transition */}
-      <div className="relative w-full h-[70vh] md:h-[80vh] bg-[#0f4c39] flex flex-col items-center justify-center overflow-hidden">
-        
-        <div className="relative z-10 text-center  md:mb-32">
-          <motion.div 
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            className="flex items-center justify-center gap-3 mb-6"
-          >
-            <div className="w-8 h-[1px] bg-white/30"></div>
-            <span className="text-white/50 text-[14px] md:text-xs font-bold tracking-[0.4em] uppercase">
-              Pentalks
-            </span>
-          </motion.div>
-
-          <h2 className="text-white text-[19vw] md:text-[12vw] font-black leading-[0.8] uppercase tracking-tighter">
-            THE <br /> PROCESS
-          </h2>
-        </div>
-
-        {/* INVERTED V-SHAPE: Pointing DOWN into the beige section */}
-        <div 
-          className="absolute bottom-[-1px] left-0 w-full h-24 md:h-48 bg-[#F9F7F2]" 
-          style={{ clipPath: 'polygon(0 0, 50% 100%, 100% 0, 100% 100%, 0 100%)' }}
-        ></div>
-      </div>
+    
 
       {/* 2. PROCESS CONTENT AREA */}
       <section className="relative px-6 py-20 md:py-48 max-w-7xl mx-auto">
@@ -95,7 +71,7 @@ const ProcessSection = () => {
                   transition={{ duration: 0.8, ease: "easeOut" }}
                   className="relative"
                 >
-                  <div className="bg-white p-8 md:p-12 rounded-[2.5rem] md:rounded-[3.5rem] shadow-[40px_40px_80px_rgba(15,76,57,0.03)] border border-[#0f4c39]/5 group transition-all duration-500 hover:border-[#0f4c39]/20">
+                  <div className="bg-white p-8 md:p-12 rounded-[1rem] md:rounded-[1rem] shadow-[40px_40px_80px_rgba(15,76,57,0.03)] border border-[#0f4c39]/5 group transition-all duration-500 hover:border-[#0f4c39]/20">
                     
                     <div className="flex flex-col gap-6 md:gap-8">
                       {/* Top Row: Icon and Large Background Number */}

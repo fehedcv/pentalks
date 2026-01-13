@@ -37,8 +37,8 @@ const CompaniesPage = () => {
             <Link to="/mukham" className="group block relative aspect-[4/5] md:aspect-square overflow-hidden rounded-tl-[80px] md:rounded-tl-[150px] rounded-br-[80px] md:rounded-br-[150px] bg-white shadow-2xl">
               {/* Background Image */}
               <img 
-                src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1200&auto=format&fit=crop" 
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                src="https://res.cloudinary.com/dmtzmgbkj/image/upload/f_webp/v1768325515/MukhamMain_sc22th.png" 
+                className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 "
                 alt="Mukham Architectural Studio"
               />
               
@@ -81,8 +81,8 @@ const CompaniesPage = () => {
             <Link to="/ver" className="group block relative aspect-[4/5] md:aspect-square overflow-hidden rounded-tr-[80px] md:rounded-tr-[150px] rounded-bl-[80px] md:rounded-bl-[150px] bg-[#1C150D] shadow-2xl">
               {/* Background Image */}
               <img 
-                src="https://images.unsplash.com/photo-1590602847861-f357a9332bbc?q=80&w=1200&auto=format&fit=crop" 
-                className="absolute inset-0 w-full h-full object-cover opacity-60 transition-transform duration-1000 group-hover:scale-110"
+                src="https://res.cloudinary.com/dmtzmgbkj/image/upload/f_webp/v1768325515/VeruImg_wsobph.png" 
+                className="absolute inset-0 w-full h-full object-cover opacity-90 transition-transform duration-1000 "
                 alt="Ver Audio Network"
               />
               
@@ -100,7 +100,7 @@ const CompaniesPage = () => {
                 
                 <div className="space-y-3">
                   <h2 className="text-[#F9F7F2] font-syne text-5xl md:text-7xl font-black uppercase tracking-tighter leading-none">
-                    VER
+                    VERU
                   </h2>
                   <p className="text-[#8B9D83] font-bold uppercase tracking-[0.4em] text-[10px] md:text-xs">
                     Audio Network
@@ -118,12 +118,7 @@ const CompaniesPage = () => {
         </div>
       </section>
 
-      {/* --- BOTTOM DECOR --- */}
-      <section className="px-6 md:px-12 py-20 text-center border-t border-[#0f4c39]/5">
-        <p className="font-syne text-[#0f4c39]/10 text-[10vw] font-black uppercase tracking-tighter select-none pointer-events-none">
-          Pentalks Collective
-        </p>
-      </section>
+     
 
       <style jsx>{`
         .outline-text {
