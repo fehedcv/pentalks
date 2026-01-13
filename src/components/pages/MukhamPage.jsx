@@ -9,36 +9,36 @@ const MukhamPage = () => {
     {
       title: "Architectural Design",
       desc: "Creating innovative structural solutions that balance aesthetic beauty with functional efficiency.",
-      img: "/service01.png",
+      img: "https://res.cloudinary.com/dmtzmgbkj/image/upload/f_webp/v1768326028/service01_px1grb.png",
       icon: <Building2 className="text-[white]" size={24} />
     },
     {
       title: "Urban Planning",
       desc: "Developing harmonious community layouts that foster growth, sustainability, and human connection.",
-      img: "/service02.png",
+      img: "https://res.cloudinary.com/dmtzmgbkj/image/upload/f_webp/v1768326039/service02_yjh4sc.png",
       icon: <Compass className="text-[#8B9D83]" size={24} />
     },
     {
       title: "Interior Identity",
       desc: "Designing internal environments that reflect the brand's soul through curated materials and lighting.",
-      img: "/service03.png",
+      img: "https://res.cloudinary.com/dmtzmgbkj/image/upload/f_webp/v1768326040/service03_rarrut.png",
       icon: <PenTool className="text-[#8B9D83]" size={24} />
     },
     {
       title: "Structural Integrity",
       desc: "Providing the technical bone-structure to ensure safety, endurance, and architectural longevity.",
-      img: "/service04.png",
+      img: "https://res.cloudinary.com/dmtzmgbkj/image/upload/f_webp/v1768326040/service04_lwoqpy.png",
       icon: <Ruler className="text-[#8B9D83]" size={24} />
     }
   ];
 
   // Preserved Crew Data
   const crew = [
-    { id: "01", name: "Aditya Menon", role: "Founder & Design Lead", status: "CREATIVE HEAD", img: "/crew-01.png", desc: "Visionary leader shaping the architectural face of modern identity." },
-    { id: "02", name: "Priya Nair", role: "Chief Architect", status: "STUDIO LEAD", img: "/crew-02.png", desc: "Expert in sustainable facade systems and urban structural narratives." },
-    { id: "03", name: "Rahul Kapoor", role: "Structural Engineer", status: "TECHNICAL HEAD", img: "/crew-03.png", desc: "The backbone of Mukham, ensuring every design is rooted in safety." },
-    { id: "04", name: "Maya Desai", role: "Interior Designer", status: "IDENTITY HEAD", img: "/crew-04.png", desc: "Crafting the soul within the shell to match our clients' character." },
-    { id: "05", name: "Zayan Khan", role: "Project Manager", status: "EXECUTION HEAD", img: "/crew-05.png", desc: "Connecting vision to reality through precision and site management." },
+    { id: "01", name: "Aditya Menon", role: "Founder & Design Lead", status: "CREATIVE HEAD", img: "https://res.cloudinary.com/dmtzmgbkj/image/upload/f_webp/v1768326688/crew-01_1_gn3yd6.png", desc: "Visionary leader shaping the architectural face of modern identity." },
+    { id: "02", name: "Priya Nair", role: "Chief Architect", status: "STUDIO LEAD", img: "https://res.cloudinary.com/dmtzmgbkj/image/upload/f_webp/v1768325816/crew-02_rkfhyi.png", desc: "Expert in sustainable facade systems and urban structural narratives." },
+    { id: "03", name: "Rahul Kapoor", role: "Structural Engineer", status: "TECHNICAL HEAD", img: "https://res.cloudinary.com/dmtzmgbkj/image/upload/f_webp/v1768325815/crew-03_s9zjfe.png", desc: "The backbone of Mukham, ensuring every design is rooted in safety." },
+    { id: "04", name: "Maya Desai", role: "Interior Designer", status: "IDENTITY HEAD", img: "https://res.cloudinary.com/dmtzmgbkj/image/upload/f_webp/v1768325816/crew-04_l6e2ui.png", desc: "Crafting the soul within the shell to match our clients' character." },
+    { id: "05", name: "Zayan Khan", role: "Project Manager", status: "EXECUTION HEAD", img: "https://res.cloudinary.com/dmtzmgbkj/image/upload/f_webp/v1768325826/crew-05_lgqse6.png", desc: "Connecting vision to reality through precision and site management." },
   ];
 
   return (
@@ -50,14 +50,14 @@ const MukhamPage = () => {
    <div className="absolute inset-0 z-0">
   {/* Mobile background */}
   <img
-    src="/MukhamHeroBg-mobile.png"
+    src="https://res.cloudinary.com/dmtzmgbkj/image/upload/f_webp/v1768326030/MukhamHeroBg-mobile_losfv8.png"
     alt="Hero Background Mobile"
     className="w-full h-full object-cover block md:hidden"
   />
 
   {/* Desktop background */}
   <img
-    src="/MukhamHeroBg.png"
+    src="https://res.cloudinary.com/dmtzmgbkj/image/upload/f_webp/v1768326029/MukhamHeroBg_kd7sx4.png"
     alt="Hero Background Desktop"
     className="w-full h-full object-cover hidden md:block"
   />
@@ -67,15 +67,12 @@ const MukhamPage = () => {
 </div>
 
 
-        {/* Large Centered Logo Background
-        <div className="absolute inset-0 z-10 flex items-center justify-center pointer-events-none opacity-20">
-             <img src="/mugamPng.png" alt="" className="w-[80%] max-w-[800px] h-auto object-contain" />
-        </div> */}
+      
 
         {/* Content Layer */}
         <div className="relative z-20 flex flex-col items-center text-center px-4">
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.2 }}>
-            <img src="/mukham_cover.png" alt="Mukham Branding" className="max-w-[85vw] md:max-w-[50vw] h-auto mb-8 mx-auto" />
+            <img src="https://res.cloudinary.com/dmtzmgbkj/image/upload/f_webp/v1768326027/mukham_cover_mo3ttq.png" alt="Mukham Branding" className="max-w-[85vw] md:max-w-[50vw] h-auto mb-8 mx-auto" />
             <p className="text-[#8B9D83] text-xs md:text-sm font-bold uppercase tracking-[0.8em] mt-2">Architectural Design Studio</p>
           </motion.div>
         </div>
@@ -86,7 +83,7 @@ const MukhamPage = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           <div className="lg:col-span-5 relative flex justify-center lg:justify-start">
             <div className="w-full max-w-[420px] aspect-[4/5] overflow-hidden rounded-tl-[100px] rounded-br-[100px] bg-[#4a250b] flex items-center justify-center shadow-xl">
-              <img src="/mukham_logo.png" alt="About" className="h-full w-auto object-contain" />
+              <img src="https://res.cloudinary.com/dmtzmgbkj/image/upload/f_webp/v1768326027/mukham_logo_qkrps5.png" alt="About" className="h-full w-auto object-contain" />
             </div>
           </div>
           <div className="lg:col-span-7 space-y-8">
@@ -128,7 +125,7 @@ const MukhamPage = () => {
             </div>
           </div>
           <div className="order-1 lg:order-2 aspect-square bg-[#F9F7F2] rounded-tr-[120px] rounded-bl-[120px] relative overflow-hidden border border-[#0f4c39]/5">
-             <img src="/whyChoose.png" className="w-full h-full object-cover mix-blend-multiply opacity-80" alt="Studio Excellence" />
+             <img src="https://res.cloudinary.com/dmtzmgbkj/image/upload/f_webp/v1768326283/whyChoose_gqbiiv.png" className="w-full h-full object-cover mix-blend-multiply opacity-80" alt="Studio Excellence" />
           </div>
         </div>
       </section>

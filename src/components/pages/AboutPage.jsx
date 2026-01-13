@@ -16,25 +16,25 @@ const AboutPage = () => {
       name: "Ahmed", 
       role: "Founder & Creative Director", 
       desc: "Visionary leader with 15+ years in brand strategy and design.",
-      image: "/src/assets/ahmed.jpeg" 
+      image: "https://res.cloudinary.com/dmtzmgbkj/image/upload/f_webp/v1768325855/ahmed_rdtpcp.jpg" 
     },
     { 
       name: "Anshif", 
       role: "Head of Architecture", 
       desc: "Award-winning architect specializing in sustainable design.",
-      image: "/src/assets/anshif.jpeg" 
+      image: "https://res.cloudinary.com/dmtzmgbkj/image/upload/f_webp/v1768325856/anshif_kfqjye.jpg" 
     },
     { 
       name: "Hashim", 
       role: "Audio Director", 
       desc: "Former radio producer turned podcast innovator.",
-      image: "/src/assets/hashim.jpeg" 
+      image: "https://res.cloudinary.com/dmtzmgbkj/image/upload/f_webp/v1768325856/hashim_inm6zm.jpg" 
     },
     { 
       name: "Sakeeb", 
       role: "Strategy Lead", 
       desc: "Brand strategist with experience at Fortune 500 companies.",
-      image: "/src/assets/sakeeb.jpeg" 
+      image: "https://res.cloudinary.com/dmtzmgbkj/image/upload/f_webp/v1768325856/sakeeb_wp9hpl.jpg" 
     },
   ];
 
@@ -94,13 +94,13 @@ const AboutPage = () => {
           <div className="lg:col-span-5 order-2 lg:order-1">
             <div className="aspect-[4/5] bg-[#0f4c39] rounded-tl-[120px] rounded-br-[120px] relative overflow-hidden group shadow-2xl">
                <img 
-                src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1400&auto=format&fit=crop" 
+                src="https://res.cloudinary.com/dmtzmgbkj/image/upload/f_webp/v1768325744/about-img_md7ibn.png" 
                 alt="Architecture"
-                className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:scale-110 transition-transform duration-1000"
+                className="absolute inset-0 w-full h-full object-cover opacity-100  transition-transform duration-1000"
                />
                <div className="absolute inset-0 bg-gradient-to-t from-[#0f4c39] to-transparent opacity-40" />
                <div className="absolute bottom-10 left-10 text-white z-10">
-                  <p className="font-syne text-6xl font-black opacity-20">PENT.</p>
+                  <p className="font-syne text-6xl font-black opacity-20">PENTALKS</p>
                </div>
             </div>
           </div>

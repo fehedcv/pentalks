@@ -54,7 +54,7 @@ const CTASection = () => {
 
               <div className="relative w-40 h-40 md:w-64 md:h-64 bg-[#FAF7F2] rounded-full flex items-center justify-center shadow-2xl z-10 transition-all duration-500 group-hover:bg-[#1C150D]"> 
                 <img 
-                  src="/logo.png" 
+                  src="https://res.cloudinary.com/dmtzmgbkj/image/upload/f_webp/v1768325663/logo_uwzokd.png" 
                   alt="Pentalks Logo" 
                   className="w-24 h-24 md:w-40 md:h-40 object-contain transition-all duration-500 group-hover:brightness-0 group-hover:invert"
                 />

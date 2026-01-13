@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion';
 import { Menu, X, ArrowUpRight } from 'lucide-react'; // Added ArrowUpRight for flair
 import { Link, useLocation } from 'react-router-dom';
-import logoAsset from '/og_logo.png'; 
+const logoAsset = 'https://res.cloudinary.com/dmtzmgbkj/image/upload/f_webp/v1768325094/og_logo_hsjtzo.png'; 
 
 const Navbar = () => {
   const location = useLocation();

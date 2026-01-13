@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform, useSpring, useInView } from 'framer-motion';
 import { Layers, Box, Mic } from 'lucide-react';
-import logoGreen from '/logogreen.png'; 
+const logoGreen =  'https://res.cloudinary.com/dmtzmgbkj/image/upload/f_webp/v1768325287/logogreen_w4rnuq.png'; 
 
 const WhatIsPentalks = () => {
   const containerRef = useRef(null);
