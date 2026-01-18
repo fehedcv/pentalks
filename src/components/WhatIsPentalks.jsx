@@ -88,21 +88,11 @@ const WhatIsPentalks = () => {
         <FloatingLogo key={item.id} data={item} progress={scrollYProgress} />
       ))}
 
-      <div className="relative z-10 max-w-[1400px] mx-auto px-8 md:px-20">
+      <div className="relative z-10 max-w-[1400px] mx-auto px-6 md:px-16 lg:px-24">
         
         {/* --- HEADER SECTION --- */}
         <div className="mb-48 space-y-10 max-w-5xl">
-          <motion.div 
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="flex items-center gap-6"
-          >
-            <div className="h-[1px] w-20 bg-[#8B9D83]/40" />
-            <span className="text-[12px] font-black tracking-[0.7em] text-[#8B9D83] uppercase">
-              Brand Ecosystem
-            </span>
-          </motion.div>
+         
           
           <div className="overflow-hidden">
             <motion.h2 
