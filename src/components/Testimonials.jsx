@@ -1,11 +1,31 @@
-import React, { useRef, useState, useEffect } from 'react';
-import { motion, useScroll, useTransform, useInView } from 'framer-motion';
+import React, { useRef, useState, useEffect, useLayoutEffect } from 'react';
+import { motion, useScroll, useTransform, useInView, AnimatePresence } from 'framer-motion';
 import { MessageSquareQuote } from 'lucide-react';
+
 const logo = "https://res.cloudinary.com/dmtzmgbkj/image/upload/f_webp/v1768325287/logogreen_w4rnuq.png";
 
 const Testimonials = () => {
   const containerRef = useRef(null);
   const [isMobile, setIsMobile] = useState(false);
+
+  // --- FONT & GLOBAL STYLE INJECTION ---
+  useLayoutEffect(() => {
+    const style = document.createElement('style');
+    style.textContent = `
+      @import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@300;400;600;700&display=swap');
+      .font-syne { font-family: 'Syne', sans-serif; }
+      .font-inter { font-family: 'Inter', sans-serif; }
+      .outline-text-sage {
+        -webkit-text-stroke: 1.5px #8B9D83;
+        color: transparent;
+      }
+      @media (min-width: 768px) {
+        .outline-text-sage { -webkit-text-stroke: 2px #8B9D83; }
+      }
+    `;
+    document.head.appendChild(style);
+    return () => document.head.removeChild(style);
+  }, []);
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
@@ -19,72 +39,58 @@ const Testimonials = () => {
     offset: ["start end", "end start"]
   });
 
-  // Background Parallax for Cinematic depth
-  const yGhost = useTransform(scrollYProgress, [0, 1], [-200, 200]);
-  const logoY = useTransform(scrollYProgress, [0, 1], [0, -100]);
-  const logoRotate = useTransform(scrollYProgress, [0, 1], [0, 45]);
+  const yGhost = useTransform(scrollYProgress, [0, 1], [-150, 150]);
+  const logoY = useTransform(scrollYProgress, [0, 1], [0, -80]);
+  const logoRotate = useTransform(scrollYProgress, [0, 1], [0, 25]);
 
+  // Updated contents for Pentalks, Mukham, and Veru Studio
   const testimonials = [
     {
-      quote: "Pentalks transformed our brand identity completely. Their attention to detail and creative vision exceeded our expectations.",
+      quote: "Mukham's architectural precision provided the perfect structural shell for our evolution. Their design isn't just space; it's a statement.",
       author: "Vikram Patel",
-      role: "CEO, TechVenture Labs",
+      role: "Structural Lead // Global Hub",
     },
     {
-      quote: "Working with the team was a revelation. They understood our vision and brought it to life in ways we never imagined.",
+      quote: "The narrative depth produced by Veru Studio gave our brand a heartbeat. They don't just record stories; they capture human resonance.",
       author: "Ananya Sharma",
-      role: "Founder, Harmony Spaces",
+      role: "Creative Director // Resonance Media",
     },
     {
-      quote: "The platform gave us a stage to share our story. Their production quality and storytelling expertise is unmatched.",
+      quote: "The Pentalks Collective bridges the gap between the physical and the digital with unmatched creative synergy. A true ecosystem of visionaries.",
       author: "Rajan Mehta",
-      role: "Author & Speaker",
+      role: "Founder // The Story Architecture",
     },
   ];
 
   return (
     <section 
       ref={containerRef}
-      className="relative min-h-screen bg-[#F9F7F2] overflow-hidden"
+      className="relative min-h-screen bg-[#1C150D] overflow-hidden font-inter"
     >
-      {/* --- 1. TOP TRANSITION (Organic Entry) --- */}
-      <div className="absolute top-0 left-0 w-full h-[15vh] bg-[#0f4c39] pointer-events-none z-40" 
-        style={{ clipPath: 'polygon(0 0, 100% 0, 100% 20%, 50% 100%, 0 20%)' }} 
+      {/* --- TOP TRANSITION --- */}
+      <div className="absolute top-0 left-0 w-full h-[12vh] bg-[#1C150D] pointer-events-none z-40" 
+        style={{ clipPath: 'polygon(0 0, 100% 0, 100% 20%, 50% 100%, 0 20%)', opacity: 0.5 }} 
       />
 
-      {/* 2. BACKGROUND PARALLAX LAYER */}
+      {/* BACKGROUND PARALLAX */}
       <motion.div 
         style={{ y: logoY, rotate: logoRotate }}
-        className="absolute top-1/4 -right-20 opacity-[0.04] pointer-events-none"
+        className="absolute top-1/4 -right-20 opacity-[0.03] pointer-events-none"
       >
-        <img src={logo} alt="Bg Icon" className="w-[600px] md:w-[950px] grayscale" />
+        <img src={logo} alt="Bg Icon" className="w-[600px] md:w-[900px] grayscale invert" />
       </motion.div>
 
-      <motion.h2 
-        style={{ y: yGhost }}
-        className="absolute bottom-20 left-0 text-[25vw] font-black text-[#0f4c39]/[0.02] uppercase leading-none select-none pointer-events-none whitespace-nowrap tracking-tighter"
-      >
-        Resonance
-      </motion.h2>
-
+     
       <div className="relative z-10 max-w-[1600px] mx-auto pt-48 pb-32 px-6 md:px-16 lg:px-24">
         
-        {/* HEADER: Clean & Modern */}
+        {/* HEADER */}
         <div className="mb-24 md:mb-40 flex flex-col lg:flex-row lg:items-end justify-between gap-12">
           <div className="max-w-4xl">
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              className="flex items-center gap-6 mb-8"
-            >
-              <div className="h-[1px] w-12 bg-[#0f4c39]" />
-              <span className="text-[10px] md:text-xs font-bold tracking-[0.4em] text-[#0f4c39] uppercase italic">Voices of Impact</span>
-            </motion.div>
+           
             
-            <h2 className="text-6xl md:text-8xl lg:text-[10vw] font-black text-[#1C150D] uppercase tracking-tighter leading-[0.8]">
+            <h2 className="font-syne text-6xl md:text-8xl lg:text-[9vw] font-800 text-[#FAF7F2] uppercase tracking-tighter leading-[0.85]">
               What they <br />
-              {/* "say" വ്യക്തമായി കാണാൻ വേണ്ടി സ്ട്രോക്ക് സ്റ്റൈൽ അപ്‌ഡേറ്റ് ചെയ്തു */}
-              <span className="text-transparent outline-text">say.</span>
+              <span className="outline-text-sage">say.</span>
             </h2>
           </div>
           
@@ -92,33 +98,21 @@ const Testimonials = () => {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
-            className="lg:max-w-xs text-lg text-[#1C150D]/50 font-medium leading-relaxed border-l-2 border-[#0f4c39]/10 pl-8 mb-4 italic"
+            className="lg:max-w-xs text-lg text-[#FAF7F2]/40 font-light leading-relaxed border-l border-[#8B9D83]/20 pl-8 mb-4 italic"
           >
-            "Built on trust and creative synergy across global industries."
+            "Built on trust and creative synergy between structure and story."
           </motion.p>
         </div>
 
-        {/* 3. STAGGERED VOICE GRID */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 items-start">
+        {/* VOICE GRID */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 items-start">
           {testimonials.map((item, idx) => (
             <VoiceCard key={idx} item={item} index={idx} logo={logo} />
           ))}
         </div>
       </div>
 
-      {/* --- SECTION ENDING: CLEAN (No bottom shapes as requested) --- */}
       <div className="h-20 w-full" />
-
-      <style jsx>{`
-        /* "say" എന്ന വാക്ക് കാണാത്ത പ്രശ്നം പരിഹരിക്കാനുള്ള സ്ട്രോക്ക് CSS */
-        .outline-text {
-          -webkit-text-stroke: 2px #0f4c39;
-          display: block;
-        }
-        @media (max-width: 768px) {
-          .outline-text { -webkit-text-stroke: 1.2px #0f4c39; }
-        }
-      `}</style>
     </section>
   );
 };
@@ -130,37 +124,39 @@ const VoiceCard = ({ item, index, logo }) => {
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 60 }}
-      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 60 }}
-      transition={{ duration: 0.8, delay: index * 0.15, ease: [0.16, 1, 0.3, 1] }}
-      whileHover={{ y: -15 }}
-      // Asymmetric shapes for modern feel
-      className={`relative p-10 md:p-14 bg-[#0f4c39] group overflow-hidden transition-all duration-700 shadow-xl
-        ${index === 1 ? 'lg:mt-32 rounded-tr-[100px] rounded-bl-[100px]' : 'rounded-tl-[100px] rounded-br-[100px]'}
+      initial={{ opacity: 0, y: 50 }}
+      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+      transition={{ duration: 1, delay: index * 0.15, ease: [0.16, 1, 0.3, 1] }}
+      // Card transition: Scute to Rectangle
+      className={`relative p-10 md:p-14 bg-[#2A241D] group overflow-hidden transition-all duration-700 shadow-2xl border border-white/5
+        ${index === 1 
+          ? 'lg:mt-32 rounded-tr-[100px] rounded-bl-[100px]' 
+          : 'rounded-tl-[100px] rounded-br-[100px]'}
+        hover:rounded-none hover:border-[#8B9D83]/30
       `}
     >
-      <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-[0.02] transition-opacity duration-500" />
+      <div className="absolute inset-0 bg-[#8B9D83] opacity-0 group-hover:opacity-[0.03] transition-opacity duration-700" />
       
-      <div className="relative z-10 flex flex-col h-full justify-between min-h-[380px]">
+      <div className="relative z-10 flex flex-col h-full justify-between min-h-[350px]">
         <div>
            <div className="mb-12">
-              <MessageSquareQuote size={40} className="text-[#8B9D83] opacity-30 group-hover:opacity-80 transition-opacity" />
+              <MessageSquareQuote size={40} className="text-[#8B9D83] opacity-30 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500" />
            </div>
            
-           <p className="text-xl md:text-2xl text-[#F9F7F2] font-medium leading-[1.5] tracking-tight mb-12 italic">
+           <p className="font-inter text-xl md:text-2xl text-[#FAF7F2]/80 font-light leading-[1.6] tracking-tight mb-12">
              "{item.quote}"
            </p>
         </div>
 
-        <div className="pt-8 border-t border-white/5">
-           <p className="text-lg font-black text-[#F9F7F2] uppercase tracking-tighter">{item.author}</p>
-           <p className="text-[10px] font-bold text-[#8B9D83] uppercase tracking-[0.3em] mt-1 opacity-70 italic">{item.role}</p>
+        <div className="pt-8 border-t border-[#8B9D83]/10">
+           <p className="font-syne text-xl font-800 text-[#FAF7F2] uppercase tracking-tighter">{item.author}</p>
+           <p className="font-inter text-[10px] font-bold text-[#8B9D83] uppercase tracking-[0.3em] mt-2 opacity-70">{item.role}</p>
         </div>
       </div>
 
-      {/* Subtle Logo Watermark */}
-      <div className="absolute -bottom-8 -right-8 opacity-[0.04] group-hover:opacity-[0.08] transition-all duration-700 pointer-events-none group-hover:scale-110 group-hover:rotate-12">
-        <img src={logo} alt="Watermark" className="w-[250px] h-[250px] grayscale brightness-200" />
+      {/* Watermark Logo */}
+      <div className="absolute -bottom-10 -right-10 opacity-[0.03] group-hover:opacity-[0.07] transition-all duration-1000 pointer-events-none group-hover:scale-110 group-hover:-rotate-12">
+        <img src={logo} alt="Watermark" className="w-[280px] h-[280px] grayscale invert brightness-150" />
       </div>
     </motion.div>
   );

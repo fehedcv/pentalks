@@ -1,249 +1,230 @@
-import React from 'react';
+import React, { useLayoutEffect } from 'react';
 import { Target, Users, Layers, Heart, Globe, ArrowUpRight, MessageCircle } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const AboutPage = () => {
-  const COLORS = {
-    sand: "#F9F7F2",
-    moss: "#8B9D83",
-    forest: "#0f4c39",
-    espresso: "#1C150D",
-    white: "#FFFFFF"
-  };
+  // --- FONT & GLOBAL STYLE INJECTION ---
+  useLayoutEffect(() => {
+    const style = document.createElement('style');
+    style.textContent = `
+      @import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@300;400;600;700&display=swap');
+      .font-syne { font-family: 'Syne', sans-serif; }
+      .font-inter { font-family: 'Inter', sans-serif; }
+      .outline-text-sage {
+        color: transparent;
+        -webkit-text-stroke: 1px #8B9D83;
+      }
+      @media (min-width: 768px) {
+        .outline-text-sage { -webkit-text-stroke: 2px #8B9D83; }
+      }
+    `;
+    document.head.appendChild(style);
+    return () => document.head.removeChild(style);
+  }, []);
 
   const team = [
     { 
       name: "Ahmed", 
       role: "Founder & Creative Director", 
-      desc: "Visionary leader with 15+ years in brand strategy and design.",
+      desc: "Visionary leader architecting the synergy between brand strategy and design.",
       image: "https://res.cloudinary.com/dmtzmgbkj/image/upload/f_webp/v1768325855/ahmed_rdtpcp.jpg" 
     },
     { 
       name: "Anshif", 
-      role: "Head of Architecture", 
-      desc: "Award-winning architect specializing in sustainable design.",
+      role: "Head of Architecture // Mukham", 
+      desc: "Specializing in the structural precision that defines the physical presence of the collective.",
       image: "https://res.cloudinary.com/dmtzmgbkj/image/upload/f_webp/v1768325856/anshif_kfqjye.jpg" 
     },
     { 
       name: "Hashim", 
-      role: "Audio Director", 
-      desc: "Former radio producer turned podcast innovator.",
+      role: "Audio Director // Veru Studio", 
+      desc: "Innovating the auditory narratives that provide the collective's human resonance.",
       image: "https://res.cloudinary.com/dmtzmgbkj/image/upload/f_webp/v1768325856/hashim_inm6zm.jpg" 
     },
     { 
       name: "Sakeeb", 
       role: "Strategy Lead", 
-      desc: "Brand strategist with experience at Fortune 500 companies.",
+      desc: "Building the strategic roadmaps that bridge structural logic with narrative soul.",
       image: "https://res.cloudinary.com/dmtzmgbkj/image/upload/f_webp/v1768325856/sakeeb_wp9hpl.jpg" 
     },
   ];
 
   const values = [
-    { icon: Target, title: "Clarity", text: "Cutting through the noise to find the core message that defines your brand." },
-    { icon: Users, title: "Community", text: "Building brands that people actually want to belong to and engage with." },
-    { icon: Layers, title: "Depth", text: "Creating work that stands up to scrutiny and the test of time." },
-    { icon: Heart, title: "Passion", text: "Every project receives our full creative energy and dedication." },
+    { icon: Target, title: "Precision", text: "Mukham's core—standardizing every detail to ensure structural integrity." },
+    { icon: Users, title: "Resonance", text: "Veru's heartbeat—crafting narratives that people engage with on a human level." },
+    { icon: Layers, title: "Symphony", text: "The Collective vision—merging structure and story into a unified legacy." },
+    { icon: Heart, title: "Soul", text: "The energy fueling every archetype, structure, and narrative we build." },
   ];
 
   const milestones = [
-  { 
-    year: "2021", 
-    title: "MPTC (Our Beginning)", 
-    desc: "The foundation of our journey, establishing a creative base focused on multimedia and technical excellence." 
-  },
-  { 
-    year: "2024", 
-    title: "Pentalks", 
-    desc: "The growth phase where we bridged the gap between architecture and storytelling through engaging digital content." 
-  },
-  { 
-    year: "2025", 
-    title: "Mugham", 
-    desc: "A dedicated Architecture Design Studio crafting premium spaces with a focus on modern aesthetic and functional design." 
-  },
-  { 
-    year: "2026", 
-    title: "Veru (Upcoming Project)", 
-    desc: "The next evolution in auditory narratives—a creative podcast network and studio built for deep-rooted conversations." 
-  }
-];
+    { year: "2021", title: "MPTC Foundation", desc: "Establishing our technical base focused on multimedia excellence." },
+    { year: "2024", title: "Pentalks Emergence", desc: "The birth of the parent collective bridging space and storytelling." },
+    { year: "2025", title: "Mukham Launch", desc: "A dedicated studio crafting premium architectural masterpieces." },
+    { year: "2026", title: "Veru Evolution", desc: "Capturing human stories through our specialized narrative network." }
+  ];
 
   return (
-    <div className="bg-[#F9F7F2] min-h-screen font-sans selection:bg-[#0f4c39] selection:text-white">
+    <div className="bg-[#1C150D] min-h-screen font-inter selection:bg-[#8B9D83] selection:text-[#1C150D]">
       
-      {/* --- HERO SECTION --- */}
+      {/* --- HERO SECTION (Updated to Dark) --- */}
       <section className="relative pt-32 md:pt-48 pb-20 px-6 md:px-12 max-w-[1400px] mx-auto overflow-hidden">
         <div className="flex flex-col lg:flex-row gap-12 lg:items-end">
           <div className="flex-1 z-10">
-            <h1 className="font-syne text-[14vw] md:text-[8vw] font-black uppercase leading-[0.8] tracking-tighter text-[#0f4c39]">
-              The <br /> Origin <br /> 
-              <span className="outline-text">Story.</span>
+            <h1 className="font-syne text-[15vw] md:text-[9vw] font-800 uppercase leading-[0.85] tracking-tighter text-[#FAF7F2]">
+              The <br /> Collective <br /> 
+              <span className="outline-text-sage">Story.</span>
             </h1>
           </div>
           <div className="flex-1 lg:max-w-md pb-4">
-            <p className="text-[#1C150D] text-lg md:text-xl font-medium leading-relaxed italic border-l-4 border-[#8B9D83] pl-6">
-              How a conversation about space and story became something bigger.
+            <p className="text-[#FAF7F2]/60 text-lg md:text-xl font-light leading-relaxed italic border-l-2 border-[#8B9D83] pl-8">
+              Where architectural precision meets the resonance of human story.
             </p>
           </div>
         </div>
       </section>
 
-      {/* --- CORE NARRATIVE --- */}
-      <section className="px-6 md:px-12 max-w-[1400px] mx-auto mb-32">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      {/* --- CORE NARRATIVE (Updated to Dark) --- */}
+      <section className="px-6 md:px-12 max-w-[1400px] mx-auto mb-40">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
           <div className="lg:col-span-5 order-2 lg:order-1">
-            <div className="aspect-[4/5] bg-[#0f4c39] rounded-tl-[120px] rounded-br-[120px] relative overflow-hidden group shadow-2xl">
+            <div className="aspect-[4/5] bg-[#2A241D] rounded-tr-[100px] rounded-bl-[100px] relative overflow-hidden shadow-2xl">
                <img 
                 src="https://res.cloudinary.com/dmtzmgbkj/image/upload/f_webp/v1768325744/about-img_md7ibn.png" 
                 alt="Architecture"
-                className="absolute inset-0 w-full h-full object-cover opacity-100  transition-transform duration-1000"
+                className="absolute inset-0 w-full h-full object-cover opacity-60"
                />
-               <div className="absolute inset-0 bg-gradient-to-t from-[#0f4c39] to-transparent opacity-40" />
-               <div className="absolute bottom-10 left-10 text-white z-10">
-                  <p className="font-syne text-6xl font-black opacity-20">PENTALKS</p>
+               <div className="absolute inset-0 bg-gradient-to-t from-[#1C150D] via-transparent to-transparent opacity-60" />
+               <div className="absolute bottom-10 left-10 text-[#FAF7F2] z-10">
+                  <p className="font-syne text-6xl font-800 opacity-20 uppercase">Collective</p>
                </div>
             </div>
           </div>
-          <div className="lg:col-span-7 flex flex-col justify-center space-y-8 order-1 lg:order-2">
-            <p className="text-2xl md:text-4xl font-syne font-bold text-[#0f4c39] leading-tight tracking-tighter uppercase">
-                Architecture & Narrative <br /> are two sides of the same coin.
-            </p>
-            <div className="space-y-6 text-[#1C150D]/80 text-lg leading-relaxed max-w-2xl">
+          <div className="lg:col-span-7 flex flex-col justify-center space-y-10 order-1 lg:order-2">
+            <h2 className="text-3xl md:text-5xl font-syne font-800 text-[#FAF7F2] leading-[1.1] tracking-tighter uppercase">
+                Structure & Narrative <br /> are two sides of the same coin.
+            </h2>
+            <div className="space-y-8 text-[#FAF7F2]/50 text-lg md:text-xl leading-relaxed max-w-2xl font-light">
               <p>
-                Pentalks began as a conversation about the intersection of space and story. We realized that both require structure, both need soul, and both must stand the test of time.
+                Pentalks began as a dialogue on the intersection of space and story. We realized that both require a foundation of precision, a core of resonance, and the ability to stand the test of time.
               </p>
               <p>
-                From this insight, Pentalks was born—a creative collective that builds brands the way architects build landmarks. Today, we work with visionaries across industries.
+                From this insight, the collective was born—an ecosystem that builds brands through the structural mastery of <span className="text-[#FAF7F2] font-bold">Mukham</span> and the narrative depth of <span className="text-[#FAF7F2] font-bold">Veru Studio</span>.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* --- VALUES: DARK MODE SHELL --- */}
-      <section className="bg-[#0f4c39] py-24 md:py-32 px-6 md:px-12 rounded-t-[60px] md:rounded-t-[150px] overflow-hidden">
+      {/* --- VALUES: ESPRESSO SHELL (No Hover Shape Change) --- */}
+      <section className="bg-[#2A241D] py-24 md:py-40 px-6 md:px-12 rounded-tr-[80px] md:rounded-tr-[180px] rounded-bl-[80px] md:rounded-bl-[180px] overflow-hidden">
         <div className="max-w-[1400px] mx-auto">
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-20 gap-8">
-            <h2 className="font-syne text-5xl md:text-7xl font-black text-[#F9F7F2] uppercase tracking-tighter">
-              Our <br /> <span className="text-[#8B9D83]">Values</span>
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-24 gap-10">
+            <h2 className="font-syne text-6xl md:text-8xl font-800 text-[#FAF7F2] uppercase tracking-tighter leading-none">
+              The <br /> <span className="text-[#8B9D83]">Ethos.</span>
             </h2>
-            <p className="text-[#F9F7F2]/60 max-w-xs font-bold uppercase tracking-widest text-[10px]">
-              The principles that guide everything we do.
+            <p className="text-[#8B9D83]/60 max-w-xs font-bold uppercase tracking-[0.4em] text-[10px]">
+              The principles of the symphony.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-white/10 border border-white/10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-white/5 border border-white/5">
             {values.map((item, i) => (
-              <div key={i} className="bg-[#0f4c39] p-10 group hover:bg-[#155a45] transition-colors duration-500">
-                <item.icon className="w-10 h-10 text-[#8B9D83] mb-8 group-hover:scale-110 transition-transform" />
-                <h4 className="font-syne text-xl font-bold text-white mb-4 uppercase tracking-tight">{item.title}</h4>
-                <p className="text-white/60 text-sm leading-relaxed">{item.text}</p>
+              <div key={i} className="bg-[#1C150D] p-12 group transition-colors duration-500">
+                <item.icon className="w-10 h-10 text-[#8B9D83] mb-10 group-hover:scale-110 transition-transform duration-500" />
+                <h4 className="font-syne text-2xl font-800 text-[#FAF7F2] mb-6 uppercase tracking-tight">{item.title}</h4>
+                <p className="text-[#FAF7F2]/40 text-sm md:text-base leading-relaxed font-light">{item.text}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* --- MILESTONES --- */}
-      <section className="py-24 px-6 md:px-12 max-w-[1400px] mx-auto">
-        <h2 className="font-syne text-5xl font-black text-[#0f4c39] uppercase tracking-tighter mb-16 text-center">Our Journey</h2>
-        <div className="relative border-l-2 border-[#0f4c39]/10 ml-4 md:ml-auto md:mr-auto max-w-3xl space-y-16">
+      {/* --- MILESTONES (Updated to Dark) --- */}
+      <section className="py-32 md:py-48 px-6 md:px-12 max-w-[1400px] mx-auto">
+        <h2 className="font-syne text-6xl md:text-7xl font-800 text-[#FAF7F2] uppercase tracking-tighter mb-24 text-center">The Journey</h2>
+        <div className="relative border-l-2 border-[#8B9D83]/10 ml-4 md:mx-auto max-w-3xl space-y-24">
           {milestones.map((ms, i) => (
-            <div key={i} className="relative pl-12">
-              <div className="absolute left-[-9px] top-0 w-4 h-4 rounded-full bg-[#0f4c39]" />
-              <span className="font-syne text-[#8B9D83] font-black text-2xl block mb-2">{ms.year}</span>
-              <h4 className="text-[#0f4c39] text-2xl font-black uppercase tracking-tight mb-2">{ms.title}</h4>
-              <p className="text-[#1C150D]/70 max-w-md leading-relaxed">{ms.desc}</p>
+            <div key={i} className="relative pl-12 group">
+              <div className="absolute left-[-9px] top-2 w-4 h-4 rounded-full bg-[#8B9D83]" />
+              <span className="font-syne text-[#8B9D83] font-800 text-3xl block mb-3">{ms.year}</span>
+              <h4 className="font-syne text-[#FAF7F2] text-2xl md:text-3xl font-800 uppercase tracking-tight mb-4">{ms.title}</h4>
+              <p className="text-[#FAF7F2]/40 max-w-lg leading-relaxed font-light text-lg">{ms.desc}</p>
             </div>
           ))}
         </div>
       </section>
 
-      {/* --- TEAM: FULL COLOR ALWAYS --- */}
-      <section className="py-24 px-6 md:px-12 bg-white rounded-b-[60px] md:rounded-b-[150px] shadow-sm">
+      {/* --- TEAM: Fixed Image Visibility & Dark Theme --- */}
+      <section className="py-24 md:py-40 px-6 md:px-12 bg-[#1C150D]">
         <div className="max-w-[1400px] mx-auto">
-          <div className="mb-20">
-            <h2 className="font-syne text-5xl font-black text-[#0f4c39] uppercase tracking-tighter">Meet the Team</h2>
-            <div className="h-1 w-24 bg-[#8B9D83] mt-4" />
+          <div className="mb-24">
+            <h2 className="font-syne text-6xl md:text-7xl font-800 text-[#FAF7F2] uppercase tracking-tighter">The Visionaries</h2>
+            <div className="h-[2px] w-24 bg-[#8B9D83] mt-6" />
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 md:gap-16">
             {team.map((member, i) => (
               <div key={i} className="group">
-                {/* Removed grayscale classes - Image is always normal color */}
-                <div className="aspect-[3/4] bg-[#F9F7F2] rounded-tl-[80px] rounded-br-[80px] mb-6 overflow-hidden relative transition-all duration-700">
-                    <img src={member.image} alt={member.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-                    <div className="absolute inset-0 bg-[#0f4c39]  translate-y-0 transition-transform duration-700 ease-expo opacity-10" />
+                {/* FIXED TEAM IMAGE: Reduced rounding to ensure faces are visible & fixed to dark bg */}
+                <div className="aspect-[3/4.5] bg-[#2A241D] rounded-tr-[60px] rounded-bl-[60px] mb-8 overflow-hidden relative shadow-2xl">
+                    <img 
+                      src={member.image} 
+                      alt={member.name} 
+                      className="w-full h-full object-cover object-top transition-transform duration-1000 group-hover:scale-105" 
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#1C150D] via-transparent to-transparent opacity-40" />
                 </div>
-                <h4 className="font-syne text-xl font-bold text-[#0f4c39] mb-1 uppercase tracking-tighter">{member.name}</h4>
-                <p className="text-[#8B9D83] text-[10px] font-black uppercase tracking-[0.2em] mb-4">{member.role}</p>
-                <p className="text-[#1C150D]/60 text-sm leading-relaxed">{member.desc}</p>
+                <h4 className="font-syne text-2xl font-800 text-[#FAF7F2] mb-1 uppercase tracking-tighter">{member.name}</h4>
+                <p className="text-[#8B9D83] text-[10px] font-bold uppercase tracking-[0.4em] mb-6">{member.role}</p>
+                <p className="text-[#FAF7F2]/40 text-base leading-relaxed font-light">{member.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* --- NEW CTA SECTION: INITIATE DIALOGUE --- */}
-      <section className="py-32 px-6">
-        <div className="max-w-[1200px] mx-auto bg-[#1C150D] p-12 md:p-24 rounded-tl-[100px] rounded-br-[100px] relative overflow-hidden flex flex-col items-center text-center shadow-2xl group">
-            {/* Background Decoration */}
-            <div className="absolute top-0 right-0 p-12 opacity-[0.03] group-hover:opacity-[0.05] transition-opacity">
+      {/* --- CTA SECTION (Consistent Dark Theme) --- */}
+      <section className="py-32 px-6 bg-[#1C150D]">
+        <div className="max-w-[1200px] mx-auto bg-[#2A241D] p-12 md:p-24 rounded-tr-[100px] rounded-bl-[100px] relative overflow-hidden flex flex-col items-center text-center shadow-2xl group border border-white/5">
+            <div className="absolute top-0 right-0 p-12 opacity-[0.03] group-hover:opacity-[0.08] transition-all duration-1000 group-hover:scale-110">
                 <Globe size={400} className="text-white" />
             </div>
             
-         <motion.div 
-  initial={{ opacity: 0, y: 20 }}
-  whileInView={{ opacity: 1, y: 0 }}
-  viewport={{ once: true }}
-  className="relative z-10"
->
-  <h2 className="font-syne text-[10vw] md:text-[6vw] font-black uppercase leading-[0.8] tracking-tighter text-white mb-8">
-    Start a <br /> 
-    <span className="text-[#8B9D83]">Conversation.</span>
-  </h2>
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="relative z-10"
+            >
+              <h2 className="font-syne text-[12vw] md:text-[6vw] font-800 uppercase leading-[0.85] tracking-tighter text-[#FAF7F2] mb-10">
+                Initiate <br /> 
+                <span className="text-[#8B9D83]">Dialogue.</span>
+              </h2>
 
-  <p className="text-white/40 text-lg md:text-xl max-w-xl mx-auto mb-12 italic">
-    Ready to work together on your brand or project?  
-    Let’s talk and build something meaningful.
-  </p>
+              <p className="text-[#FAF7F2]/40 text-xl md:text-2xl max-w-xl mx-auto mb-16 font-light italic">
+                Ready to architect the resonance of your brand? Let’s initiate the symphony.
+              </p>
 
-  <div className="flex flex-col sm:flex-row gap-6 justify-center">
-    {/* EMAIL */}
-    <a 
-      href="mailto:hello@pentalks.com"
-      className="bg-[#0f4c39] text-white px-12 py-6 rounded-full font-black uppercase tracking-widest text-[10px] flex items-center gap-4 hover:bg-[#8B9D83] hover:text-[#1C150D] transition-all duration-500 shadow-xl"
-    >
-      Send Email <ArrowUpRight size={18} />
-    </a>
+              <div className="flex flex-col sm:flex-row gap-8 justify-center items-center">
+                <a 
+                  href="mailto:hello@pentalks.com"
+                  className="bg-[#8B9D83] text-[#1C150D] px-12 py-6 rounded-tr-3xl rounded-bl-3xl font-syne font-800 uppercase tracking-widest text-[11px] flex items-center gap-4 transition-all duration-500 hover:bg-[#FAF7F2] shadow-xl"
+                >
+                  Send Inquiry <ArrowUpRight size={20} />
+                </a>
 
-    {/* WHATSAPP */}
-    <a
-      href="https://wa.me/919XXXXXXXXX"
-      target="_blank"
-      rel="noopener noreferrer"
-      className="bg-white/5 border border-white/10 text-white px-12 py-6 rounded-full font-black uppercase tracking-widest text-[10px] flex items-center gap-4 hover:bg-white hover:text-[#1C150D] transition-all duration-500"
-    >
-      Chat on WhatsApp <MessageCircle size={18} />
-    </a>
-  </div>
-</motion.div>
-
+                <a
+                  href="https://wa.me/919XXXXXXXXX"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-white/5 border border-white/10 text-[#FAF7F2] px-12 py-6 rounded-tr-3xl rounded-bl-3xl font-syne font-800 uppercase tracking-widest text-[11px] flex items-center gap-4 transition-all duration-500 hover:bg-white hover:text-[#1C150D]"
+                >
+                  Connect on WhatsApp <MessageCircle size={20} />
+                </a>
+              </div>
+            </motion.div>
         </div>
       </section>
-
-      <style jsx>{`
-        .outline-text {
-          color: transparent;
-          -webkit-text-stroke: 1.5px #0f4c39;
-        }
-        @media (min-width: 768px) {
-          .outline-text { -webkit-text-stroke: 3px #0f4c39; }
-        }
-        .ease-expo {
-            transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
-        }
-      `}</style>
     </div>
   );
 };
