@@ -1,38 +1,55 @@
-import React from 'react';
-import { Building2, Compass, PenTool, Ruler, Eye, CheckCircle2, ArrowUpRight, Zap, Landmark } from 'lucide-react';
+import React, { useLayoutEffect } from 'react';
+import { Building2, Compass, PenTool, Ruler, Eye, ArrowUpRight, Zap, Landmark } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
 const MukhamPage = () => {
-  // Service Data with Stock Images
+  // --- FONT & GLOBAL STYLE INJECTION ---
+  useLayoutEffect(() => {
+    const style = document.createElement('style');
+    style.textContent = `
+      @import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@300;400;600;700&display=swap');
+      .font-syne { font-family: 'Syne', sans-serif; }
+      .font-inter { font-family: 'Inter', sans-serif; }
+      .outline-text-sage { 
+        color: transparent; 
+        -webkit-text-stroke: 1px #8B9D83; 
+      } 
+      @media (min-width: 768px) { 
+        .outline-text-sage { -webkit-text-stroke: 2.5px #8B9D83; } 
+      }
+    `;
+    document.head.appendChild(style);
+    return () => document.head.removeChild(style);
+  }, []);
+
   const services = [
     {
       title: "Architectural Design",
       desc: "Creating innovative structural solutions that balance aesthetic beauty with functional efficiency.",
       img: "https://res.cloudinary.com/dmtzmgbkj/image/upload/f_webp/v1768326028/service01_px1grb.png",
-      icon: <Building2 className="text-[white]" size={24} />
+      icon: <Building2 size={24} />
     },
     {
       title: "Urban Planning",
       desc: "Developing harmonious community layouts that foster growth, sustainability, and human connection.",
       img: "https://res.cloudinary.com/dmtzmgbkj/image/upload/f_webp/v1768326039/service02_yjh4sc.png",
-      icon: <Compass className="text-[#8B9D83]" size={24} />
+      icon: <Compass size={24} />
     },
     {
       title: "Interior Identity",
       desc: "Designing internal environments that reflect the brand's soul through curated materials and lighting.",
       img: "https://res.cloudinary.com/dmtzmgbkj/image/upload/f_webp/v1768326040/service03_rarrut.png",
-      icon: <PenTool className="text-[#8B9D83]" size={24} />
+      icon: <PenTool size={24} />
     },
     {
       title: "Structural Integrity",
       desc: "Providing the technical bone-structure to ensure safety, endurance, and architectural longevity.",
       img: "https://res.cloudinary.com/dmtzmgbkj/image/upload/f_webp/v1768326040/service04_lwoqpy.png",
-      icon: <Ruler className="text-[#8B9D83]" size={24} />
+      icon: <Ruler size={24} />
     }
   ];
 
-  // Preserved Crew Data
   const crew = [
     { id: "01", name: "Aditya Menon", role: "Founder & Design Lead", status: "CREATIVE HEAD", img: "https://res.cloudinary.com/dmtzmgbkj/image/upload/f_webp/v1768326688/crew-01_1_gn3yd6.png", desc: "Visionary leader shaping the architectural face of modern identity." },
     { id: "02", name: "Priya Nair", role: "Chief Architect", status: "STUDIO LEAD", img: "https://res.cloudinary.com/dmtzmgbkj/image/upload/f_webp/v1768325816/crew-02_rkfhyi.png", desc: "Expert in sustainable facade systems and urban structural narratives." },
@@ -42,242 +59,168 @@ const MukhamPage = () => {
   ];
 
   return (
-    <div className="bg-[#F9F7F2] min-h-screen selection:bg-[#0f4c39] selection:text-white overflow-x-hidden" style={{ fontFamily: "'Montserrat', sans-serif" }}>
+    <div className="bg-[#1C150D] min-h-screen selection:bg-[#8B9D83] selection:text-[#1C150D] overflow-x-hidden font-inter">
       
-      {/* --- HERO SECTION: FULL IMAGE + LARGE CENTERED LOGO --- */}
+      {/* --- HERO SECTION --- */}
       <section className="relative h-screen w-full flex items-center justify-center overflow-hidden">
-        {/* Background Image Layer */}
-   <div className="absolute inset-0 z-0">
-  {/* Mobile background */}
-  <img
-    src="https://res.cloudinary.com/dmtzmgbkj/image/upload/f_webp/v1768326030/MukhamHeroBg-mobile_losfv8.png"
-    alt="Hero Background Mobile"
-    className="w-full h-full object-cover block md:hidden"
-  />
+        <div className="absolute inset-0 z-0">
+          <img src="https://res.cloudinary.com/dmtzmgbkj/image/upload/f_webp/v1768326030/MukhamHeroBg-mobile_losfv8.png" alt="Hero Mobile" className="w-full h-full object-cover block md:hidden" />
+          <img src="https://res.cloudinary.com/dmtzmgbkj/image/upload/f_webp/v1768326029/MukhamHeroBg_kd7sx4.png" alt="Hero Desktop" className="w-full h-full object-cover hidden md:block" />
+          <div className="absolute inset-0 bg-black/80" />
+        </div>
 
-  {/* Desktop background */}
-  <img
-    src="https://res.cloudinary.com/dmtzmgbkj/image/upload/f_webp/v1768326029/MukhamHeroBg_kd7sx4.png"
-    alt="Hero Background Desktop"
-    className="w-full h-full object-cover hidden md:block"
-  />
-
-  {/* Overlay */}
-  <div className="absolute inset-0 bg-black/70" />
-</div>
-
-
-      
-
-        {/* Content Layer */}
-        <div className="relative z-20 flex flex-col items-center text-center px-4">
+        <div className="relative z-20 flex flex-col items-center text-center px-6">
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.2 }}>
-            <img src="https://res.cloudinary.com/dmtzmgbkj/image/upload/f_webp/v1768326027/mukham_cover_mo3ttq.png" alt="Mukham Branding" className="max-w-[85vw] md:max-w-[50vw] h-auto mb-8 mx-auto" />
-            <p className="text-[#8B9D83] text-xs md:text-sm font-bold uppercase tracking-[0.8em] mt-2">Architectural Design Studio</p>
+            <img src="https://res.cloudinary.com/dmtzmgbkj/image/upload/f_webp/v1768326027/mukham_cover_mo3ttq.png" alt="Mukham Branding" className="max-w-[90vw] md:max-w-[45vw] h-auto mb-8 mx-auto" />
+            <p className="font-syne text-[#8B9D83] text-[10px] md:text-sm font-800 uppercase tracking-[0.5em] md:tracking-[0.8em] mt-4">Architectural Design Studio</p>
           </motion.div>
         </div>
       </section>
 
-      {/* --- ABOUT US --- */}
-      <section className="py-24 px-6 md:px-12 max-w-[1400px] mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          <div className="lg:col-span-5 relative flex justify-center lg:justify-start">
-            <div className="w-full max-w-[420px] aspect-[4/5] overflow-hidden rounded-tl-[100px] rounded-br-[100px] bg-[#4a250b] flex items-center justify-center shadow-xl">
-              <img src="https://res.cloudinary.com/dmtzmgbkj/image/upload/f_webp/v1768326027/mukham_logo_qkrps5.png" alt="About" className="h-full w-auto object-contain" />
-            </div>
-          </div>
-          <div className="lg:col-span-7 space-y-8">
-            <h2 className="text-5xl md:text-8xl font-black text-[#0f4c39] uppercase tracking-tighter leading-[0.8]">
-              About <br /> <span className="outline-text">Us.</span>
-            </h2>
-            <div className="space-y-6">
-                <p className="text-[#1C150D] text-lg md:text-2xl font-semibold leading-relaxed italic border-l-4 border-[#8B9D83] pl-6">
-                    Mukham Design Studio is a creative architectural and design practice dedicated to crafting meaningful, functional, and aesthetically refined spaces.
-                </p>
-                <p className="text-[#1C150D]/60 text-base md:text-lg leading-relaxed font-medium">
-                    Our approach combines modern design thinking with practical execution, ensuring every project reflects clarity, comfort, and character. We focus on creating spaces that truly match the lifestyle, culture, and personality of our clients.
-                </p>
-            </div>
-          </div>
-        </div>
-      </section>
+    <section className="py-32 md:py-48 px-6 md:px-12 max-w-[1400px] mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+          <div className="lg:col-span-5 relative flex justify-center lg:justify-start">
+            <div className="w-full max-w-[420px] aspect-[4/5] overflow-hidden rounded-tr-[120px] rounded-bl-[120px] bg-[#3f200f] flex items-center justify-center shadow-2xl border border-white/5">
+              <img src="https://res.cloudinary.com/dmtzmgbkj/image/upload/f_webp/v1768326027/mukham_logo_qkrps5.png" alt="Logo" className="h-full w-auto object-contain opacity-80" />
+            </div>
+          </div>
+          <div className="lg:col-span-7 space-y-10">
+            <h2 className="font-syne text-6xl md:text-9xl font-800 text-[#FAF7F2] uppercase tracking-tighter leading-[0.85]">
+              About <br /> <span className="outline-text-sage">Us.</span>
+            </h2>
+            <div className="space-y-8">
+                <p className="text-[#FAF7F2] text-xl md:text-3xl font-semibold leading-relaxed italic border-l-4 border-[#8B9D83] pl-8">
+                    Mukham Design Studio is the architectural pillar of the collective, dedicated to crafting refined structural masterpieces.
+                </p>
+                <p className="text-[#FAF7F2]/50 text-lg md:text-xl leading-relaxed font-light">
+                    Our approach combines modern structural precision with practical execution, ensuring every project reflects character and longevity. We focus on creating spaces that harmonize with the lifestyle and culture of our clients.
+                </p>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* --- WHY CHOOSE SECTION --- */}
-      <section className="py-24 bg-white px-6 md:px-12 relative overflow-hidden border-y border-[#0f4c39]/5">
-        <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+      <section className="py-20 md:py-32 bg-[#2A241D] px-6 md:px-12 relative overflow-hidden rounded-tr-[60px] md:rounded-tr-[180px] rounded-bl-[60px] md:rounded-bl-[180px]">
+        <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-16 items-center">
           <div className="order-2 lg:order-1">
-            <h2 className="text-4xl md:text-7xl font-black text-[#0f4c39] uppercase tracking-tighter mb-12 leading-none">Why Choose <br /> <span className="text-[#8B9D83]">Mukham?</span></h2>
-            <div className="space-y-8">
-              <div className="flex gap-6 group">
-                <div className="w-12 h-12 rounded-full bg-[#F9F7F2] flex items-center justify-center shrink-0 border border-[#0f4c39]/10 group-hover:bg-[#0f4c39] transition-colors duration-500"><Zap className="text-[#0f4c39] group-hover:text-white" size={20} /></div>
+            <h2 className="font-syne text-4xl md:text-7xl lg:text-8xl font-800 text-[#FAF7F2] uppercase tracking-tighter mb-8 md:mb-12 leading-none">Why Choose <br /> <span className="text-[#8B9D83]">Mukham?</span></h2>
+            <div className="space-y-8 md:space-y-10">
+              <div className="flex flex-col md:flex-row gap-4 md:gap-8 group text-center md:text-left items-center md:items-start">
+                <div className="w-14 h-14 rounded-full bg-[#1C150D] flex items-center justify-center shrink-0 border border-[#8B9D83]/20 group-hover:bg-[#8B9D83] transition-all duration-500">
+                  <Zap className="text-[#8B9D83] group-hover:text-[#1C150D]" size={24} />
+                </div>
                 <div>
-                  <h4 className="font-bold text-xl uppercase text-[#0f4c39] mb-2 tracking-tight">Technical Precision</h4>
-                  <p className="text-[#1C150D]/60 text-sm leading-relaxed font-medium">We use industry-leading 3D analysis to ensure that every facade is not only beautiful but structurally flawless.</p>
+                  <h4 className="font-syne font-800 text-xl md:text-2xl uppercase text-[#FAF7F2] mb-2 md:mb-3 tracking-tight">Technical Precision</h4>
+                  <p className="text-[#FAF7F2]/40 text-sm md:text-base leading-relaxed font-light">We use industry-leading 3D analysis to ensure that every facade is structurally flawless and visually striking.</p>
                 </div>
               </div>
-              <div className="flex gap-6 group">
-                <div className="w-12 h-12 rounded-full bg-[#F9F7F2] flex items-center justify-center shrink-0 border border-[#0f4c39]/10 group-hover:bg-[#0f4c39] transition-colors duration-500"><Landmark className="text-[#0f4c39] group-hover:text-white" size={20} /></div>
+              <div className="flex flex-col md:flex-row gap-4 md:gap-8 group text-center md:text-left items-center md:items-start">
+                <div className="w-14 h-14 rounded-full bg-[#1C150D] flex items-center justify-center shrink-0 border border-[#8B9D83]/20 group-hover:bg-[#8B9D83] transition-all duration-500">
+                  <Landmark className="text-[#8B9D83] group-hover:text-[#1C150D]" size={24} />
+                </div>
                 <div>
-                  <h4 className="font-bold text-xl uppercase text-[#0f4c39] mb-2 tracking-tight">Cultural Resonance</h4>
-                  <p className="text-[#1C150D]/60 text-sm leading-relaxed font-medium">Our designs aren't just modern; they are rooted in the specific heritage and personal story of the space.</p>
+                  <h4 className="font-syne font-800 text-xl md:text-2xl uppercase text-[#FAF7F2] mb-2 md:mb-3 tracking-tight">Cultural Resonance</h4>
+                  <p className="text-[#FAF7F2]/40 text-sm md:text-base leading-relaxed font-light">Our designs aren't just modern; they are rooted in the specific heritage and personal narrative of the space.</p>
                 </div>
               </div>
             </div>
           </div>
-          <div className="order-1 lg:order-2 aspect-square bg-[#F9F7F2] rounded-tr-[120px] rounded-bl-[120px] relative overflow-hidden border border-[#0f4c39]/5">
-             <img src="https://res.cloudinary.com/dmtzmgbkj/image/upload/f_webp/v1768326283/whyChoose_gqbiiv.png" className="w-full h-full object-cover mix-blend-multiply opacity-80" alt="Studio Excellence" />
+          <div className="order-1 lg:order-2 aspect-square bg-[#1C150D] rounded-tr-[80px] md:rounded-tr-[100px] rounded-bl-[80px] md:rounded-bl-[100px] relative overflow-hidden border border-white/5 shadow-2xl">
+             <img src="https://res.cloudinary.com/dmtzmgbkj/image/upload/f_webp/v1768326283/whyChoose_gqbiiv.png" className="w-full h-full object-cover opacity-60 grayscale group-hover:grayscale-0 transition-all duration-1000" alt="Studio Excellence" />
           </div>
         </div>
       </section>
 
       {/* --- SERVICES SECTION --- */}
-     <section className="py-24 px-6 md:px-12 max-w-[1400px] mx-auto" style={{ fontFamily: "'Montserrat', sans-serif" }}>
-  {/* --- SECTION HEADER --- */}
-  <div className="flex flex-col md:flex-row items-baseline justify-between mb-20 gap-4">
-    <div>
-      <h2 className="text-5xl md:text-8xl font-black text-[#0f4c39] uppercase tracking-tighter leading-none">
-        Services.
-      </h2>
-      <p className="text-[#8B9D83] font-bold uppercase tracking-[0.4em] text-[10px] md:text-xs mt-4">
-        Transforming Identity into Space
-      </p>
-    </div>
-    <div className="h-[1px] flex-grow bg-[#0f4c39]/10 hidden md:block ml-12"></div>
-  </div>
-
-  {/* --- FIXED ASPECT RATIO SLATS --- */}
-  <div className="flex flex-col gap-6 md:gap-10">
-    {services.map((service, i) => (
-      <motion.div
-        key={i}
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        className="group relative w-full overflow-hidden rounded-tl-[40px] rounded-br-[40px] md:rounded-tl-[80px] md:rounded-br-[80px] shadow-lg border border-[#0f4c39]/5 bg-[#1C150D]"
-        /* This style ensures the container height is always exactly 
-           calculated based on the 497x148 ratio (approx 29.7% height of width)
-        */
-        style={{ aspectRatio: '497 / 148' }}
-      >
-        {/* Background Image - Now set to full width/height with no cropping */}
-        <img 
-          src={service.img} 
-          alt={service.title} 
-          className="absolute inset-0 w-full h-full object-fill md:object-cover transition-transform duration-1000 group-hover:scale-105" 
-        />
-        
-        {/* Dynamic Gradient Overlay - Made lighter to show more image detail */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#1C150D]/90 via-[#1C150D]/40 to-transparent transition-opacity duration-500 group-hover:opacity-80" />
-
-        {/* Content Container */}
-        <div className="absolute inset-0 p-4 md:p-8 lg:px-16 flex items-center justify-between z-10">
-          <div className="flex items-center gap-4 md:gap-12">
-            {/* Index Number */}
-            <span className="hidden lg:block font-black text-white/10 text-7xl xl:text-9xl select-none">
-              0{i + 1}
-            </span>
-
-            <div className="flex flex-col">
-              <div className="flex items-center gap-3 md:gap-4 mb-1 md:mb-3">
-                <div className="w-6 h-6 md:w-10 md:h-10 rounded-full bg-[#8B9D83] flex items-center justify-center text-[#1C150D] shrink-0">
-                  {/* Scaling the icon for the custom height */}
-                  {React.cloneElement(service.icon, { size: 18 })}
-                </div>
-                <h3 className="text-white text-lg md:text-3xl lg:text-4xl font-black uppercase tracking-tighter leading-none">
-                  {service.title}
-                </h3>
-              </div>
-              <p className="text-white/60 text-[9px] md:text-sm lg:text-base max-w-[200px] md:max-w-md lg:max-w-xl font-medium leading-relaxed line-clamp-2 md:line-clamp-none">
-                {service.desc}
-              </p>
-            </div>
+      <section className="py-24 px-6 md:px-12 max-w-[1400px] mx-auto">
+        <div className="flex flex-col md:flex-row items-baseline justify-between mb-16 md:mb-24 gap-4 md:gap-6">
+          <div className="text-center md:text-left w-full md:w-auto">
+            <h2 className="font-syne text-5xl md:text-8xl lg:text-9xl font-800 text-[#FAF7F2] uppercase tracking-tighter leading-none">Services.</h2>
+            <p className="font-inter text-[#8B9D83] font-bold uppercase tracking-[0.4em] text-[10px] md:text-xs mt-4 md:mt-6">Transforming Identity into Space</p>
           </div>
-
-       
+          <div className="h-[1px] flex-grow bg-[#8B9D83]/10 hidden md:block ml-16"></div>
         </div>
 
-        {/* Bottom Accent Line */}
-        <div className="absolute bottom-0 left-0 h-[3px] md:h-[6px] bg-[#8B9D83] w-0 group-hover:w-full transition-all duration-700 ease-in-out" />
-      </motion.div>
-    ))}
-  </div>
-</section>
-      {/* --- THE CREW: MONOCHROME & NO SHADOWS --- */}
-      <section className="py-32 px-6 md:px-12 max-w-[1200px] mx-auto">
-        <div className="text-center mb-32">
-            <h2 className="text-6xl md:text-[8vw] font-black text-[#0f4c39] uppercase tracking-tighter leading-none">The Crew.</h2>
-            <div className="h-[2px] w-24 bg-[#8B9D83] mx-auto mt-8 opacity-40" />
-        </div>
-
-        <div className="space-y-48 md:space-y-64">
-          {crew.map((member, i) => (
-            <motion.div 
-              key={member.id} 
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className={`flex flex-col md:flex-row items-center gap-12 md:gap-24 ${i % 2 !== 0 ? 'md:flex-row-reverse' : ''}`}
-            >
-              <div className="relative w-full md:w-1/2">
-                <div className={`absolute inset-0 bg-[#0f4c39]/5 -z-10 translate-x-4 translate-y-4
-                  ${i % 2 === 0 ? 'rounded-tl-[120px] rounded-br-[120px]' : 'rounded-tr-[120px] rounded-bl-[120px]'}
-                `} />
-                <div className="aspect-[3/4] overflow-hidden relative ">
-                    <img src={member.img} className="w-full h-full object-cover grayscale contrast-125 brightness-95" alt={member.name} />
-                    <div className="absolute top-10 right-4 [writing-mode:vertical-lr] text-[10px] font-black text-red-600 tracking-[0.4em] uppercase">
-                        {member.status}
+        <div className="flex flex-col gap-6 md:gap-12">
+          {services.map((service, i) => (
+            <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+              className="group relative w-full overflow-hidden rounded-tr-[40px] md:rounded-tr-[100px] rounded-bl-[40px] md:rounded-bl-[100px] shadow-2xl border border-white/5 bg-[#2A241D] aspect-[2/1] md:aspect-[497/148]">
+              <img src={service.img} alt={service.title} className="absolute inset-0 w-full h-full object-cover grayscale opacity-40 transition-transform duration-1000 group-hover:scale-105 group-hover:grayscale-0 group-hover:opacity-60" />
+              <div className="absolute inset-0 bg-gradient-to-r from-[#1C150D]/95 via-[#1C150D]/60 to-transparent" />
+              <div className="absolute inset-0 p-4 md:p-12 flex items-center justify-between z-10">
+                <div className="flex items-center gap-4 md:gap-16">
+                  <span className="hidden lg:block font-syne font-800 text-[#FAF7F2]/10 text-8xl xl:text-[10rem] select-none">0{i + 1}</span>
+                  <div className="flex flex-col">
+                    <div className="flex items-center gap-3 md:gap-4 mb-2 md:mb-3">
+                      <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-[#8B9D83] flex items-center justify-center text-[#1C150D] shrink-0">
+                        {React.cloneElement(service.icon, { size: 18 })}
+                      </div>
+                      <h3 className="text-[#FAF7F2] text-lg md:text-3xl lg:text-4xl font-syne font-800 uppercase tracking-tighter leading-none">{service.title}</h3>
                     </div>
-                    {/* <div className="absolute bottom-4 left-6 text-white/40 font-black text-8xl select-none leading-none">
-                        {member.id}
-                    </div> */}
+                    <p className="font-inter text-[#FAF7F2]/50 text-[10px] md:text-base lg:text-lg max-w-xl font-light leading-relaxed line-clamp-3 md:line-clamp-none">{service.desc}</p>
+                  </div>
                 </div>
               </div>
-
-              <div className="w-full md:w-1/2 space-y-6 text-center md:text-left">
-                {/* <div className="flex items-center justify-center md:justify-start gap-4">
-                    <span className="text-[#8B9D83] font-black text-xs tracking-widest">({member.id})</span>
-                    <div className="h-[1px] w-12 bg-[#8B9D83]" />
-                </div> */}
-                <h3 className="text-4xl md:text-6xl font-black text-[#0f4c39] uppercase tracking-tighter leading-none">
-                  {member.name}
-                </h3>
-                <p className="text-[#8B9D83] font-bold uppercase tracking-[0.3em] text-xs">
-                  {member.role}
-                </p>
-                <p className="text-[#1C150D]/60 text-lg italic leading-relaxed border-l-0 md:border-l-4 border-[#8B9D83] md:pl-6 font-medium">
-                  {member.desc}
-                </p>
-              </div>
+              <div className="absolute bottom-0 left-0 h-[4px] md:h-[8px] bg-[#8B9D83] w-0 group-hover:w-full transition-all duration-700 ease-in-out" />
             </motion.div>
           ))}
         </div>
       </section>
 
+      {/* --- THE CREW --- */}
+         <section className="py-32 md:py-48 px-6 md:px-12 max-w-[1300px] mx-auto">
+           <div className="text-center mb-32">
+               <h2 className="font-syne text-6xl md:text-[8vw] font-800 text-[#FAF7F2] uppercase tracking-tighter leading-none">The Crew.</h2>
+               <div className="h-[2px] w-32 bg-[#8B9D83] mx-auto mt-10 opacity-40" />
+           </div>
+   
+           <div className="space-y-48 md:space-y-72">
+             {crew.map((member, i) => (
+               <motion.div 
+                 key={member.id} 
+                 initial={{ opacity: 0, y: 50 }} 
+                 whileInView={{ opacity: 1, y: 0 }} 
+                 viewport={{ once: true }}
+                 className={`flex flex-col md:flex-row items-center gap-16 md:gap-32 ${i % 2 !== 0 ? 'md:flex-row-reverse' : ''} group`}
+               >
+                 <div className="relative w-full md:w-1/2">
+                   {/* FIXED IMAGE: Removed background offset, added group-hover scale, and object-cover */}
+                   <div className="aspect-[3/4.5] overflow-hidden relative rounded-tr-[100px] rounded-bl-[100px] ">
+                       <img 
+                         src={member.img} 
+                         className="w-full h-full object-cover object-top grayscale contrast-125 brightness-90 group-hover:grayscale-0 transition-all duration-1000 group-hover:scale-105" 
+                         alt={member.name} 
+                       />
+                       <div className="absolute top-10 right-6 [writing-mode:vertical-lr] text-[10px] font-800 text-[#8B9D83] tracking-[0.5em] uppercase">{member.status}</div>
+                   </div>
+                 </div>
+                 <div className="w-full md:w-1/2 space-y-8 text-center md:text-left">
+                   <h3 className="font-syne text-5xl md:text-7xl font-800 text-[#FAF7F2] uppercase tracking-tighter leading-none">{member.name}</h3>
+                   <p className="font-inter text-[#8B9D83] font-bold uppercase tracking-[0.4em] text-xs">{member.role}</p>
+                   <p className="font-inter text-[#FAF7F2]/50 text-xl font-light italic leading-relaxed border-l-0 md:border-l-4 border-[#8B9D83]/20 md:pl-8">{member.desc}</p>
+                 </div>
+               </motion.div>
+             ))}
+           </div>
+         </section>
+
       {/* --- FOOTER CTA --- */}
-      <section className="py-24 md:py-40 px-6 text-center bg-[#1C150D] rounded-t-[80px]">
-        <div className="max-w-4xl mx-auto">
-          <div className="inline-block p-6 bg-white/5 rounded-full mb-10">
-            <Eye className="w-12 h-12 text-[#8B9D83]" />
+      <section className="py-24 md:py-48 px-6 text-center bg-[#2A241D] rounded-tr-[60px] md:rounded-tr-[100px] rounded-bl-[60px] md:rounded-bl-[100px]">
+        <div className="max-w-4xl mx-auto flex flex-col items-center">
+          <div className="inline-block p-6 md:p-8 bg-[#1C150D] rounded-full mb-8 md:mb-12 border border-white/5 shadow-2xl">
+            <Eye className="w-10 h-10 md:w-14 md:h-14 text-[#8B9D83]" />
           </div>
-          <h3 className="text-4xl md:text-8xl font-black text-white uppercase tracking-tighter leading-[0.9] mb-12">Ready to show <br /> <span className="text-[#8B9D83]">Your Face?</span></h3>
-          <p className="text-white/40 text-base md:text-xl mb-16 max-w-2xl mx-auto font-medium leading-relaxed">Let's transform your ideas into architectural reality. Start a conversation with Mukham Studio today.</p>
-          <Link to="/contact">
-            <button className="bg-[#0f4c39] text-white px-10 md:px-16 py-6 md:py-8 rounded-full font-black uppercase tracking-widest text-xs hover:bg-[#8B9D83] hover:text-[#1C150D] transition-all duration-500 shadow-xl flex items-center justify-center gap-4 mx-auto group">
-              Start a Dialogue <ArrowUpRight className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" size={20} />
+          <h3 className="font-syne text-4xl md:text-[7vw] font-800 text-[#FAF7F2] uppercase tracking-tighter leading-[0.9] md:leading-[0.85] mb-8 md:mb-12">Ready to show <br /> <span className="text-[#8B9D83]">Your Face?</span></h3>
+          <p className="font-inter text-[#FAF7F2]/40 text-base md:text-xl lg:text-2xl mb-12 md:mb-16 max-w-2xl mx-auto font-light leading-relaxed">Let's transform your vision into architectural reality. Start a dialogue with Mukham Studio today.</p>
+          <Link to="/contact" className="w-full sm:w-auto">
+            <button className="w-full sm:w-auto bg-[#8B9D83] text-[#1C150D] px-8 md:px-20 py-6 md:py-9 rounded-tr-[30px] md:rounded-tr-[40px] rounded-bl-[30px] md:rounded-bl-[40px] font-syne font-800 uppercase tracking-widest text-[10px] md:text-xs hover:bg-[#FAF7F2] transition-all duration-700 shadow-2xl flex items-center justify-center gap-4 md:gap-6 mx-auto group">
+              <span>Start a Dialogue</span> 
+              <ArrowUpRight className="group-hover:translate-x-2 group-hover:-translate-y-2 transition-transform duration-500" size={20} />
             </button>
           </Link>
         </div>
       </section>
-
-      <style jsx>{`
-        .outline-text { 
-          color: transparent; 
-          -webkit-text-stroke: 1.5px #0f4c39; 
-        } 
-        @media (min-width: 768px) { 
-          .outline-text { -webkit-text-stroke: 3px #0f4c39; } 
-        }
-      `}</style>
     </div>
   );
 };

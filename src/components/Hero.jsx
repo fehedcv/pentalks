@@ -1,119 +1,151 @@
-import React, { useLayoutEffect, useRef, useEffect, useState } from 'react';
+import React, { useLayoutEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { ArrowRight, Mic, Building2 } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const COLORS = {
-  sand: "#F9F7F2",
-  sage: "#8B9D83",
-  forest: "#0f4c39",
-  espresso: "#1C150D",
-};
-
-const fontAquire = { fontFamily: "'Aquire', sans-serif" };
-
-const PentalksCinematicHero = () => {
+const PentalksModernHero = () => {
   const [mounted, setMounted] = useState(false);
   const containerRef = useRef(null);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const imageRef = useRef(null);
+  const cardRef = useRef(null);
 
   useLayoutEffect(() => {
-    if (!mounted) return;
+    setMounted(true);
+    
+    const style = document.createElement('style');
+    style.textContent = `
+      @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Inter:wght@300;400;600&display=swap');
+      .font-syne { font-family: 'Syne', sans-serif; }
+      .font-inter { font-family: 'Inter', sans-serif; }
+      .reveal-mask {
+        overflow: hidden;
+        display: block;
+      }
+    `;
+    document.head.appendChild(style);
 
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
-      
-      tl.from(".bg-hero-image", { scale: 1.3, opacity: 0, duration: 2.5 })
-        .from(".hero-line", { 
-          y: 60, 
-          opacity: 0, 
-          duration: 1.2, 
-          stagger: 0.2 
-        }, "-=1.8")
-        .from(".cta-button", {
-          y: 20,
-          opacity: 0,
-          duration: 1,
-        }, "-=0.8");
 
-      if (window.innerWidth > 768) {
-        gsap.to(".parallax-bg", {
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: "top top",
-            end: "bottom top",
-            scrub: true
-          },
-          y: 200,
-          scale: 1.1
-        });
-      }
+      tl.from(".reveal-item", {
+        yPercent: 100,
+        stagger: 0.1,
+        duration: 1.4,
+        delay: 0.5
+      })
+      .from(cardRef.current, {
+        y: 30,
+        opacity: 0,
+        filter: "blur(10px)",
+        duration: 1.2
+      }, "-=1");
+
     }, containerRef);
 
-    return () => ctx.revert();
-  }, [mounted]);
+    return () => {
+      ctx.revert();
+      document.head.removeChild(style);
+    };
+  }, []);
 
   if (!mounted) return <div className="h-screen bg-[#1C150D]" />;
 
   return (
-    <div ref={containerRef} className="relative w-full bg-[#1C150D] font-syne overflow-x-hidden">
-      
-      <section className="relative h-screen w-full flex flex-col items-center justify-center overflow-hidden mt-16">
-        {/* --- BACKGROUND WITH IMPROVED DARK FILTER --- */}
-        <div className="absolute inset-0 z-0">
-          <img 
-            src="https://res.cloudinary.com/dmtzmgbkj/image/upload/f_webp/v1768846691/Gemini_Generated_Image_ygcjigygcjigygcj_1_v2chgs.png" 
-            alt="Pentalks Atmosphere"
-            className="bg-hero-image parallax-bg w-full h-full object-cover" 
-          />
-          {/* Layered Gradient Filter: Darker at edges and bottom for depth */}
-          <div className="absolute inset-0 z-[1] bg-gradient-to-b from-black/70 via-black/40 to-[#1C150D]" />
-          <div className="absolute inset-0 z-[1] bg-black/20 backdrop-blur-[1px]" />
-        </div>
+    <div 
+      ref={containerRef} 
+      className="relative w-full h-screen bg-[#1C150D] overflow-hidden font-inter"
+    >
+      {/* --- BACKGROUND --- */}
+      <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 bg-gradient-to-t from-[#1C150D] via-[#1C150D]/40 to-transparent z-[2]" />
+        <div className="absolute inset-0 bg-black/30 z-[1]" />
+        <img 
+          ref={imageRef}
+          src="https://res.cloudinary.com/dmtzmgbkj/image/upload/f_webp/v1768846691/Gemini_Generated_Image_ygcjigygcjigygcj_1_v2chgs.png" 
+          alt="Pentalks Atmosphere"
+          className="w-full h-full object-cover" 
+        />
+      </div>
 
-        {/* --- CENTERED HERO CONTENT --- */}
-        <div className="relative z-10 text-center px-6 max-w-6xl">
-          <div className="overflow-hidden mb-2 md:mb-6">
-            <h1 
-              className="hero-line text-[#F9F7F2] font-bold tracking-tighter uppercase leading-[0.85]"
-              style={{ ...fontAquire, fontSize: "clamp(3rem, 11vw, 8.5rem)" }}
-            >
-              Dual<br />
-              <span className="text-[#8B9D83]">Entities</span>
+      {/* --- CONTENT CONTAINER --- */}
+      {/* Changed justify-end to justify-center and adjusted padding to keep everything in view */}
+      <div className="relative z-10 h-full max-w-[1440px] mx-auto px-6 md:px-12 flex flex-col justify-center pt-20">
+        
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          
+          {/* --- LEFT CONTENT: TYPOGRAPHY --- */}
+          <div className="lg:col-span-7 mb-10 lg:mb-0">
+            <span className="reveal-mask mb-2">
+              <p className="reveal-item text-[#8B9D83] font-bold tracking-[0.3em] uppercase text-xs">
+                The Parent Collective
+              </p>
+            </span>
+            
+            <h1 className="font-syne font-800 leading-[0.9] uppercase tracking-tighter text-[#F9F7F2]">
+              <span className="reveal-mask">
+                {/* Adjusted clamp values to ensure text doesn't overflow the viewport height */}
+                <span className="reveal-item block text-[12vw] lg:text-[8.5rem]">
+                  Pentalks
+                </span>
+              </span>
+              <span className="reveal-mask">
+                <span className="reveal-item block text-[6vw] lg:text-[3.5rem] text-white/40">
+                  <span className="text-white">Structure</span> & Story
+                </span>
+              </span>
             </h1>
           </div>
 
-          <div className="flex flex-col items-center">
-            <div className="hero-line w-12 md:w-20 h-[2px] bg-[#8B9D83] mb-6 md:mb-10" />
-            
-            <p className="hero-line text-[#F9F7F2]/90 text-base md:text-2xl max-w-2xl font-medium tracking-tight leading-snug mb-10">
-              An ecosystem where <span className="text-white font-bold border-b border-[#8B9D83]">architectural precision</span> meets <br className="hidden md:block" />
-              the resonance of human stories.
-            </p>
+          {/* --- RIGHT CONTENT: GLASS CARD --- */}
+          <div className="lg:col-span-5 flex justify-end">
+            <div 
+              ref={cardRef}
+              className="w-full max-w-[440px] bg-white/[0.04] backdrop-blur-2xl border border-white/10 p-7 md:p-9 rounded-[2rem] text-[#F9F7F2] shadow-2xl"
+            >
+              <h3 className="font-syne text-xl md:text-2xl font-bold mb-4 leading-tight">
+                Architectural Precision. <br/>Podcast Resonance.
+              </h3>
+              
+              <p className="text-white/70 text-sm md:text-base leading-relaxed mb-8 font-light">
+                Bridging the gap between physical spaces and human narratives through our specialized subsidiaries <span className="text-[#8B9D83] font-semibold">Mukham</span> and <span className="text-[#8B9D83] font-semibold">Veru</span>.
+              </p>
 
-            {/* --- RESPONSIVE CTA BUTTON --- */}
-            <div className="cta-button">
-              <button 
-                className="group relative px-8 py-3 md:px-10 md:py-4 bg-[#F9F7F2] text-[#1C150D] rounded-full font-bold text-sm md:text-base tracking-widest uppercase transition-all duration-300 hover:bg-[#8B9D83] hover:text-[#F9F7F2] hover:scale-105 active:scale-95 shadow-xl"
-                style={fontAquire}
-              >
-                Explore Pentalks
+              {/* Subsidiary Pillars */}
+              <div className="flex flex-wrap gap-4 mb-8">
+                <div className="flex items-center gap-2 group bg-white/5 pr-4 rounded-xl border border-white/5">
+                  <div className="h-10 w-10 rounded-xl bg-[#8B9D83]/20 flex items-center justify-center text-[#8B9D83]">
+                    <Building2 size={18} />
+                  </div>
+                  <span className="font-bold text-[10px] uppercase tracking-widest opacity-80">Mukham</span>
+                </div>
+                
+                <div className="flex items-center gap-2 group bg-white/5 pr-4 rounded-xl border border-white/5">
+                  <div className="h-10 w-10 rounded-xl bg-white/10 flex items-center justify-center text-white">
+                    <Mic size={18} />
+                  </div>
+                  <span className="font-bold text-[10px] uppercase tracking-widest opacity-80">Veru Studio</span>
+                </div>
+              </div>
+
+              <button className="group w-full flex items-center justify-between bg-[#F9F7F2] text-[#1C150D] px-6 py-4 rounded-xl font-800 text-xs tracking-widest uppercase transition-all duration-500 hover:bg-[#8B9D83] hover:text-white">
+                <span>Enter the Ecosystem</span>
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform duration-300" />
               </button>
             </div>
           </div>
-        </div>
 
-        {/* Floating Scroll Indicator (Optional) */}
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 opacity-50 animate-bounce hidden md:block">
-           <div className="w-[1px] h-12 bg-gradient-to-b from-[#8B9D83] to-transparent"></div>
         </div>
-      </section>
+      </div>
+
+      {/* Subtle Scroll Indicator */}
+      <div className="absolute left-1/2 bottom-8 -translate-x-1/2 flex flex-col items-center gap-2 opacity-30">
+        <span className="text-[10px] uppercase tracking-[0.2em] text-white">Scroll</span>
+        <div className="h-8 w-[1px] bg-gradient-to-b from-white to-transparent" />
+      </div>
     </div>
   );
 };
 
-export default PentalksCinematicHero;
+export default PentalksModernHero;

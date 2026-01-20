@@ -1,23 +1,42 @@
-import React from 'react';
+import React, { useLayoutEffect } from 'react';
 import { ArrowRight, Mic, Building2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
 const CompaniesPage = () => {
+  // --- FONT & GLOBAL STYLE INJECTION ---
+  useLayoutEffect(() => {
+    const style = document.createElement('style');
+    style.textContent = `
+      @import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@300;400;600;700&display=swap');
+      .font-syne { font-family: 'Syne', sans-serif; }
+      .font-inter { font-family: 'Inter', sans-serif; }
+      .outline-text-sage {
+        color: transparent;
+        -webkit-text-stroke: 1px #8B9D83;
+      }
+      @media (min-width: 768px) {
+        .outline-text-sage { -webkit-text-stroke: 2px #8B9D83; }
+      }
+    `;
+    document.head.appendChild(style);
+    return () => document.head.removeChild(style);
+  }, []);
+
   return (
-    <div className="bg-[#F9F7F2] min-h-screen selection:bg-[#0f4c39] selection:text-white overflow-x-hidden">
+    <div className="bg-[#1C150D] min-h-screen selection:bg-[#8B9D83] selection:text-[#1C150D] overflow-x-hidden font-inter">
       
       {/* --- TOP SECTION --- */}
       <section className="pt-32 md:pt-48 pb-12 px-6 md:px-12 max-w-[1400px] mx-auto">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
           <div className="flex-1">
-            <h1 className="font-syne text-[15vw] md:text-[9vw] font-black uppercase leading-[0.8] tracking-tighter text-[#0f4c39]">
-              The <br /> <span className="outline-text">Directory.</span>
+            <h1 className="font-syne text-[15vw] md:text-[9vw] font-800 uppercase leading-[0.85] tracking-tighter text-[#FAF7F2]">
+              The <br /> <span className="outline-text-sage">Collective.</span>
             </h1>
           </div>
           <div className="max-w-xs pb-4">
-            <p className="text-[#1C150D]/60 text-sm md:text-base font-medium leading-relaxed border-l-2 border-[#8B9D83] pl-6 uppercase tracking-wider">
-              Explore our creative studios and networks.
+            <p className="text-[#8B9D83]/60 text-xs md:text-sm font-bold leading-relaxed border-l border-[#8B9D83]/30 pl-6 uppercase tracking-[0.2em]">
+              Architecting the synergy between structural precision and human narratives.
             </p>
           </div>
         </div>
@@ -25,44 +44,41 @@ const CompaniesPage = () => {
 
       {/* --- STUDIO GRID --- */}
       <section className="px-6 md:px-12 pb-32 max-w-[1400px] mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-16">
           
           {/* MUKHAM CARD (Architecture) */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             viewport={{ once: true }}
           >
-            <Link to="/mukham" className="group block relative aspect-[4/5] md:aspect-square overflow-hidden rounded-tl-[80px] md:rounded-tl-[150px] rounded-br-[80px] md:rounded-br-[150px] bg-white shadow-2xl">
-              {/* Background Image */}
+            <Link to="/mukham" className="group block relative aspect-[4/5] md:aspect-square overflow-hidden rounded-tr-[100px] md:rounded-tr-[180px] rounded-bl-[100px] md:rounded-bl-[180px] bg-[#2A241D] shadow-2xl transition-all duration-700">
               <img 
                 src="https://res.cloudinary.com/dmtzmgbkj/image/upload/f_webp/v1768325515/MukhamMain_sc22th.png" 
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 "
+                className="absolute inset-0 w-full h-full object-cover transition-all duration-1000  grayscale-0 "
                 alt="Mukham Architectural Studio"
               />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#1C150D] via-[#1C150D]/40 to-transparent opacity-80 group-hover:opacity-40 transition-opacity duration-700" />
               
-              {/* Modern Overlay */}
-              <div className="absolute inset-0 bg-[#0f4c39]/40 group-hover:bg-[#0f4c39]/20 transition-colors duration-500" />
-              
-              {/* Card Content */}
               <div className="absolute inset-0 p-8 md:p-16 flex flex-col justify-between z-10">
                 <div className="flex justify-between items-start">
-                  <div className="bg-white/90 backdrop-blur-md p-4 rounded-full shadow-lg">
-                    <Building2 className="text-[#0f4c39] w-6 h-6" />
+                  <div className="bg-[#8B9D83] p-4 rounded-full shadow-lg text-[#1C150D]">
+                    <Building2 size={24} />
                   </div>
-                  <span className="text-white/20 font-syne text-5xl md:text-7xl font-black">01</span>
+                  <span className="text-[#FAF7F2]/10 font-syne text-6xl md:text-8xl font-800">01</span>
                 </div>
                 
-                <div className="space-y-3">
-                  <h2 className="text-white font-syne text-5xl md:text-7xl font-black uppercase tracking-tighter leading-none">
+                <div className="space-y-4">
+                  <h2 className="text-[#FAF7F2] font-syne text-5xl md:text-7xl font-800 uppercase tracking-tighter leading-none">
                     MUKHAM
                   </h2>
                   <p className="text-[#8B9D83] font-bold uppercase tracking-[0.4em] text-[10px] md:text-xs">
                     Architectural Studio
                   </p>
-                  <div className="pt-6 overflow-hidden">
-                    <span className="inline-flex items-center gap-4 bg-white text-[#0f4c39] px-8 py-4 rounded-full font-black uppercase tracking-widest text-[10px] translate-y-24 group-hover:translate-y-0 transition-transform duration-500 shadow-xl">
+                  <div className="pt-8 overflow-hidden">
+                    {/* UPDATED: translate-y-0 on mobile, md:translate-y-24 on desktop */}
+                    <span className="inline-flex items-center gap-4 bg-[#8B9D83] text-[#1C150D] px-8 py-4 rounded-full font-800 uppercase tracking-widest text-[10px] translate-y-0 md:translate-y-24 group-hover:translate-y-0 transition-transform duration-700 shadow-xl">
                       Enter Studio <ArrowRight size={14} />
                     </span>
                   </div>
@@ -71,43 +87,40 @@ const CompaniesPage = () => {
             </Link>
           </motion.div>
 
-          {/* VER CARD (Audio) */}
+          {/* VERU CARD (Audio) */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
             viewport={{ once: true }}
           >
-            <Link to="/ver" className="group block relative aspect-[4/5] md:aspect-square overflow-hidden rounded-tr-[80px] md:rounded-tr-[150px] rounded-bl-[80px] md:rounded-bl-[150px] bg-[#1C150D] shadow-2xl">
-              {/* Background Image */}
+            <Link to="/veru" className="group block relative aspect-[4/5] md:aspect-square overflow-hidden rounded-tr-[100px] md:rounded-tr-[180px] rounded-bl-[100px] md:rounded-bl-[180px] bg-[#2A241D] shadow-2xl transition-all duration-700">
               <img 
                 src="https://res.cloudinary.com/dmtzmgbkj/image/upload/f_webp/v1768325515/VeruImg_wsobph.png" 
-                className="absolute inset-0 w-full h-full object-cover opacity-90 transition-transform duration-1000 "
-                alt="Ver Audio Network"
+                className="absolute inset-0 w-full h-full object-cover transition-all duration-1000 grayscale-0 opacity-100"
+                alt="Veru Audio Network"
               />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#1C150D] via-[#1C150D]/40 to-transparent opacity-80 group-hover:opacity-40 transition-opacity duration-700" />
               
-              {/* Modern Overlay */}
-              <div className="absolute inset-0 bg-black/60 group-hover:bg-black/40 transition-colors duration-500" />
-              
-              {/* Card Content */}
               <div className="absolute inset-0 p-8 md:p-16 flex flex-col justify-between z-10">
                 <div className="flex justify-between items-start">
-                  <div className="bg-[#8B9D83] p-4 rounded-full shadow-lg">
-                    <Mic className="text-[#1C150D] w-6 h-6" />
+                  <div className="bg-[#FAF7F2] p-4 rounded-full shadow-lg text-[#1C150D]">
+                    <Mic size={24} />
                   </div>
-                  <span className="text-white/10 font-syne text-5xl md:text-7xl font-black">02</span>
+                  <span className="text-[#FAF7F2]/10 font-syne text-6xl md:text-8xl font-800">02</span>
                 </div>
                 
-                <div className="space-y-3">
-                  <h2 className="text-[#F9F7F2] font-syne text-5xl md:text-7xl font-black uppercase tracking-tighter leading-none">
+                <div className="space-y-4">
+                  <h2 className="text-[#FAF7F2] font-syne text-5xl md:text-7xl font-800 uppercase tracking-tighter leading-none">
                     VERU
                   </h2>
-                  <p className="text-[#8B9D83] font-bold uppercase tracking-[0.4em] text-[10px] md:text-xs">
-                    Audio Network
+                  <p className="text-[#FAF7F2]/40 font-bold uppercase tracking-[0.4em] text-[10px] md:text-xs">
+                    Narrative Studio
                   </p>
-                  <div className="pt-6 overflow-hidden">
-                    <span className="inline-flex items-center gap-4 bg-[#8B9D83] text-[#1C150D] px-8 py-4 rounded-full font-black uppercase tracking-widest text-[10px] translate-y-24 group-hover:translate-y-0 transition-transform duration-500 shadow-xl">
-                      Listen Now <ArrowRight size={14} />
+                  <div className="pt-8 overflow-hidden">
+                    {/* UPDATED: translate-y-0 on mobile, md:translate-y-24 on desktop */}
+                    <span className="inline-flex items-center gap-4 bg-[#FAF7F2] text-[#1C150D] px-8 py-4 rounded-full font-800 uppercase tracking-widest text-[10px] translate-y-0 md:translate-y-24 group-hover:translate-y-0 transition-transform duration-700 shadow-xl">
+                      Listen Resonance <ArrowRight size={14} />
                     </span>
                   </div>
                 </div>
@@ -118,19 +131,8 @@ const CompaniesPage = () => {
         </div>
       </section>
 
-     
-
-      <style jsx>{`
-        .outline-text {
-          color: transparent;
-          -webkit-text-stroke: 1.5px #0f4c39;
-        }
-        @media (min-width: 768px) {
-          .outline-text {
-            -webkit-text-stroke: 3px #0f4c39;
-          }
-        }
-      `}</style>
+      {/* Subtle Scroll Line */}
+      <div className="fixed right-12 bottom-0 h-32 w-[1px] bg-gradient-to-b from-transparent to-[#8B9D83]/40 hidden lg:block" />
     </div>
   );
 };
