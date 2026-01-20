@@ -94,9 +94,7 @@ const AboutPage = () => {
                 className="absolute inset-0 w-full h-full object-cover opacity-60"
                />
                <div className="absolute inset-0 bg-gradient-to-t from-[#1C150D] via-transparent to-transparent opacity-60" />
-               <div className="absolute bottom-10 left-10 text-[#FAF7F2] z-10">
-                  <p className="font-syne text-6xl font-800 opacity-20 uppercase">Collective</p>
-               </div>
+            
             </div>
           </div>
           <div className="lg:col-span-7 flex flex-col justify-center space-y-10 order-1 lg:order-2">
