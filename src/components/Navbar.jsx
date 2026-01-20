@@ -105,7 +105,7 @@ const Navbar = () => {
                     hover:rounded-none
                     transition-all duration-700 ease-in-out shadow-xl
                     ${isAtTop 
-                      ? "bg-white/10 text-white border border-white/20 hover:bg-white hover:text-[#1C150D]" 
+                      ? "bg-white/10 text-white border border-white/20  " 
                       : "bg-[#8B9D83] text-[#FAF7F2]"
                     }`}>
                     Connect

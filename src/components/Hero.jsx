@@ -99,42 +99,42 @@ const PentalksModernHero = () => {
           </div>
 
           {/* --- RIGHT CONTENT: GLASS CARD --- */}
-          <div className="lg:col-span-5 flex justify-end">
-            <div 
-              ref={cardRef}
-              className="w-full max-w-[440px] bg-white/[0.04] backdrop-blur-2xl border border-white/10 p-7 md:p-9 rounded-[2rem] text-[#F9F7F2] shadow-2xl"
-            >
-              <h3 className="font-syne text-xl md:text-2xl font-bold mb-4 leading-tight">
-                Architectural Precision. <br/>Podcast Resonance.
-              </h3>
-              
-              <p className="text-white/70 text-sm md:text-base leading-relaxed mb-8 font-light">
-                Bridging the gap between physical spaces and human narratives through our specialized subsidiaries <span className="text-[#8B9D83] font-semibold">Mukham</span> and <span className="text-[#8B9D83] font-semibold">Veru</span>.
-              </p>
+       <div className="lg:col-span-5 flex justify-end">
+  <div 
+    ref={cardRef}
+    className="w-full max-w-[440px] bg-white/[0.04] backdrop-blur-2xl border border-white/10 p-7 md:p-9 rounded-tr-[5rem] rounded-bl-[5rem] rounded-tl-2xl rounded-br-2xl text-[#F9F7F2] shadow-2xl"
+  >
+    <h3 className="font-syne text-xl md:text-2xl font-bold mb-4 leading-tight">
+      Architectural Precision. <br/>Podcast Resonance.
+    </h3>
+    
+    <p className="text-white/70 text-sm md:text-base leading-relaxed mb-8 font-light">
+      Bridging the gap between physical spaces and human narratives through our specialized subsidiaries <span className="text-[#8B9D83] font-semibold">Mukham</span> and <span className="text-[#8B9D83] font-semibold">Veru</span>.
+    </p>
 
-              {/* Subsidiary Pillars */}
-              <div className="flex flex-wrap gap-4 mb-8">
-                <div className="flex items-center gap-2 group bg-white/5 pr-4 rounded-xl border border-white/5">
-                  <div className="h-10 w-10 rounded-xl bg-[#8B9D83]/20 flex items-center justify-center text-[#8B9D83]">
-                    <Building2 size={18} />
-                  </div>
-                  <span className="font-bold text-[10px] uppercase tracking-widest opacity-80">Mukham</span>
-                </div>
-                
-                <div className="flex items-center gap-2 group bg-white/5 pr-4 rounded-xl border border-white/5">
-                  <div className="h-10 w-10 rounded-xl bg-white/10 flex items-center justify-center text-white">
-                    <Mic size={18} />
-                  </div>
-                  <span className="font-bold text-[10px] uppercase tracking-widest opacity-80">Veru Studio</span>
-                </div>
-              </div>
+    {/* Subsidiary Pillars */}
+    <div className="flex flex-wrap gap-4 mb-8">
+      <div className="flex items-center gap-2 group bg-white/5 pr-4 rounded-xl border border-white/5">
+        <div className="h-10 w-10 rounded-xl bg-[#8B9D83]/20 flex items-center justify-center text-[#8B9D83]">
+          <Building2 size={18} />
+        </div>
+        <span className="font-bold text-[10px] uppercase tracking-widest opacity-80">Mukham</span>
+      </div>
+      
+      <div className="flex items-center gap-2 group bg-white/5 pr-4 rounded-xl border border-white/5">
+        <div className="h-10 w-10 rounded-xl bg-white/10 flex items-center justify-center text-white">
+          <Mic size={18} />
+        </div>
+        <span className="font-bold text-[10px] uppercase tracking-widest opacity-80">Veru Studio</span>
+      </div>
+    </div>
 
-              <button className="group w-full flex items-center justify-between bg-[#F9F7F2] text-[#1C150D] px-6 py-4 rounded-xl font-800 text-xs tracking-widest uppercase transition-all duration-500 hover:bg-[#8B9D83] hover:text-white">
-                <span>Enter the Ecosystem</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform duration-300" />
-              </button>
-            </div>
-          </div>
+    <button className="group w-full flex items-center justify-between bg-[#F9F7F2] text-[#1C150D] px-6 py-4 rounded-xl font-800 text-xs tracking-widest uppercase transition-all duration-500 hover:bg-[#8B9D83] hover:text-white">
+      <span>Enter the Ecosystem</span>
+      <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform duration-300" />
+    </button>
+  </div>
+</div>
 
         </div>
       </div>
