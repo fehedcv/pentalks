@@ -47,10 +47,10 @@ const VeruPage = () => {
       
       {/* --- HERO SECTION --- */}
       <section className="relative h-screen w-full flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 z-0 ">
           {/* REMOVED FILTERS AND OPACITY */}
-          <img src="https://res.cloudinary.com/dmtzmgbkj/image/upload/f_webp/v1768326810/verStock02_acnyya.png" className="block md:hidden w-full h-full object-cover" alt="Formation BG" />
-          <img src="https://res.cloudinary.com/dmtzmgbkj/image/upload/f_webp/v1768326811/veru-hero-desktop_ztjoqd.png" className="hidden md:block w-full h-full object-cover" alt="Formation BG" />
+          <img src="https://res.cloudinary.com/dmtzmgbkj/image/upload/f_webp/v1768326810/verStock02_acnyya.png" className="block md:hidden w-full h-full object-cover  opacity-80" alt="Formation BG" />
+          <img src="https://res.cloudinary.com/dmtzmgbkj/image/upload/f_webp/v1768326811/veru-hero-desktop_ztjoqd.png" className="hidden md:block w-full h-full object-cover opacity-80" alt="Formation BG" />
           {/* Maintained overlay strictly for text legibility */}
           <div className="absolute inset-0 bg-gradient-to-b from-[#1C150D]/80 via-transparent to-[#1C150D]" />
         </div>
