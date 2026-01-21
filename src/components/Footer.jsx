@@ -91,11 +91,13 @@ const Footer = () => {
           </div>
 
           {/* Copyright */}
-          <div className="text-center order-3 md:order-2">
-            <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#1C150D]/30">
-              © 2026 Pentalks Collective. All rights reserved.
-            </p>
-          </div>
+         <div className="text-center order-3 md:order-2">
+  <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#1C150D]/30">
+    © {new Date().getFullYear()} Pentalks. All rights reserved. <br />
+    Developed by <span className="text-[#1C150D]/60">Vynx Webworks</span>
+  </p>
+</div>
+
 
           {/* Back to Top */}
           <motion.button 
